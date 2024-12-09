@@ -122,7 +122,7 @@ session_start();
                 <div class="menu">
                     <p>Menu</p>
                     <ul>
-                         <?php
+                        <?php
                        if(!$_SESSION['dn'])
                        {
                         echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
@@ -168,14 +168,29 @@ session_start();
             <div class="confirmation">
 
                 <p class="title">Bạn có chắc chắn muốn xóa thiết bị này không?</p>
-                <form action="/xoa-thiet-bi" method="POST">
+                <form action="" method="POST">
                     <input type="hidden" name="deviceId" value="ID_THIET_BI"> <!-- Thay ID_THIET_BI bằng ID thực tế -->
-                    <input type="submit" value="Xóa" class="delete-btn">
+                    <input type="submit" name="btn-xoa" value="Xóa" class="delete-btn">
                     <input type="button" value="Hủy" class="cancel-btn" onclick="window.history.back();">
                 </form>
             </div>
             </form>
+            <?php
+include_once('../controller/cThietBi.php');
+$p = new cThietBi();
 
+if (isset($_REQUEST['btn-xoa'])) {
+    $idtb = $_REQUEST['idtb'];
+    $ketqua = $p->deleteTB($idtb);
+    if ($ketqua) {
+        echo "<script>alert('Xóa thiết bị thành công!');</script>";
+        echo "<script>window.location.href='QLTB.php';</script>";
+    } else {
+        echo "<script>alert('Xóa thiết bị thất bại!');</script>";
+        echo "<script>window.location.href='QLTB.php';</script>";
+    }
+}
+?>
 
         </div>
     </div>
@@ -257,5 +272,7 @@ session_start();
     <!-- Template Javascript -->
     <script src="../assets/js/main.js"></script>
 </body>
+
+
 
 </html>

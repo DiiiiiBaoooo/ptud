@@ -1,6 +1,7 @@
 <?php
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +20,7 @@ session_start();
 
     <!-- Flaticon Font -->
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
-    <link rel="stylesheet" href="login/css/qltb.css">
+    <link rel="stylesheet" href="login/css/them.css">
     <link rel="stylesheet" href="login/css/style.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
@@ -76,7 +77,7 @@ session_start();
             <div class="d-inline-flex">
                 <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Quản lý thiết bị</p>
+                <p class="m-0 text-white">Quản lý</p>
             </div>
         </div>
     </div>
@@ -132,46 +133,100 @@ session_start();
             </div>
 
         </div>
+        <?php
+            include_once("../controller/cGoiTap.php");
+            $p = new cGoiTap();
+            $tbl = $p->get1GT($_REQUEST['idgt']);
+            if($tbl)
+            {
+               while($r=mysqli_fetch_assoc($tbl)) 
+               {
+                $ten=$r['TenGoi'];
+                $gia=$r['Gia'];
+                $thoihan=$r['ThoiHan'];
+               }
+            }
+            else{
+                echo "<script>alert('Thông tin gói tập không tồn tại');</script>";
+                echo "<script>window.location.href = 'QLGT.php';</script>"; 
+            }
+        ?>
         <div class="right">
-            <div class="qltv">
-                <h1 align="center">Quản lý Gói tập</h1>
-                <div class="search-bar">
-                    <input type="text" placeholder="Tìm gói tập">
-                    <button class="search-btn">&#128269;</button>
-                </div>
-                <div class="list-container">
-                    <div class="table-head">
-                        <span>STT</span>
-                        <span style="margin-right:50px">Tên gói tập</span>
-                        <span style="margin-right:50px">Thao tác</span>
-                    </div>
-                    <?php
-                        include_once("../controller/cGoiTap.php");
-                        $p= new cGoiTap();
-                        $tbl=$p->getAllGT();
-                        if($tbl)
-                        {
-                            while($r=mysqli_fetch_assoc($tbl))
-                            {
-                                echo' <div class="list-item">
+            <div class="update-info-container">
+                <h2>Sửa thông tin gói tập
 
-                        <span class="name" style="margin-left:50px"><a href="ChiTietGoiTap.php?idtb='.$r['IDGoiTap'].'">'.$r['TenGoi'].'</a></span>
-                      
-                        <a class="update-btn" href="suagoitap.php?idgt='.$r['IDGoiTap'].'">Sửa</a>
-                         <a class="delete-btn" href="xoagoitap.php?idgt='.$r['IDGoiTap'].'">Xóa</a>
-                     
-                        <button class="submit-btn">Xem</button>
-                    </div>';
-                            }
-                        }
-                    ?>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <label for="TenGoi">Tên gói</label>
+                        <input width="60%" type="text" id="TenGoi" name="TenGoi"
+                            value="<?php if(isset($ten)){echo $ten;} ?>">
 
-                    <!-- Repeat the .list-item div for each item in the list -->
+                        <label for="Gia">Giá gói:</label>
 
-                    <!-- Add more list items as needed -->
-                </div>
+                        <input type="decimal" id="Gia" name="Gia" value="<?php if(isset($gia)){echo $gia;} ?>">
+                        <br>
+                        <label for="thoihan">chọn Thời hạn</label>
+
+                        <select style="width:calc(60%)" class="form-select" aria-label="Default select example"
+                            name="thoihan">
+                            <?php
+                                if($thoihan=="1 tháng")
+                                {
+                                    echo ' <option value="1 tháng" selected>1 Tháng</option>
+                            <option value="3 tháng">3 Tháng</option>
+                            <option value="6 tháng">6 Tháng</option>
+                            <option value="12 tháng">12 tháng</option>';
+                                }
+                                elseif($thoihan=="3 tháng")
+                                {
+                                    echo ' <option value="1 tháng" >1 Tháng</option>
+                            <option value="3 tháng" selected>3 Tháng</option>
+                            <option value="6 tháng">6 Tháng</option>
+                            <option value="12 tháng">12 tháng</option>';
+                                }
+                                elseif($thoihan=="6 tháng")
+                                {
+                                    echo ' <option value="1 tháng" >1 Tháng</option>
+                            <option value="3 tháng" >3 Tháng</option>
+                            <option value="6 tháng" selected>6 Tháng</option>
+                            <option value="12 tháng">12 tháng</option>';
+                                }
+                                else
+                                {
+                                    echo ' <option value="1 tháng" >1 Tháng</option>
+                                    <option value="3 tháng" >3 Tháng</option>
+                                    <option value="6 tháng" >6 Tháng</option>
+                                    <option value="12 tháng" selected>12 tháng</option>'; 
+                                }
+                            ?>
+
+
+                        </select>
+
+
+                        <div class="button-group">
+                            <input type="submit" class="update-btn" name="btnadd" value="Cập nhật">
+                            <input type="button" value="Hủy" class="cancel-btn" onclick="window.history.back();">
+                        </div>
+                    </form>
             </div>
-
+            <?php
+      
+        if(isset($_REQUEST['btnadd']) && $_REQUEST['btnadd']=="Cập nhật")
+        {
+            $insertGT=$p->updateGT($_REQUEST['idgt'],$_REQUEST['TenGoi'], $_REQUEST['Gia'], $_REQUEST['thoihan']);
+            if($insertGT)
+            {
+                echo "<script>alert('cập nhật  thông tin gói tập thành công');</script>";
+                echo "<script>window.location.href = 'QLGT.php';</script>"; 
+            }
+            else
+            {
+                echo "<script>alert('cập nhật  thông tin gói tập không thành công');</script>";
+                echo "<script>window.location.href = 'QLGT.php';</script>"; 
+            }
+        }
+       
+?>
 
         </div>
     </div>

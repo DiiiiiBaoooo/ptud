@@ -1,6 +1,49 @@
 <?php
 session_start();
 ?>
+
+<STYle>
+/* CSS cho thông báo với hiệu ứng di chuyển từ dưới lên */
+.message-3d {
+    font-size: 12px;
+    /* Giảm kích thước chữ */
+    font-weight: bold;
+    color: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    margin: 10px;
+    text-transform: uppercase;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3), -4px -4px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(145deg, #8B0000, #B22222);
+    animation: slideUp 2s ease-out;
+    /* Áp dụng animation di chuyển lên */
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(50px);
+        /* Vị trí ban đầu (dưới) */
+        opacity: 0;
+        /* Ban đầu không hiển thị */
+    }
+
+    100% {
+        transform: translateY(0);
+        /* Vị trí cuối (ở vị trí ban đầu) */
+        opacity: 1;
+        /* Sau khi di chuyển lên, hiển thị */
+    }
+}
+
+form {
+    max-width: 1000px;
+    /* Tăng chiều rộng form */
+    margin: 0 auto;
+    /* Căn giữa form */
+    padding: 40px;
+    /* Thêm khoảng cách bên trong */
+}
+</STYle>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,11 +62,22 @@ session_start();
 
     <!-- Flaticon Font -->
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
-    <link rel="stylesheet" href="login/css/qltb.css">
+    <link rel="stylesheet" href="login/css/chitiethd.css">
     <link rel="stylesheet" href="login/css/style.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
+<STYle>
+h2.text-center {
+    margin-bottom: -50px;
+    /* Giảm khoảng cách dưới tiêu đề */
+}
+
+.table {
+    margin-top: 0;
+    /* Giảm khoảng cách trên bảng */
+}
+</STYle>
 
 <body class="bg-white">
     <!-- Navbar Start -->
@@ -72,11 +126,11 @@ session_start();
     <div class="container-fluid page-header mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
             style="min-height: 400px">
-            <h4 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase font-weight-bold">Quản lý</h4>
+            <h4 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase font-weight-bold">Kế toán</h4>
             <div class="d-inline-flex">
                 <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Quản lý thiết bị</p>
+                <p class="m-0 text-white">Quản lý hóa đơn</p>
             </div>
         </div>
     </div>
@@ -116,7 +170,6 @@ session_start();
                             case 3: 
                                 {
                                     echo' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    echo  '<li><a href="Capnhattrangthai.php">Cập nhật tình trạng thanh toán</a></li>';
                                     break;
                                 }
                        }
@@ -133,50 +186,75 @@ session_start();
 
         </div>
         <div class="right">
-            <div class="qltv">
-                <h1 align="center">Quản lý Gói tập</h1>
-                <div class="search-bar">
-                    <input type="text" placeholder="Tìm gói tập">
-                    <button class="search-btn">&#128269;</button>
-                </div>
-                <div class="list-container">
-                    <div class="table-head">
-                        <span>STT</span>
-                        <span style="margin-right:50px">Tên gói tập</span>
-                        <span style="margin-right:50px">Thao tác</span>
+            <div class="update-info-container">
+            </div>
+            <!-- Page Header End -->
+            <?php
+include_once("../controller/cHoaDon.php");
+
+$successMessage = ''; // Biến để lưu thông báo thành công
+$errorMessage = ''; // Biến để lưu thông báo lỗi
+
+if (isset($_POST['btnUpdate'])) {
+    $idhd = $_GET['idhd']; // Lấy ID Hóa Đơn từ URL
+    $trangThai = $_POST['trangThai']; // Lấy trạng thái thanh toán từ form
+
+    // Tạo đối tượng cHoaDon và gọi phương thức updateTT
+    $cHoaDon = new cHoaDon();
+    $result = $cHoaDon->updateTT($idhd, $trangThai);
+
+    if ($result) {
+        $successMessage = 'Cập nhật trạng thái thanh toán thành công!'; // Lưu thông báo thành công
+        // Sau khi hiển thị thông báo, sẽ tự động chuyển hướng sau 3 giây
+        echo '<script>
+                setTimeout(function() {
+                    window.location.href = "QLHD.php";
+                }, 1000); // Chuyển hướng sau 2 giây
+              </script>';
+    } else {
+        $errorMessage = 'Cập nhật thất bại!'; // Lưu thông báo lỗi
+    }
+}
+?>
+
+            <!-- Form HTML -->
+            <div class="col-lg-9,center">
+                <div class="bg-light p-4">
+                    <h2 class="text-center">Cập Nhật Trạng Thái Thanh Toán</h2>
+
+                    <!-- Hiển thị thông báo thành công -->
+                    <?php if ($successMessage): ?>
+                    <div class="alert alert-success text-center message-3d">
+                        <?php echo $successMessage; ?>
                     </div>
-                    <?php
-                        include_once("../controller/cGoiTap.php");
-                        $p= new cGoiTap();
-                        $tbl=$p->getAllGT();
-                        if($tbl)
-                        {
-                            while($r=mysqli_fetch_assoc($tbl))
-                            {
-                                echo' <div class="list-item">
+                    <?php endif; ?>
 
-                        <span class="name" style="margin-left:50px"><a href="ChiTietGoiTap.php?idtb='.$r['IDGoiTap'].'">'.$r['TenGoi'].'</a></span>
-                      
-                        <a class="update-btn" href="suagoitap.php?idgt='.$r['IDGoiTap'].'">Sửa</a>
-                         <a class="delete-btn" href="xoagoitap.php?idgt='.$r['IDGoiTap'].'">Xóa</a>
-                     
-                        <button class="submit-btn">Xem</button>
-                    </div>';
-                            }
-                        }
-                    ?>
+                    <!-- Hiển thị thông báo lỗi -->
+                    <?php if ($errorMessage): ?>
+                    <div class="alert alert-danger text-center message-3d">
+                        <?php echo $errorMessage; ?>
+                    </div>
+                    <?php endif; ?>
 
-                    <!-- Repeat the .list-item div for each item in the list -->
-
-                    <!-- Add more list items as needed -->
+                    <form action="" method="POST" class="mt-4">
+                        <div class="form-group">
+                            <label for="trangThai"></label>
+                            <select name="trangThai" id="trangThai" class="form-control" required>
+                                <option value="" disabled selected>-- Chọn trạng thái --</option>
+                                <option value="Đã thanh toán">Đã thanh toán</option>
+                                <option value="Chưa thanh toán">Chưa thanh toán</option>
+                            </select>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" name="btnUpdate" class="btn btn-primary px-4">Cập nhật</button>
+                            <a href="QLHD.php" class="btn btn-secondary px-4">Hủy</a>
+                        </div>
+                    </form>
                 </div>
             </div>
 
-
         </div>
     </div>
-    <!-- Blog End -->
-
 
     <!-- Footer Start -->
     <div class="footer container-fluid mt-5 py-5 px-sm-3 px-md-5 text-white">
@@ -197,33 +275,7 @@ session_start();
                         style="width: 40px; height: 40px;" href="#"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-primary mb-4">Quick Links</h4>
-                <div class="d-flex flex-column justify-content-start">
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Features</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Classes</a>
-                    <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-primary mb-4">Popular Links</h4>
-                <div class="d-flex flex-column justify-content-start">
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Features</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Classes</a>
-                    <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-primary mb-4">Opening Hours</h4>
-                <h5 class="text-white">Monday - Friday</h5>
-                <p>8.00 AM - 8.00 PM</p>
-                <h5 class="text-white">Saturday - Sunday</h5>
-                <p>2.00 PM - 8.00 PM</p>
-            </div>
+            <!-- Additional Footer Content -->
         </div>
         <div class="container border-top border-dark pt-5">
             <p class="m-0 text-center text-white">
@@ -235,22 +287,16 @@ session_start();
     </div>
     <!-- Footer End -->
 
-
     <!-- Back to Top -->
     <a href="#" class="btn btn-outline-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/lib/easing/easing.min.js"></script>
     <script src="../assets/lib/waypoints/waypoints.min.js"></script>
-
-    <!-- Contact Javascript File -->
     <script src="../assets/mail/jqBootstrapValidation.min.js"></script>
     <script src="../assets/mail/contact.js"></script>
-
-    <!-- Template Javascript -->
     <script src="../assets/js/main.js"></script>
 </body>
 

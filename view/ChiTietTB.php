@@ -19,7 +19,7 @@ session_start();
 
     <!-- Flaticon Font -->
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
-    <link rel="stylesheet" href="login/css/qltb.css">
+    <link rel="stylesheet" href="login/css/chitiet.css">
     <link rel="stylesheet" href="login/css/style.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
@@ -76,7 +76,7 @@ session_start();
             <div class="d-inline-flex">
                 <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Quản lý thiết bị</p>
+                <p class="m-0 text-white">Quản lý thành viên</p>
             </div>
         </div>
     </div>
@@ -96,35 +96,26 @@ session_start();
                         echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
                         echo "<script>window.location.href = '../index.php';</script>";
                        }
-                       echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
+                       echo '<li><a href="#home">Thông tin chung</a></li>';
                        switch($_SESSION['dn'])
                        {
                         case 1:
                             {
-                                echo' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
-                                echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
-                                echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                echo' <li><a href="#profile">Quản lý nhân viên</a></li>';
+                                echo  '<li><a href="#settings">Quản lý khuyến mãi</a></li>';
+                                echo  '<li><a href="#settings">Quản lý lịch làm việc</a></li>';
                                 break;
                             }
-                            case 2:
-                                {
-                                    echo' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
-                                    echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
-                                    break;
-                                }
-                            case 3: 
-                                {
-                                    echo' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    echo  '<li><a href="Capnhattrangthai.php">Cập nhật tình trạng thanh toán</a></li>';
-                                    break;
-                                }
                        }
-                       
+                       if($_SESSION['dn']==2)
+                       {
+                        echo' <li><a href="#profile">Quản lý thành viên</a></li>';
+                      echo  '<li><a href="#settings">Quản lý thiết bị</a></li>';
+                       }
                         
                        
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+                     echo   '<li><a href="#logout">Logout</a></li>';
 
                         ?>
                     </ul>
@@ -133,43 +124,51 @@ session_start();
 
         </div>
         <div class="right">
-            <div class="qltv">
-                <h1 align="center">Quản lý Gói tập</h1>
-                <div class="search-bar">
-                    <input type="text" placeholder="Tìm gói tập">
-                    <button class="search-btn">&#128269;</button>
-                </div>
-                <div class="list-container">
-                    <div class="table-head">
-                        <span>STT</span>
-                        <span style="margin-right:50px">Tên gói tập</span>
-                        <span style="margin-right:50px">Thao tác</span>
-                    </div>
-                    <?php
-                        include_once("../controller/cGoiTap.php");
-                        $p= new cGoiTap();
-                        $tbl=$p->getAllGT();
-                        if($tbl)
+            <div class="update-info-container">
+                <?php
+                include_once('../controller/cThietBi.php');
+                $p = new cThietBi();
+                if(isset($_REQUEST['idtb']))
+                {
+                    $idtb=$_REQUEST['idtb'];
+                    $kq = $p->get01TB($idtb);
+                    if($kq)
+                    {
+                        while($r= mysqli_fetch_assoc($kq))
                         {
-                            while($r=mysqli_fetch_assoc($tbl))
-                            {
-                                echo' <div class="list-item">
+                        echo'<h2>Thông Tin Thiết bị</h2>
+                <label for="name">Tên Thiết bị:</label>
+                <span class="Ten">'.$r['TenThietBi'].'</span>
+                <br>
 
-                        <span class="name" style="margin-left:50px"><a href="ChiTietGoiTap.php?idtb='.$r['IDGoiTap'].'">'.$r['TenGoi'].'</a></span>
-                      
-                        <a class="update-btn" href="suagoitap.php?idgt='.$r['IDGoiTap'].'">Sửa</a>
-                         <a class="delete-btn" href="xoagoitap.php?idgt='.$r['IDGoiTap'].'">Xóa</a>
-                     
-                        <button class="submit-btn">Xem</button>
-                    </div>';
-                            }
+
+
+                <label for="phone">Tình Trạng:</label>
+                <span class="sdt">'.$r['TinhTrang'].'</span>
+                <br>
+                <label for="Email">Nơi sản xuất:</label>
+                <span class="email">'.$r['NoiSanXuat'].'</span>
+                <br>
+                <label for="address">Ngày sản xuất:</label>
+                <span class="diachi">'.$r['NgaySanXuat'].'</span>
+                
+                <br>
+                  <a href="SuaThongTinThietBi.php?idtb='.$r['IDThietBi'].'" class="update-btn">Sửa</a>
+                        <a href="XoaThietBi.php?idtb='.$r['IDThietBi'].'" class="update-btn">Xoá</a>
+                        <a href="BCL.php?idtb='.$r['IDThietBi'].'" class="update-btn">Báo cáo lỗi</a>';  
                         }
-                    ?>
+                      
+                    }
+                }
+                
 
-                    <!-- Repeat the .list-item div for each item in the list -->
+                ?>
 
-                    <!-- Add more list items as needed -->
-                </div>
+
+
+
+
+
             </div>
 
 

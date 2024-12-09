@@ -24,6 +24,50 @@ session_start();
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
+<STYle>
+h2.text-center {
+    margin-bottom: -50px;
+}
+
+form {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.table {
+    margin-top: 0;
+}
+
+.back-btn {
+
+    margin-top: 20px;
+
+}
+
+.alert {
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    margin: 10px;
+    text-transform: uppercase;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3), -4px -4px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(145deg, #8B0000, #B22222);
+    animation: slideUp 2s ease-out;
+}
+
+@keyframes slideUp {
+    0% {
+        bottom: -100px;
+    }
+
+    100% {
+        bottom: 20px;
+    }
+}
+</STYle>
 
 <body class="bg-white">
     <!-- Navbar Start -->
@@ -72,11 +116,11 @@ session_start();
     <div class="container-fluid page-header mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
             style="min-height: 400px">
-            <h4 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase font-weight-bold">Quản lý</h4>
+            <h4 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase font-weight-bold">Kế toán</h4>
             <div class="d-inline-flex">
                 <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Quản lý thành viên</p>
+                <p class="m-0 text-white">Quản lý hóa đơn</p>
             </div>
         </div>
     </div>
@@ -90,7 +134,7 @@ session_start();
                 <div class="menu">
                     <p>Menu</p>
                     <ul>
-                         <?php
+                        <?php
                        if(!$_SESSION['dn'])
                        {
                         echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
@@ -116,7 +160,7 @@ session_start();
                             case 3: 
                                 {
                                     echo' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    echo  '<li><a href="Capnhattrangthai.php">Cập nhật tình trạng thanh toán</a></li>';
+                                    echo' <li><a href="Taohoadon.php">Tạo hóa đơn</a></li>';
                                     break;
                                 }
                        }
@@ -134,40 +178,123 @@ session_start();
         </div>
         <div class="right">
             <div class="update-info-container">
-                <h2>Thông Tin Hóa đơn </h2>
-                <label for="name">Số Tiền:</label>
-                <span class="Ten">500.000đ</span>
-                <br>
+                <?php
+include_once("../controller/cHoaDon.php");
 
-                <label for="address">Trạng Thái Thanh Toán:</label>
-                <span class="diachi">Đã thanh toán</span>
-                <br>
+if (isset($_GET['idhd'])) {
+    $idhd = $_GET['idhd']; 
 
-                <label for="phone">Ngày Thanh Toán:</label>
-                <span class="sdt">20/10/2024</span>
-                <br>
-                <label for="Email">Ngày Lập Hóa Đơn:</label>
-                <span class="email">20/10/2024</span>
-                <br>
-                <label for="Email">Loại Giao Dịch:</label>
-                <span class="ngaythamgia">Chuyển khoản</span>
-                <br>
-                <label for="thanhvien">Tên Thành Viên:</label>
-                <span class="thanhvien">Nguyễn văn A</span>
-                <br>
+    $q = new cHoaDon();
+    $kq = $q->getChiTietHoaDon($idhd); 
+
+    if ($kq) {
+        $r = mysqli_fetch_assoc($kq);
+    } else {
+        echo '<p>Không tìm thấy hóa đơn này!</p>';
+        exit;
+    }
+} else {
+    echo '<p>Không có ID hóa đơn được cung cấp!</p>';
+    exit;
+}
+
+$p = new choadon();
+
+if (isset($_POST['btXoa'])) {
+    $id = $_POST['btXoa'];
+    if ($p->xoahoadon($id)) {
+        echo "<div class='alert alert-success text-center'>Xóa thành công.</div>";
+        echo "<script>
+                setTimeout(function() {
+                    window.location.href = 'QLHD.php';
+                }, 3000);
+              </script>";
+    } else {
+      
+        echo "<div class='alert alert-danger text-center'>Xóa hóa đơn thất bại. Vui lòng thử lại.</div>";
+    }
+}
 
 
-                <div class="button-group">
+?>
 
-                    <button type="submit" class="update-btn">Cập nhật TTTT</button>
-                    <button type="button" class="submit-btn">OK</button>
+                <!-- HTML Display the Invoice Details -->
+                <h2 class="text-center">Chi Tiết Hóa Đơn</h2>
+                <div class="container">
+                    <div class="invoice-details">
+                        <table class="table">
 
+
+                            <tr>
+                                <th>Tên Thành Viên</th>
+                                <td><?php echo $r['TenThanhVien'] ? $r['TenThanhVien'] : 'Không có tên'; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Tên Nhân Viên lập hóa đơn</th>
+                                <td><?php echo $r['TenNhanVien'] ? $r['TenNhanVien'] : 'Không có tên nhân viên'; ?></td>
+                            </tr>
+
+                            <tr>
+                                <th>Số Tiền</th>
+                                <td><?php echo number_format($r['SoTien'], 2); ?> VND</td>
+                            </tr>
+                            <tr>
+                                <th>Tình Trạng Thanh Toán</th>
+                                <td><?php echo $r['TinhTrangThanhToan'] ? $r['TinhTrangThanhToan'] : 'Chưa xác nhận'; ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Phương Thức Thanh Toán</th>
+                                <td><?php echo $r['HinhThucThanhToan'] ? $r['HinhThucThanhToan'] : 'Chưa xác định'; ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Ngày Thanh Toán</th>
+                                <td><?php echo ($r['NgayThanhToan'] ? $r['NgayThanhToan'] : 'Chưa thanh toán'); ?></td>
+                            </tr>
+                            <tr>
+                                <th>Ngày Lập Hóa Đơn</th>
+                                <td><?php echo $r['NgayLapHoaDon']; ?></td>
+                            </tr>
+
+
+
+                        </table>
+
+                        <div class="text-center mt-3">
+                            <div class="action-buttons">
+                                <button class="update-btn"
+                                    onclick="window.location.href='CapNhatTTTT.php?idhd=<?php echo $r['IDHoaDon']; ?>'">Cập
+                                    nhật tình trạng thanh toán</button>
+                                <form method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa hóa đơn này?');"
+                                    style="display: inline;">
+                                    <input type="hidden" name="btXoa"
+                                        value="<?php echo htmlspecialchars($r['IDHoaDon']); ?>">
+                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                </form>
+                            </div>
+                            <a href="QLHD.php" class="btn btn-secondary back-btn">Quay lại</a>
+                        </div>
+
+
+                    </div>
                 </div>
 
             </div>
-
-
         </div>
+    </div>
+
+
+
+    <div class="button-group">
+
+
+    </div>
+
+    </div>
+
+
+    </div>
     </div>
     <!-- Blog End -->
 

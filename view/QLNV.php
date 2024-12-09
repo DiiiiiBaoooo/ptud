@@ -76,7 +76,7 @@ session_start();
             <div class="d-inline-flex">
                 <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Quản lý thiết bị</p>
+                <p class="m-0 text-white">Quản lý lịch làm việc</p>
             </div>
         </div>
     </div>
@@ -90,7 +90,7 @@ session_start();
                 <div class="menu">
                     <p>Menu</p>
                     <ul>
-                         <?php
+                        <?php
                        if(!$_SESSION['dn'])
                        {
                         echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
@@ -134,38 +134,64 @@ session_start();
         </div>
         <div class="right">
             <div class="qltv">
-                <h1 align="center">Quản lý Nhân viên</h1>
-                <div class="search-bar">
-                    <input type="text" placeholder="Tìm nhân viên">
-                    <button class="search-btn">&#128269;</button>
-                </div>
-                <div class="list-container">
-                    <div class="table-head">
-                        <span>STT</span>
-                        <span style="margin-right:50px">Tên nhân viên</span>
-                        <span style="margin-right:50px">Thao tác</span>
-                    </div>
+                <h1 align="center">Quản lý lịch làm việc của
                     <?php
-                        include_once("../controller/cNhanVien.php");
-                        $q= new cNhanVien();
-                        $kq = $q->getAllNV();
-                        if($kq)
-                        {
-                            while($r=mysqli_fetch_assoc($kq))
-                            {
-                                echo '<div class="list-item">
-
-                        <span class="name" style="margin-left:50px"><a href="ChiTietNV.php?idnv='.$r['IDNhanVien'].'">'.$r['TenNhanVien'].'</a></span>
-                        <button class="update-btn">Sửa</button>
-                        <button class="delete-btn">Xoá</button>
-                        <button class="submit-btn">Ghi danh</button>
-                    </div>';
-                            }
+                    include_once("../controller/cNhanVien.php");
+                    $p = new cNhanVien();
+                    $kq = $p->Query1NV($_REQUEST['idnv']);
+                    if($kq){
+                        while($r=mysqli_fetch_assoc($kq)){
+                            echo $r["TenNhanVien"].'</h1>';
                         }
-                    
-                    ?>
-                    <!-- Add more list items as needed -->
-                </div>
+                    }
+                    echo '<div style="float:right; padding:10px">
+                    <a href=""></a>
+                    <button class="submit-btn" ><a  style="color:white;  " href="TaoLichLV.php?idnv='.$_REQUEST['idnv'].'">Tạo lịch mới</a></button>
+                    </div>';
+                ?>
+
+                    <div class="list-container" style="clear: both">
+                        <div class="table-head">
+                            <span>STT</span>
+                            <span style="margin-right:50px">Ngày làm việc</span>
+                            <span style="margin-right:50px">Ca làm việc</span>
+                            <span style="margin-right:50px">Trạng thái</span>
+                            <span style="margin-right:50px">Thao tác</span>
+                        </div>
+
+                        <?php
+                            include_once("../controller/cNhanVien.php");
+                            $p = new cNhanVien();
+                            $kq = $p->getLichByID($_REQUEST['idnv']);
+                            if($kq){
+                                while($r=mysqli_fetch_assoc($kq)){
+                                    echo '<form method="post">';
+                                    echo '<div class="list-item">';
+                                    echo '<span class="name" style="margin-left:50px">' . $r['NgayLamViec']. '</span>';
+                                    echo '<span class="name" style="margin-left:50px">' . $r['CaLamViec']. '</span>';
+                                    echo '<span class="name" style="margin-left:50px">' . $r['TrangThai']. '</span>';
+                                    echo '<button class="delete-btn" onclick="return confirm(\'Bạn có chắc muốn xóa lịch này không?\')" type="submit" value="'.$r["IDLichLamViec"].'" name="xoaLich">Xóa</button>';
+                                    echo '<button class="update-btn"  value="'.$r["IDLichLamViec"].'" type="submit" name="capNhatLich" >Cập nhật</button></div>';
+                                    echo '</form>';
+                                }
+                            }else{
+                                echo '<center style="color:red">Lịch làm việc trống</center>';
+                            }
+                            if(isset($_REQUEST["xoaLich"])){
+                                $result = $p->xoaLich($_REQUEST["xoaLich"]);
+                                if($result){
+                                    echo "<script>alert('Xoá lịch làm việc thành công!'); window.location.href = 'QLLichNV.php?idnv=".$_REQUEST['idnv']."';</script>";
+                                    exit();
+                                }else{
+                                    echo '<script>alert("Không thành công")</script>';
+                            }
+                            }
+
+                            if(isset($_REQUEST["capNhatLich"])){
+                                echo "<script>window.location.href = 'CapNhatLich.php?idl=".$_REQUEST["capNhatLich"]."&&idnv=".$_REQUEST['idnv']."';</script>";
+                            }
+                       ?>
+                    </div>
             </div>
 
 

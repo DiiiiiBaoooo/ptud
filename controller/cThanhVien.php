@@ -86,7 +86,20 @@
 
         }
         
-        
+        public function getDanhgia()
+        {
+        $p = new mThanhVien();
+            
+		$kq= $p->xemdanhgia();
+		if(mysqli_num_rows($kq)>0)
+		{
+			return $kq;
+		}
+		else
+		{
+			return false;
+		}
+        }
 
 
     }   

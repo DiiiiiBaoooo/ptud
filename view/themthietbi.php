@@ -142,7 +142,7 @@ session_start();
                 <div class="menu">
                     <p>Menu</p>
                     <ul>
-                         <?php
+                        <?php
                        if(!$_SESSION['dn'])
                        {
                         echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
@@ -197,8 +197,16 @@ session_start();
                         </tr>
                         <tr>
                             <td><label for="txtTinhTrang">Tình Trạng:</label></td>
+
                             <td>
-                                <input type="text" name="txtTinhTrang" id="txtTinhTrang" required>
+
+                                <select name="txtTinhTrang" style="width:calc(100%)" class="form-select"
+                                    aria-label="Default select example">
+                                    <option value="Mới">Mới</option>
+                                    <option value="Bị lỗi">Bị lỗi</option>
+                                    <option value="Đang bảo trì">Đang bảo trì</option>
+                                </select>
+
                             </td>
                         </tr>
                         <tr>
@@ -213,29 +221,40 @@ session_start();
                                 <input type="text" name="txtNoiSX" id="txtNoiSX" required>
                             </td>
                         </tr>
-                        <tr>
-                            <td><label for="idnhanvien">Chọn nhân viên</label></td>
-                            <td>
 
-                                <select style="width:calc(100%)" class="form-select"
-                                    aria-label="Default select example">
-                                    <option value="Quan Ly">nhân vien 1</option>
-                                    <option value="Nhan Vien">Nhân viên 2</option>
-                                    <option value="Thanh Vien">nhân vien 3</option>
-                                </select>
-                            </td>
-                        </tr>
                         <tr>
                             <td colspan="2">
-                                <button name="btnCapNhat" class="update-btn">Tạo </button>
-                                <button value="Làm Lại" class="cancel-btn">Hủy bỏ </button>
+                                <input type="submit" name="btnadd" class="update-btn" value="Tạo">
+                                <input type="button" value="Hủy" class="cancel-btn" onclick="window.history.back();">
                             </td>
                         </tr>
                     </table>
                 </form>
             </div>
             </form>
-
+            <?php
+            
+            include_once("../controller/cThietBi.php");
+            $p= new cThietBi();
+            if(isset($_REQUEST['btnadd'])){
+                $tentb= $_REQUEST['txtTenTB'];
+            $tinhtrang=$_REQUEST['txtTinhTrang'];
+            $ngaysx=$_REQUEST['txtNgaySX'];
+            $noisx=$_REQUEST['txtNoiSX'];
+                $inserttb=$p->themthietbi($tentb,$tinhtrang,$ngaysx,$noisx);
+                if($inserttb)
+                {
+                    echo "<script>alert('thêm  thông tin thiết bị thành công');</script>";
+                    echo "<script>window.location.href = 'QLTB.php';</script>"; 
+                }
+                else
+                {
+                    echo "<script>alert('thêm  thông tin thiết bị không thành công');</script>";
+                    echo "<script>window.location.href = 'QLTB.php';</script>"; 
+                }
+            }
+           
+?>
 
         </div>
     </div>

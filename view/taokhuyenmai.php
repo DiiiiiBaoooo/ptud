@@ -154,12 +154,26 @@ session_start();
                 <div class="menu">
                     <p>Menu</p>
                     <ul>
-                        <li><a href="#home">Thông tin chung</a></li>
-                        <li><a href="#profile">Quản lý thành viên</a></li>
-                        <li><a href="#settings">Quản lý thiết bị</a></li>
-                        <li><a href="#settings">Quản lý khuyến mãi</a></li>
+                        <?php
+                       if(!$_SESSION['dn'])
+                       {
+                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                        echo "<script>window.location.href = '../index.php';</script>";
+                       }
+                      
+                       
+                                echo  '<li><a href="ThongTinChungTV.php">Xem thông tin tài khoản</a></li>';
+                                echo' <li><a href="GiaHantv-1.php">Gia hạn </a></li>';
+                                echo  '<li><a href="Thanhtoan1.php">Thanh toán</a></li>';
+                                echo  '<li><a href="LSTT.php">Xem lịch sử thanh toán</a></li>';
+                               
+                    
+                        
+                       
 
-                        <li><a href="#logout">Logout</a></li>
+                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+                        ?>
                     </ul>
                 </div>
             </div>
@@ -205,7 +219,8 @@ session_start();
                 </form>
             </div>
             </form>
-
+            <?php
+?>
 
         </div>
     </div>

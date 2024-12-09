@@ -91,7 +91,7 @@ session_start();
                 <div class="menu">
                     <p>Menu</p>
                     <ul>
-                         <?php
+                        <?php
                        if(!$_SESSION['dn'])
                        {
                         echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
@@ -135,43 +135,75 @@ session_start();
         </div>
         <div class="right">
             <div class="update-info-container">
-                <h2>Tạo lịch làm việc</h2>
-                <form action="" method="POST" enctype="multipart/form-data">
-                    <label for="name">Chọn Nhân Viên</label>
-                    <select style="width:calc(100%)" class="form-select" aria-label="Default select example">
-                        <option value="Quan Ly">nhân vien 1</option>
-                        <option value="Nhan Vien">Nhân viên 2</option>
-                        <option value="Thanh Vien">nhân vien 3</option>
-                    </select>
+                <h2>Tạo lịch làm việc cho
+                    <?php
+                    include("../controller/cNhanVien.php");
+                    $p = new cNhanVien();
+                    $kq = $p->Query1NV($_REQUEST['idnv']);
+                    if($kq){
+                        while($r=mysqli_fetch_assoc($kq)){
+                            echo $r["TenNhanVien"].'</h2>';
+                        }
+                    }
+                    
+                    if(isset($_REQUEST['taoLich'])) {
+                        $idLichLamViec = rand();
+                        $ngayLamViec = $_REQUEST['ngayLamViec'];
+                        $caLamViec = $_REQUEST['caLamViec'];
+                        $trangThai = $_REQUEST['trangThai'];
+                        $idNhanVien = $_REQUEST['idnv'];
+                        
+                       $temp = $p->kiemTraLichTrung($ngayLamViec,$caLamViec,$trangThai,$idNhanVien);
+                       if($temp!=-1){
+                            echo "<script>alert('Lịch làm việc bị trùng!'); window.location.href = 'QLLichNV.php?idnv=".$idNhanVien."';</script>";
+                       }else{
+                            $tblSP = $p->setLich($idLichLamViec,$ngayLamViec, $caLamViec, $trangThai, $idNhanVien);
+                            
+                            if(!$tblSP){
+                                echo "Tạo lịch làm việc mới không thành công";
+                            }else {
+                                echo "<script>alert('Tạo lịch làm việc thành công!'); window.location.href = 'QLLichNV.php?idnv=".$idNhanVien."';</script>";
+                            }
+                       }
+                        
+                    }
+
+                    if(isset($_REQUEST["huy"])){
+                        echo "<script>window.location.href = 'QLLichNV.php?idnv=".$_REQUEST['idnv']."';</script>";
+                    }
+
+                ?>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <label for="ngaylam">Ngày làm việc</label>
+                        <input type="date" id="ngaylam" name="ngayLamViec">
+
+                        <label for="calamviec">Chọn ca làm việc</label>
+
+                        <select style="width:calc(100%)" class="form-select" aria-label="Default select example"
+                            name="caLamViec">
+                            <option value="7:00 - 9:00 AM">7:00 - 9:00 AM</option>
+                            <option value="9:00 - 11:00 AM">9:00 - 11:00 AM</option>
+                            <option value="13:00 - 15:00 PM">13:00 - 15:00 PM</option>
+                            <option value="15:00 - 17:00 PM">15:00 - 17:00 PM</option>
+                        </select>
+                        <label for="trangthai">Trạng thái</label>
+
+                        <select style="width:calc(100%)" class="form-select" aria-label="Default select example"
+                            name="trangThai">
+                            <option value="Chưa hoàn thành">Chưa hoàn thành</option>
+                            <option value="Đã hoàn thành">Đã hoàn thành</option>
+                            <option value="Đang làm việc">Đang làm việc</option>
+
+                        </select>
 
 
-
-                    <label for="ngaylam">Ngày làm việc</label>
-                    <input type="date" id="ngaylam" name="ngaylam">
-
-                    <label for="calamviec">Chọn ca làm việc</label>
-
-                    <select style="width:calc(100%)" class="form-select" aria-label="Default select example">
-                        <option value="7:00 - 9:00 AM">7:00 - 9:00 AM</option>
-                        <option value="9:00 - 11:00 AM">9:00 - 11:00 AM</option>
-                        <option value="13:00 - 15:00 PM">13:00 - 15:00 PM</option>
-                        <option value="15:00 - 17:00 PM">15:00 - 17:00 PM</option>
-                    </select>
-                    <label for="trangthai">Trạng thái</label>
-
-                    <select style="width:calc(100%)" class="form-select" aria-label="Default select example">
-                        <option value="Chưa hoàn thành">Chưa hoàn thành</option>
-                        <option value="Đã hoàn thành">Đã hoàn thành</option>
-                        <option value="Đang làm việc">Đang làm việc</option>
-
-                    </select>
-
-
-                    <div class="button-group">
-                        <button type="submit" class="update-btn">Cập nhật</button>
-                        <button type="button" class="cancel-btn">Hủy</button>
-                    </div>
-                </form>
+                        <div class="button-group">
+                            <button type="submit" class="update-btn" name="taoLich">Tạo lịch</button>
+                            <button type="submit" class="cancel-btn"
+                                onclick="return confirm('Bạn có chắc muốn hủy thao tác này không?')"
+                                name="huy">Hủy</button>
+                        </div>
+                    </form>
             </div>
 
 

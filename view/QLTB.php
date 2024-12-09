@@ -156,9 +156,9 @@ session_start();
                         echo' <div class="list-item">   
 
                         <span class="name" style="margin-left:50px"><a href="ChiTietTB.php?idtb='.$r['IDThietBi'].'" >'.$r['TenThietBi'].'</a></span>
-                        <button class="update-btn">Sửa</button>
-                        <button class="delete-btn">Xoá</button>
-                        <button class="submit-btn">Báo cáo lỗi</button>
+                          <a href="SuaThongTinThietBi.php?idtb='.$r['IDThietBi'].'" class="update-btn">Sửa</a>
+                        <a href="XoaThietBi.php?idtb='.$r['IDThietBi'].'" class="delete-btn">Xoá</a>
+                        <a href="BCL.php?idtb='.$r['IDThietBi'].'" class="update-btn">Báo cáo lỗi</a>
                     </div>';
                         }
                     }

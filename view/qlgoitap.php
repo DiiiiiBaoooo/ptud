@@ -14,6 +14,8 @@ session_start();
     <!-- Favicon -->
     <link href="../assets/img/favicon.ico" rel="icon">
 
+
+
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
@@ -24,6 +26,8 @@ session_start();
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
+
+
 
 <body class="bg-white">
     <!-- Navbar Start -->
@@ -83,6 +87,8 @@ session_start();
     <!-- Page Header End -->
 
 
+
+
     <!-- Blog Start -->
     <div class="container pt-5">
         <div class="left">
@@ -139,42 +145,150 @@ session_start();
                     <input type="text" placeholder="Tìm gói tập">
                     <button class="search-btn">&#128269;</button>
                 </div>
-                <div class="list-container">
-                    <div class="table-head">
-                        <span>STT</span>
-                        <span style="margin-right:50px">Tên gói tập</span>
-                        <span style="margin-right:50px">Thao tác</span>
-                    </div>
-                    <?php
-                        include_once("../controller/cGoiTap.php");
-                        $p= new cGoiTap();
-                        $tbl=$p->getAllGT();
-                        if($tbl)
-                        {
-                            while($r=mysqli_fetch_assoc($tbl))
-                            {
-                                echo' <div class="list-item">
 
-                        <span class="name" style="margin-left:50px"><a href="ChiTietGoiTap.php?idtb='.$r['IDGoiTap'].'">'.$r['TenGoi'].'</a></span>
-                      
-                        <a class="update-btn" href="suagoitap.php?idgt='.$r['IDGoiTap'].'">Sửa</a>
-                         <a class="delete-btn" href="xoagoitap.php?idgt='.$r['IDGoiTap'].'">Xóa</a>
-                     
-                        <button class="submit-btn">Xem</button>
-                    </div>';
-                            }
-                        }
-                    ?>
-
-                    <!-- Repeat the .list-item div for each item in the list -->
-
-                    <!-- Add more list items as needed -->
+                <!-- Nút tạo gói tập mới -->
+                <div class="create-package-btn" align="center">
+                    <button id="createPackageBtn" class="btn btn-primary">Tạo Gói Tập Mới</button>
                 </div>
+
+                <!-- Form tạo gói tập mới ẩn đi -->
+                <div id="createPackageForm" class="create-package-form" style="display: none; margin-top: 20px;">
+                    <h3>Thêm Gói Tập Mới</h3>
+                    <form method="POST" action="add_goitap.php">
+                        <!-- Thay đổi backend script -->
+                        <div class="form-group">
+                            <label for="packageName">Tên Gói Tập</label>
+                            <input type="text" id="packageName" name="TenGoi" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="packagePrice">Giá Gói Tập</label>
+                            <input type="number" id="packagePrice" name="Gia" class="form-control" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="packageDuration">Thời Gian (Tháng)</label>
+                            <input type="number" id="packageDuration" name="ThoiHan" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Lưu</button>
+                        <button type="button" id="cancelCreate" class="btn btn-danger">Hủy</button>
+                    </form>
+                </div>
+
+
+                <!-- Bảng danh sách gói tập -->
+                <div class="package-list" style="margin-top: 20px;">
+                    <h3>Danh Sách Gói Tập</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên Gói</th>
+                                <th>Giá</th>
+                                <th>Thời Gian (Tháng)</th>
+                                <th>Hành Động</th>
+                            </tr>
+
+
+                        </thead>
+
+
+
+
+
+                        <tbody id="packageTableBody">
+
+
+                            <!-- Dữ liệu sẽ được hiển thị ở đây -->
+                            <div id="editPackageForm" class="create-package-form"
+                                style="display: none; margin-top: 20px;">
+                                <h3>Sửa Gói Tập</h3>
+
+                                <form method="POST" action="edit_goitap.php" id="editForm">
+                                    <!-- Thay đổi backend script -->
+                                    <input type="hidden" id="editPackageId" name="id">
+                                    <!-- Thêm trường id để xác định gói tập cần sửa -->
+                                    <div class="form-group">
+                                        <label for="editPackageName">Tên Gói Tập</label>
+                                        <input type="text" id="editPackageName" name="TenGoi" class="form-control"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editPackagePrice">Giá Gói Tập</label>
+                                        <input type="number" id="editPackagePrice" name="Gia" class="form-control"
+                                            step="0.01" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editPackageDuration">Thời Gian (Tháng)</label>
+                                        <input type="number" id="editPackageDuration" name="ThoiHan"
+                                            class="form-control" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Cập nhật</button>
+                                    <button type="button" id="cancelEdit" class="btn btn-danger">Hủy</button>
+                                </form>
+                            </div>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- JavaScript -->
+
+
+
+
+
+                <!-- Removed redundant JavaScript code -->
+
+
+
+
+
+                <!-- JavaScript để hiển thị form -->
+                <script>
+                // Lắng nghe sự kiện nhấn vào nút tạo gói tập mới
+                document.getElementById('createPackageBtn').addEventListener('click', function() {
+                    // Hiển thị form tạo gói tập
+                    document.getElementById('createPackageForm').style.display = 'block';
+                });
+
+                // Lắng nghe sự kiện nhấn vào nút hủy
+                document.getElementById('cancelCreate').addEventListener('click', function() {
+                    // Ẩn form tạo gói tập
+                    document.getElementById('createPackageForm').style.display = 'none';
+                });
+
+
+
+
+                //scrip cua sua
+                $(document).on('click', '.edit-package-btn', function() {
+                    var packageId = $(this).data('id');
+                    var packageName = $(this).data('name');
+                    var packagePrice = $(this).data('price');
+                    var packageDuration = $(this).data('duration');
+
+                    // Điền dữ liệu vào form sửa
+                    $('#editPackageId').val(packageId);
+                    $('#editPackageName').val(packageName);
+                    $('#editPackagePrice').val(packagePrice);
+                    $('#editPackageDuration').val(packageDuration);
+
+                    // Hiển thị form sửa
+                    $('#editPackageForm').show();
+                });
+
+                //
+                </script>
+
             </div>
 
 
         </div>
     </div>
+
+
+
+
+
+
     <!-- Blog End -->
 
 
@@ -252,6 +366,52 @@ session_start();
 
     <!-- Template Javascript -->
     <script src="../assets/js/main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    // Khi form được submit
+    $("form#createPackageForm").submit(function(event) {
+        event.preventDefault(); // Ngừng hành động mặc định của form
+
+        // Lấy dữ liệu từ form
+        var formData = $(this).serialize();
+
+        // Gửi dữ liệu qua Ajax
+        $.ajax({
+            url: "add_goitap.php", // File xử lý dữ liệu
+            type: "POST",
+            data: formData,
+            success: function(response) {
+                // Sau khi lưu thành công, tải lại danh sách gói tập
+                loadPackageList();
+                alert("Gói tập đã được lưu thành công!");
+            },
+            error: function() {
+                alert("Có lỗi xảy ra khi lưu gói tập.");
+            }
+        });
+    });
+
+    // Hàm tải lại danh sách gói tập từ cơ sở dữ liệu
+    function loadPackageList() {
+        $.ajax({
+            url: "get_goitap_list.php", // Tạo file này để lấy dữ liệu
+            success: function(response) {
+                // Cập nhật bảng danh sách gói tập
+                $("#packageTableBody").html(response);
+            }
+        });
+    }
+
+    // Gọi hàm loadPackageList khi trang được tải
+    $(document).ready(function() {
+        loadPackageList();
+    });
+    </script>
+
 </body>
+
+
+
 
 </html>

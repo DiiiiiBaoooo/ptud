@@ -63,7 +63,102 @@
             return $kq;
 
         }
+        public function getLichByID($idtv)
+        {
+            $p = new mNhanVien();
+		$kq= $p->selectLichByID($idtv);
+		if(mysqli_num_rows($kq)>0)
+		{
+			return $kq;
+		}
+		else
+		{
+			return false;
+		}
+        }
 
+        public function setLich($idLichLamViec,$ngayLamViec, $caLamViec, $trangThai, $idNhanVien){
+            
+            $p = new mNhanVien();
+            $result = $p->insertLich($idLichLamViec,$ngayLamViec, $caLamViec, $trangThai, $idNhanVien);
+            if ($result === -1) {
+                return -1;
+            } elseif ($result === 0) {
+                return 0;
+            } else {
+                return $result;
+            }
+        }
+        
+        public function xoaLich($idLichLamViec){
+            $p = new mNhanVien();
+            $result = $p->xoaLich($idLichLamViec);
+            
+            if($result){
+                return true; // Xóa  thành công
+            } else {
+                return false; // Xóa thất bại hoặc không tồn tại
+            }
+        }
+
+        public function getNVByID($gt){
+            $p = new mNhanVien();
+            $tblSP = $p -> selectNVByID($gt);
+            if(!$tblSP){
+                return -1;
+            }else{
+                if($tblSP -> num_rows>0){
+                    return $tblSP;
+                }else{
+                    return 0; // la 0 co dong du lieu 
+                }
+            }
+        }
+
+        public function getNVByName($ten){
+            $p = new mNhanVien();
+            $tblSP = $p->selectNVByName($ten);
+            
+            if(!$tblSP){
+                
+                return -1;
+            }else{
+                if($tblSP -> num_rows>0){
+                    return $tblSP;
+                }else{
+                    return 0; // la 0 co dong du lieu 
+                }
+            }
+        }
+
+        public function setCapNhatLich($idLichLamViec,$ngayLamViec, $caLamViec, $trangThai, $idNhanVien){
+            
+            $p = new mNhanVien();
+            $tblSP = $p->capNhatLich($idLichLamViec,$ngayLamViec, $caLamViec, $trangThai, $idNhanVien);
+            
+            if ($tblSP === -1) {
+                return -1;
+            } elseif ($tblSP === 0) {
+                return 0;
+            } else {
+                return $tblSP;
+            }
+        }
+
+        public function kiemTraLichTrung($ngayLamViec, $caLamViec, $trangThai, $idNhanVien){
+            
+            
+            $p = new mNhanVien();
+            $tblSP = $p->kiemTraLichTrung($ngayLamViec, $caLamViec, $trangThai, $idNhanVien);
+            
+            if ($tblSP === -1) {
+                return -1;
+            } elseif ($tblSP === 0) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
         
 
 

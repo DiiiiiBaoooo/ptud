@@ -63,5 +63,15 @@
             $p->DongKetNoi($con);
             return $kq;
         }
+        // kiet
+        public function xemdanhgia()
+        {
+            $p = new clsketnoi();
+            $con = $p->MoKetNoi();
+            $query = "SELECT * from `danhgia` ";
+            $kq = mysqli_query($con, $query);
+            $p->DongKetNoi($con);
+            return $kq;
+        }
     }
 ?>

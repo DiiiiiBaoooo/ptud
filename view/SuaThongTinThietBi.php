@@ -1,5 +1,5 @@
 <?php
-session_start();
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,7 @@ session_start();
 
     <!-- Flaticon Font -->
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
-    <link rel="stylesheet" href="login\css\update.css">
+    <link rel="stylesheet" href="login/css/update.css">
     <link rel="stylesheet" href="login/css/style.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
@@ -90,7 +90,7 @@ session_start();
                 <div class="menu">
                     <p>Menu</p>
                     <ul>
-                         <?php
+                        <?php
                        if(!$_SESSION['dn'])
                        {
                         echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
@@ -132,27 +132,72 @@ session_start();
             </div>
 
         </div>
+
+        <?php
+         include_once("../controller/cThietBi.php");
+         $q= new cThietBi();
+         
+         $tbl = $q->get01TB($_REQUEST['idtb']);
+         if($tbl && mysqli_num_rows($tbl) > 0)
+         {
+            while($r=mysqli_fetch_assoc($tbl))
+	{
+        $tentb = $r['TenThietBi'];
+        $tt = $r['TinhTrang'];
+        $ngaysx = $r['NgaySanXuat'];
+        $noisx = $r['NoiSanXuat'];
+        
+	}
+         }
+         ?>
+
         <div class="right">
             <div class="update-info-container">
-                <h2>Sửa Thông Tin Thiết Bị</h2>
-                <form action="update_info.php" method="POST" enctype="multipart/form-data">
+                <h2>Cập nhật thông tin thiết bị</h2>
+                <form action="" method="POST" enctype="multipart/form-data">
                     <label for="name">Tên Thiết Bị</label>
-                    <input type="text" id="name" name="name" placeholder="Nhập tên của thiết bị" required>
+                    <input type="text" id="name" name="tentb" value="<?php if(isset($tentb)) {echo $tentb;}  ?>"
+                        placeholder="Nhập tên thiết bị" required>
 
-                    <label for="tt">Tình Trạng</label>
-                    <input type="text" id="tt" name="tt" placeholder="Nhập tình trạng của thiết bị">
+                    <label for="address">Tình Trạng</label>
+                    <input type="text" id="tt" name="tt" value="<?php if(isset($tt)) {
+	 echo $tt;
+}  ?>" placeholder="Nhập tình trạng">
 
-                    <label for="nsx">Ngày Sản Xuất</label>
-                    <input type="date" id="nsx" name="nsx" placeholder="Nhập ngày sản xuất của thiết bị" required><br>
-                    <label for="noisx">Nơi Sản Xuất</label>
-                    <input type="text" id="noisx" name="noisx" placeholder="Nhập nơi sản xuất của thiết bị">
+                    <label for="date">Ngày Sản Xuất</label>
+                    <input type="date" id="date" name="ngaysx" value="<?php if(isset($ngaysx)) {
+	 echo $ngaysx;
+}  ?>" placeholder="Nhập ngày sản xuất" required>
+                    <br>
+                    <label for="address">Nơi Sản Xuất</label>
+                    <input type="address" id="address" name="noisx" value="<?php if(isset($noisx)) {
+	 echo $noisx;
+}  ?>" placeholder="Nhập nơi sản xuất" required>
 
 
                     <div class="button-group">
-                        <button type="submit" class="update-btn">Cập nhật</button>
-                        <button type="button" class="cancel-btn">Hủy</button>
+                        <input type="submit" class="update-btn" name='update-btn' value="Cập nhật">
+                        <input type="button" class="cancel-btn" value="Hủy">
                     </div>
                 </form>
+                <?php
+                include_once("../controller/cThietBi.php");
+                $p= new cThietBi();
+                if(isset($_REQUEST['update-btn'])){
+	
+	$kq2 = $p->updateTB($_REQUEST['idtb'],$_REQUEST['tentb'],$_REQUEST['tt'],$_REQUEST['ngaysx'],$_REQUEST['noisx']);
+	if($kq2)
+	{
+		echo '<script>alert("Update thành công!")</script>';
+		echo "<script>window.location.href = 'QLTB.php';</script>";
+	}
+	else
+	{
+		echo '<script>alert("Update không thành công!")</script>';
+		echo "<script>window.location.href = 'QLTB.php';</script>";
+	}
+}
+?>
             </div>
 
 

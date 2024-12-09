@@ -76,7 +76,7 @@ session_start();
             <div class="d-inline-flex">
                 <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Quản lý thiết bị</p>
+                <p class="m-0 text-white">Quản lý lịch làm việc</p>
             </div>
         </div>
     </div>
@@ -134,41 +134,65 @@ session_start();
         </div>
         <div class="right">
             <div class="qltv">
-                <h1 align="center">Quản lý Gói tập</h1>
-                <div class="search-bar">
-                    <input type="text" placeholder="Tìm gói tập">
-                    <button class="search-btn">&#128269;</button>
-                </div>
+                <h1 align="center">Quản lý lịch làm việc</h1>
+                <form method="post">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Tìm nhân viên (Nhập tên hoặc mã nhân viên)" style="width:50%"
+                            name="gtTK">
+                        <button class="search-btn" type="submit" name="timKiemNV">&#128269;</button>
+                    </div>
+                </form>
+
                 <div class="list-container">
                     <div class="table-head">
                         <span>STT</span>
-                        <span style="margin-right:50px">Tên gói tập</span>
+                        <span style="margin-right:50px">Tên nhân viên</span>
                         <span style="margin-right:50px">Thao tác</span>
                     </div>
+
                     <?php
-                        include_once("../controller/cGoiTap.php");
-                        $p= new cGoiTap();
-                        $tbl=$p->getAllGT();
-                        if($tbl)
-                        {
-                            while($r=mysqli_fetch_assoc($tbl))
-                            {
-                                echo' <div class="list-item">
-
-                        <span class="name" style="margin-left:50px"><a href="ChiTietGoiTap.php?idtb='.$r['IDGoiTap'].'">'.$r['TenGoi'].'</a></span>
-                      
-                        <a class="update-btn" href="suagoitap.php?idgt='.$r['IDGoiTap'].'">Sửa</a>
-                         <a class="delete-btn" href="xoagoitap.php?idgt='.$r['IDGoiTap'].'">Xóa</a>
-                     
-                        <button class="submit-btn">Xem</button>
-                    </div>';
+                            include("../controller/cNhanVien.php");
+                            $p = new cNhanVien();
+                            $kq = $p->getAllNV();
+                            if(isset($_REQUEST['timKiemNV'])){
+                                if($_REQUEST['gtTK']>0&&$_REQUEST['gtTK']<26){
+                                    $gt = $_REQUEST["gtTK"];
+                                    $temp = $p->getNVByID($gt);
+                                        if(isset($temp)&&$temp!=-1&&$temp!=0){
+                                            while($r=mysqli_fetch_assoc($temp)){
+                                            echo '<div class="list-item">';
+                                            echo '<span class="name" style="margin-left:50px">' . $r['TenNhanVien']. '</span>';
+                                            echo '<button class="submit-btn" "><a style="color:white" href="QLLichNV.php?idnv='.$r['IDNhanVien'].'">Xem chi tiết</a></button></div>';
+                                            }
+                                        }
+                                    
+                                }else{
+                                    $gt = $_REQUEST["gtTK"];
+                                    $temp = $p->getNVByName($gt);
+                                        if(isset($temp)&&$temp!=-1&&$temp!=0){
+                                            while($r=mysqli_fetch_assoc($temp)){
+                                            echo '<div class="list-item">';
+                                            echo '<span class="name" style="margin-left:50px">' . $r['TenNhanVien']. '</span>';
+                                            echo '<button class="submit-btn" "><a style="color:white" href="QLLichNV.php?idnv='.$r['IDNhanVien'].'">Xem chi tiết</a></button></div>';
+                                            }
+                                        }else{
+                                            echo '<center style="color:red">Không tìm thấy nhân viên</center>';
+                                        }
+                                }
+                            }else{
+                                if($kq){
+                                    while($r=mysqli_fetch_assoc($kq)){
+                                        echo '<div class="list-item">';
+                                        echo '<span class="name" style="margin-left:50px">' . $r['TenNhanVien']. '</span>';
+                                        echo '<button class="submit-btn" "><a style="color:white" href="QLLichNV.php?idnv='.$r['IDNhanVien'].'">Xem chi tiết</a></button></div>';
+                                    }
+                                }
                             }
-                        }
-                    ?>
+                                
+                            
+                            
 
-                    <!-- Repeat the .list-item div for each item in the list -->
-
-                    <!-- Add more list items as needed -->
+                       ?>
                 </div>
             </div>
 

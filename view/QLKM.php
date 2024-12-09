@@ -90,7 +90,7 @@ session_start();
                 <div class="menu">
                     <p>Menu</p>
                     <ul>
-                         <?php
+                        <?php
                        if(!$_SESSION['dn'])
                        {
                         echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
@@ -135,85 +135,42 @@ session_start();
         <div class="right">
             <div class="qltv">
                 <h1 align="center">Quản lý Khuyến mãi</h1>
-                <div class="search-bar">
-                    <input type="text" placeholder="Tìm khuyến mãi">
-                    <button class="search-btn">&#128269;</button>
-                </div>
-                <div class="list-container">
-                    <div class="table-head">
-                        <span>STT</span>
-                        <span style="margin-right:50px">Tên khuyến mãi</span>
-                        <span style="margin-right:50px">Thao tác</span>
+                <form method="post">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Tìm khuyến mãi">
+                        <button class="search-btn">&#128269;</button>
                     </div>
-                    <div class="list-item">
+                    <div class="list-container">
+                        <div class="table-head">
+                            <span>STT</span>
+                            <span style="margin-right:50px">Tên khuyến mãi</span>
+                            <span style="margin-right:50px">Thao tác</span>
+                        </div>
+                        <?php
+                        include_once("../controller/cKhuyenMai.php");
+                        $p = new cKhuyenMai();
+                        $tbl = $p->getAllKM();
+                        if($tbl)
+                        {
+                            while($r=mysqli_fetch_assoc($tbl))
+                            {
+                                echo'<div class="list-item">
 
-                        <span class="name" style="margin-left:50px">Ưu đãi chào xuân</span>
-                        <button class="update-btn">Sửa</button>
-                        <button class="delete-btn">Xoá</button>
-                        <button class="submit-btn">Xem</button>
-                    </div>
-                    <!-- Repeat the .list-item div for each item in the list -->
-                    <div class="list-item">
+                            <span class="name" style="margin-left:50px"><a href="ChiTietKM.php?IDKhuyenMai='.$r['IDKhuyenMai'].'">'.$r['TenKhuyenMai'].'</a></span>
+                            <button class="update-btn">Sửa</button>
+                            <button class="delete-btn">Xoá</button>
+                            <button class="submit-btn">Xem</button>
+                        </div>';
+                            }
+                        }
+                        ?>
 
-                        <span class="name" style="margin-left:50px">Ưu đãi chào xuân</span>
-                        <button class="update-btn">Sửa</button>
-                        <button class="delete-btn">Xoá</button>
-                        <button class="submit-btn">Xem</button>
-                    </div>
-                    <div class="list-item">
 
-                        <span class="name" style="margin-left:50px">Ưu đãi chào xuân</span>
-                        <button class="update-btn">Sửa</button>
-                        <button class="delete-btn">Xoá</button>
-                        <button class="submit-btn">Xem</button>
+                        <!-- Add more list items as needed -->
                     </div>
-                    <div class="list-item">
-
-                        <span class="name" style="margin-left:50px">Ưu đãi chào xuân</span>
-                        <button class="update-btn">Sửa</button>
-                        <button class="delete-btn">Xoá</button>
-                        <button class="submit-btn">Xem</button>
-                    </div>
-                    <div class="list-item">
-
-                        <span class="name" style="margin-left:50px">Ưu đãi chào xuân</span>
-                        <button class="update-btn">Sửa</button>
-                        <button class="delete-btn">Xoá</button>
-                        <button class="submit-btn">Xem</button>
-                    </div>
-                    <div class="list-item">
-
-                        <span class="name" style="margin-left:50px">Ưu đãi chào xuân</span>
-                        <button class="update-btn">Sửa</button>
-                        <button class="delete-btn">Xoá</button>
-                        <button class="submit-btn">Xem</button>
-                    </div>
-                    <div class="list-item">
-
-                        <span class="name" style="margin-left:50px">Ưu đãi chào xuân</span>
-                        <button class="update-btn">Sửa</button>
-                        <button class="delete-btn">Xoá</button>
-                        <button class="submit-btn">Xem</button>
-                    </div>
-                    <div class="list-item">
-
-                        <span class="name" style="margin-left:50px">Ưu đãi chào xuân</span>
-                        <button class="update-btn">Sửa</button>
-                        <button class="delete-btn">Xoá</button>
-                        <button class="submit-btn">Xem</button>
-                    </div>
-                    <div class="list-item">
-
-                        <span class="name" style="margin-left:50px">Ưu đãi chào xuân</span>
-                        <button class="update-btn">Sửa</button>
-                        <button class="delete-btn">Xoá</button>
-                        <button class="submit-btn">Xem</button>
-                    </div>
-                    <!-- Add more list items as needed -->
-                </div>
             </div>
 
-
+            </form>
         </div>
     </div>
     <!-- Blog End -->

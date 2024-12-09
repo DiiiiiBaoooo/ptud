@@ -19,10 +19,42 @@ session_start();
 
     <!-- Flaticon Font -->
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
-    <link rel="stylesheet" href="login/css/qltb.css">
+    <link rel="stylesheet" href="login\css\delete.css">
     <link rel="stylesheet" href="login/css/style.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
+    <style>
+    .confirmation {
+        border: 1px solid #ccc;
+        padding: 20px;
+        text-align: center;
+        width: 100%;
+        height: 300px;
+        margin: auto;
+        border-radius: 10px;
+        align-content: center;
+    }
+
+    button {
+        margin: 10px;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .left,
+    .right {
+        margin: 10px;
+    }
+
+    .left {
+        margin-right: 30px;
+        /* Adjust for spacing between the menu and confirmation form */
+    }
+    </style>
 </head>
 
 <body class="bg-white">
@@ -76,7 +108,7 @@ session_start();
             <div class="d-inline-flex">
                 <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Quản lý thiết bị</p>
+                <p class="m-0 text-white">Quản lý</p>
             </div>
         </div>
     </div>
@@ -133,45 +165,32 @@ session_start();
 
         </div>
         <div class="right">
-            <div class="qltv">
-                <h1 align="center">Quản lý Gói tập</h1>
-                <div class="search-bar">
-                    <input type="text" placeholder="Tìm gói tập">
-                    <button class="search-btn">&#128269;</button>
-                </div>
-                <div class="list-container">
-                    <div class="table-head">
-                        <span>STT</span>
-                        <span style="margin-right:50px">Tên gói tập</span>
-                        <span style="margin-right:50px">Thao tác</span>
-                    </div>
-                    <?php
-                        include_once("../controller/cGoiTap.php");
-                        $p= new cGoiTap();
-                        $tbl=$p->getAllGT();
-                        if($tbl)
-                        {
-                            while($r=mysqli_fetch_assoc($tbl))
-                            {
-                                echo' <div class="list-item">
+            <div class="confirmation">
 
-                        <span class="name" style="margin-left:50px"><a href="ChiTietGoiTap.php?idtb='.$r['IDGoiTap'].'">'.$r['TenGoi'].'</a></span>
-                      
-                        <a class="update-btn" href="suagoitap.php?idgt='.$r['IDGoiTap'].'">Sửa</a>
-                         <a class="delete-btn" href="xoagoitap.php?idgt='.$r['IDGoiTap'].'">Xóa</a>
-                     
-                        <button class="submit-btn">Xem</button>
-                    </div>';
-                            }
-                        }
-                    ?>
-
-                    <!-- Repeat the .list-item div for each item in the list -->
-
-                    <!-- Add more list items as needed -->
-                </div>
+                <p class="title">Bạn có chắc chắn muốn xóa gói tập này không?</p>
+                <form action="" method="POST">
+                    <input type="hidden" name="deviceId" value="ID_THIET_BI"> <!-- Thay ID_THIET_BI bằng ID thực tế -->
+                    <input type="submit" name="btn-xoa" value="Xóa" class="delete-btn">
+                    <input type="button" value="Hủy" class="cancel-btn" onclick="window.history.back();">
+                </form>
             </div>
+            </form>
+            <?php
+include_once('../controller/cGoiTap.php');
+$p = new cGoiTap();
 
+if (isset($_REQUEST['btn-xoa'])) {
+    $idgt = $_REQUEST['idgt'];
+    $ketqua = $p->deletegt($idgt);
+    if ($ketqua) {
+        echo "<script>alert('Xóa gói tập thành công!');</script>";
+        echo "<script>window.location.href='QLGT.php';</script>";
+    } else {
+        echo "<script>alert('Xóa gói tập thất bại!');</script>";
+        echo "<script>window.location.href='QLGT.php';</script>";
+    }
+}
+?>
 
         </div>
     </div>
@@ -253,5 +272,7 @@ session_start();
     <!-- Template Javascript -->
     <script src="../assets/js/main.js"></script>
 </body>
+
+
 
 </html>

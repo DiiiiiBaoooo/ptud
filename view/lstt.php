@@ -168,12 +168,12 @@ session_start();
         </div>
         <div class="right">
             <div class="update-info-container">
-           
-    
+
+
                 <?php
     include_once("../controller/cHoaDon.php");
     $p= new cHoaDon();
-    $kq= $p->getallhd($_SESSION['id']);
+    $kq= $p->getallhdbytv($_SESSION['id']);
     if($kq)
     {
         

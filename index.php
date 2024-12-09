@@ -887,63 +887,87 @@ session_start();
         </div>
     </div>
     <!-- Team End -->
+    <div class="subscribe container-fluid my-5 py-5 text-center">
+        <h4 class="display-4 text-white font-weight-bold mt-5 mb-3">Gửi đánh giá</h4>
+        <p class="text-white mb-4">Hãy đánh giá trải nghiệm của bạn tại đây.</p>
+        <form class="form-inline justify-content-center mb-5" method="post" action="">
+            <!-- name -->
+            <div class="input-group">
+                <textarea name="danhgia" rows="6" cols="50" id="danhgia"
+                    placeholder="Nhập trải nghiệm của bạn"></textarea>
+            </div>
+            <!-- sdt -->
 
+            <div class="input-group-append">
+                <input type="submit" name="btndg" class="btn btn-primary" value="Gửi đánh giá">
+            </div>
+            <?php
+            include_once("controller/cDanhGia.php");
+            $q= new cDanhGia();
+            if(isset($_REQUEST['btndg']))
+            {
+                $insertdg=$q->TaoDanhGia($_SESSION['id'],$_REQUEST['danhgia']);
+                if($insertdg)
+                {
+                    echo "<script>alert('Gửi đánh giá thành công!');</script>";
+        echo "<script>window.location.href='index.php#a';</script>";
+                }
+                else
+                {
+                    echo "<script>alert('gửi ko thành công!');</script>";
+        echo "<script>window.location.href='index.php#a';</script>";
+                }
+            }
+               
+            ?>
+        </form>
+    </div>
 
     <!-- Testimonial Start -->
     <div class="container-fluid position-relative testimonial my-5">
-        <div class="container">
+        <div class="container" id="a">
             <div class="row px-3 align-items-center">
                 <div class="col-md-6 bg-secondary">
                     <div class="d-flex align-items-center px-3" style="min-height: 450px;">
                         <div id="carouselId" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
+                            <!-- <ol class="carousel-indicators">
                                 <li data-target="#carouselId" data-slide-to="0" class="active"></li>
                                 <li data-target="#carouselId" data-slide-to="1"></li>
                                 <li data-target="#carouselId" data-slide-to="2"></li>
-                            </ol>
+                            </ol> -->
                             <div class="carousel-inner" role="listbox">
-                                <div class="carousel-item active">
+                                <?php
+                                                include_once("controller/cDanhGia.php");
+                                                $p= new cDanhGia();
+                                                $tbl= $p->getDanhgia();
+                                                if($tbl)
+                                                {
+                                                    $stt=1;
+                                                    echo'<div class="carousel-item active">';
+                                                    while($r=mysqli_fetch_array($tbl))
+                                                    {
+                                                        echo'
                                     <div class="d-flex align-items-center mb-4 text-white">
                                         <img width="80" height="80" class="rounded-circle bg-dark p-2"
                                             src="./assets/img/testimonial-1.jpg" alt="Image">
                                         <div class="pl-4">
-                                            <h4 class="text-primary">Duy Bảo</h4>
+                                            <h4 class="text-primary">'.$r['TenThanhVien'].'</h4>
                                             <p class="m-0">Nhân viên văn phòng</p>
                                         </div>
                                     </div>
                                     <div class="testimonial-text position-relative border bg-dark text-white mb-5 p-4">
-                                        Tôi thấy phòng tập rất tốt, chất lượng máy móc tốt, giáo viên nhiệt tình, phòng
-                                        tập sạch sẽ, thoáng đãng, rất thích hợp cho việc tập luyện
+                                        '.$r['NoiDung'].'
                                     </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex align-items-center mb-4 text-white">
-                                        <img width="80" height="80" class="rounded-circle bg-dark p-2"
-                                            src="./assets/img/testimonial-2.jpg" alt="Image">
-                                        <div class="pl-4">
-                                            <h4 class="text-primary">Nhường Em</h4>
-                                            <p class="m-0">Chủ tịch</p>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-text position-relative border bg-dark text-white mb-5 p-4">
-                                        Không gian rộng rãi, sạch sẽ. Đọi ngũ huấn luyện viên có tâm và giàu chuyên môn
-                                        nhất mình từng gặp.
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="d-flex align-items-center mb-4 text-white">
-                                        <img width="80" height="80" class="rounded-circle bg-dark p-2"
-                                            src="./assets/img/testimonial-3.jpg" alt="Image">
-                                        <div class="pl-4">
-                                            <h4 class="text-primary">Đầy Trương</h4>
-                                            <p class="m-0">Giám đốc Gara</p>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-text position-relative border bg-dark text-white mb-5 p-4">
-                                        Quả là một phòng tập tuyệt vời, thiết bị hiện đại, đội ngũ chuyên nghiệp, xứng
-                                        đáng là phòng gym số một Việt Nam.
-                                    </div>
-                                </div>
+                                ';
+                                $stt++;
+                                                    }
+                                                    echo'</div>';
+                                                }
+                                                else
+                                                { echo 'ko co dl';}
+                                            ?>
+
+
                             </div>
                         </div>
                     </div>
