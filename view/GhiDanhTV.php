@@ -157,6 +157,13 @@ session_start();
             </div>
 
         </div>
+        <?php
+        if ($_SESSION['dn'] != 2) {
+            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+            echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+        }
+
+        ?>
         <div class="right">
             <div class="confirmation">
 

@@ -143,6 +143,13 @@ session_start();
                 }
                 ?>
 
+                <?php
+                if ($_SESSION['dn'] == 3) {
+                    echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                    echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+                }
+
+                ?>
                 <div class="list-container">
                     <div class="table-head">
                         <span>STT</span>

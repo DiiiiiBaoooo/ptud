@@ -159,7 +159,9 @@ session_start();
                     <input type="date" id="nxrl" name="nxrl" required><br>
 
                     <label for="ttl">Thông Tin lỗi</label>
-                    <input type="text" id="ttl" name="ttl" placeholder="Nhập thông tin lỗi của thiết bị" required><br>
+                    <input type="text" id="ttl" name="ttl" placeholder="Nhập thông tin lỗi của thiết bị"
+                        pattern="[A-Za-z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s,.-]+"
+                        required><br>
 
                     <label for="kq">Kết Quả Bảo Trì</label>
 
