@@ -21,6 +21,7 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/chitiet.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
@@ -43,18 +44,18 @@ session_start();
                     <a href="class.php" class="nav-item nav-link">Lớp học</a>
                     <a href="contact.php" class="nav-item nav-link">Liên hệ</a>
                     <?php
-if (!isset($_SESSION['dn'])) {
-    echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
-    echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-} else {
-    if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
-        echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-    } else {
-        echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
-    }
-    echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
-}
-?>
+                    if (!isset($_SESSION['dn'])) {
+                        echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
+                        echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
+                            echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
+                        } else {
+                            echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
+                        }
+                        echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
+                    }
+                    ?>
 
                 </div>
             </div>

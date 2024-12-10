@@ -1,0 +1,81 @@
+/* Overlay background */
+.alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Alert box */
+.alert-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 30px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+/* Title */
+.alert-box h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Message */
+.alert-box p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.alert-box .alert-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.alert-box .alert-btn.confirm {
+    background-color: #4caf50;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.alert-box .alert-btn.confirm:hover {
+    background-color: #45a049;
+}
+
+.alert-box .alert-btn.cancel {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.alert-box .alert-btn.cancel:hover {
+    background-color: #e53935;
+}
+
+/* Show alert animation */
+.alert-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.alert-box.show {
+    transform: scale(1);
+}

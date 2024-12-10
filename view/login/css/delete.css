@@ -120,14 +120,7 @@ form input[type="email"] {
     border-radius: 4px;
     cursor: pointer;
 }
-.submit-btn {
-    background-color: #035529;
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+
 .update-btn:hover {
     background-color: #d81b1b;
 }

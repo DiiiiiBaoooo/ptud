@@ -56,13 +56,13 @@
 			return false;
 		}
         }
-        public function CapNhat($idnv,$tennv,$sdt,$email,$diachi)
-        {
-            $p = new mNhanVien();
-            $kq= $p->CapNhatTT($idnv,$tennv,$sdt,$email,$diachi);
-            return $kq;
+        // public function CapNhat($idnv,$tennv,$sdt,$email,$diachi)
+        // {
+        //     $p = new mNhanVien();
+        //     $kq= $p->CapNhatTT($idnv,$tennv,$sdt,$email,$diachi);
+        //     return $kq;
 
-        }
+        // }
         public function getLichByID($idtv)
         {
             $p = new mNhanVien();
@@ -161,6 +161,100 @@
         }
         
 
-
+        public function Query2NV($idnv)
+        {
+            $p = new mNhanVien();
+            $tbl = $p->select2NV($idnv);
+            if (mysqli_num_rows($tbl) > 0) {
+                return $tbl;
+            } else {
+                return false;
+            }
+        }
+    
+    
+    
+        
+        // dang ky tu van
+        public function getAllTuVan()
+        {
+            $p = new mNhanVien();
+            $kq = $p->SelectAllTuVan();
+            if (mysqli_num_rows($kq) > 0) {
+                return $kq;
+            } else {
+                return false;
+            }
+        }
+    
+    
+        public function CapNhat($idnv, $tennv, $sdt, $email, $diachi)
+        {
+            $p = new mNhanVien();
+            $kq = $p->CapNhatTTNV($idnv, $tennv, $sdt, $email, $diachi);
+            return $kq;
+        }
+    
+    
+        public function cThem($tennv, $sdt, $matkhau, $diachi, $email, $ngayvaolam, $idrole)
+        {
+            $p = new mNhanVien();
+            $ar = array();
+            $r = $this->getAllNV();
+            foreach ($r as $row) {
+                $ar[] = $row['SoDienThoai'];
+            }
+            if (in_array($sdt, $ar)) {
+                echo "<script>alert('Số điện thoại đã tồn tại')</script>";
+                header("refresh:0;url='../view/QLNV.php'");
+                return;
+            } else {
+                $kq = $p->mThem($tennv, $sdt, $matkhau, $diachi, $email, $ngayvaolam, $idrole);
+                if ($kq) {
+                    return $kq;
+                } else {
+                    return false;
+                }
+            }
+        }
+    
+    
+    
+        public function cXoaNV($idnv)
+        {
+            $p = new mNhanVien();
+            if ($idnv == 1) {
+                echo "<script>alert('Bạn không thể xóa tài khoản admin')</script>";
+                header("refresh:0;url='../view/QLNV.php'");
+                return;
+            } else {
+                $con = $p->mXoaNV($idnv);
+                return $con;
+            }
+        }
+    
+        //search
+        public function searchNV($keyword)
+        {
+            include_once("../model/mNhanVien.php");
+            $model = new mNhanVien();
+            return $model->searchNV($keyword);
+        }
+    
+        //  dang ky tu van
+    
+        public function cTuVan($tentuvan, $sdttv)
+        {
+            $p = new mNhanVien();
+            $ar = array();
+            $r = $this->getAllTuVan();
+    
+            $kq = $p->mTuVan($tentuvan, $sdttv);
+            if ($kq) {
+                return $kq;
+            } else {
+                return false;
+            }
+        }
     }   
 ?>

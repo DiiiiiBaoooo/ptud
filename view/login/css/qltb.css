@@ -57,13 +57,12 @@
 .search-bar {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content:flex-end !important;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .search-bar input {
-   
-    width: 25%;
     padding: 10px;
     border: 1px solid #000000;
     border-radius: 20px 0 0 20px;
@@ -109,6 +108,7 @@
 }
 
 .update-btn,
+.error-btn,
 .submit-btn,
 .delete-btn {
     padding: 5px 10px;
@@ -131,10 +131,12 @@
     background-color: #053606;
     
 }
+.error-btn,
 .submit-btn{
     background-color: #099696;
     
 }
+.error-btn:hover,
 .submit-btn:hover{
     background-color: #0f5e5e;
     

@@ -21,71 +21,72 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login\css\them.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
     <style>
-    .confirmation {
-        border: 1px solid #ccc;
-        padding: 20px;
-        text-align: center;
-        width: 100%;
-        height: 300px;
-        margin: auto;
-        border-radius: 10px;
-        align-content: center;
-    }
+        .confirmation {
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            height: 300px;
+            margin: auto;
+            border-radius: 10px;
+            align-content: center;
+        }
 
-    button {
-        margin: 10px;
-    }
+        button {
+            margin: 10px;
+        }
 
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .left,
-    .right {
-        margin: 10px;
-    }
+        .left,
+        .right {
+            margin: 10px;
+        }
 
-    .left {
-        margin-right: 30px;
-        /* Adjust for spacing between the menu and confirmation form */
-    }
+        .left {
+            margin-right: 30px;
+            /* Adjust for spacing between the menu and confirmation form */
+        }
 
-    .confirmation {
-        border: 2px solid #ccc;
-        border-radius: 10px;
-        padding: 20px;
-        width: 500px;
-        height: 500px;
-        margin: auto;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
+        .confirmation {
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            width: 500px;
+            height: 500px;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .confirmation form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+        .confirmation form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    .confirmation input[type="number"],
-    .confirmation textarea {
-        width: 100%;
-        /* Đảm bảo các ô điền có cùng độ rộng với ô cha */
-        box-sizing: border-box;
-        /* Đảm bảo padding không làm thay đổi kích thước */
-        padding: 8px;
-        /* Khoảng cách bên trong ô điền */
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
+        .confirmation input[type="number"],
+        .confirmation textarea {
+            width: 100%;
+            /* Đảm bảo các ô điền có cùng độ rộng với ô cha */
+            box-sizing: border-box;
+            /* Đảm bảo padding không làm thay đổi kích thước */
+            padding: 8px;
+            /* Khoảng cách bên trong ô điền */
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
 
-    .confirmation table {
-        width: 100%;
-    }
+        .confirmation table {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -111,13 +112,10 @@ session_start();
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -131,7 +129,13 @@ session_start();
     </div>
     <!-- Navbar End -->
 
+    <?php
+    if ($_SESSION['dn'] != 1) {
+        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+        echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+    }
 
+    ?>
     <!-- Page Header Start -->
     <div class="container-fluid page-header mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
@@ -169,64 +173,81 @@ session_start();
             <div class="confirmation">
                 <h2>Sửa Khuyến Mãi</h2>
                 <?php
-        // include("class/clsquanly.php");
-        // $obj = new quanly();
+                include_once("../controller/cKhuyenMai.php");
+                $p = new cKhuyenMai();
+                $tbl = $p->get1KM($_REQUEST['idkm']);
+                if ($tbl) {
+                    while ($r = mysqli_fetch_assoc($tbl)) {
+                        $tenkm = $r['TenKhuyenMai'];
+                        $nd = $r['NoiDung'];
+                        $mucgiam = $r['MucGiamGia'];
+                        $dieukien = $r['DieuKien'];
+                    }
+                } else {
+                    echo "<script>alert('Thông tin khuyến mãi không tồn tại');</script>";
+                    echo "<script>window.location.href = 'QLKM.php';</script>";
+                }
+                ?>
 
-        // // Kiểm tra xem có ID khuyến mãi không
-        // if (isset($_GET['ID'])) {
-        //     $idKhuyenMai = $_GET['ID'];
-        //     $sql = "SELECT * FROM KhuyenMai WHERE IDKhuyenMai = $idKhuyenMai";
-        //     $khuyenMai = $obj->xuatdulieu($sql);
-            
-        //     if ($khuyenMai) {
-        //         $khuyenMai = $khuyenMai[0]; // Lấy thông tin khuyến mãi
-        //     } else {
-        //         echo "<script>alert('Khuyến mãi không tồn tại.'); window.location.href='index.php?page=danhsachkhuyenmai';</script>";
-        //     }
-        // } else {
-        //     echo "<script>alert('ID khuyến mãi không hợp lệ.'); window.location.href='index.php?page=danhsachkhuyenmai';</script>";
-        // }
-        ?>
 
                 <form action="" method="post">
-                    <input type="hidden" name="txtIDKM" value="<?php echo $khuyenMai['IDKhuyenMai']; ?>">
+
                     <table>
                         <tr>
                             <td><label for="txtTenKM">Tên Khuyến Mãi:</label></td>
                             <td>
-                                <input type="text" name="txtTenKM" id="txtTenKM" value="" required>
+                                <input type="text" name="txtTenKM" id="txtTenKM" value="<?php if (isset($tenkm)) {
+                                                                                            echo $tenkm;
+                                                                                        } ?>" required>
                             </td>
                         </tr>
                         <tr>
                             <td><label for="txtNoiDung">Nội Dung:</label></td>
                             <td>
-                                <input type="text" name="txtNoiDung" id="txtNoiDung" value="" required>
+                                <input type="text" name="txtNoiDung" id="txtNoiDung" value="<?php if (isset($nd)) {
+                                                                                                echo $nd;
+                                                                                            } ?>" required>
                             </td>
                         </tr>
                         <tr>
                             <td><label for="txtMucGiamGia">Mức Giảm Giá:</label></td>
                             <td>
-                                <input type="number" step="0.01" name="txtMucGiamGia" id="txtMucGiamGia" value=""
+                                <input type="number" step="0.01" name="txtMucGiamGia" id="txtMucGiamGia" value="<?php if (isset($mucgiam)) {
+                                                                                                                    echo $mucgiam;
+                                                                                                                } ?>"
                                     required>
                             </td>
                         </tr>
                         <tr>
                             <td><label for="txtDieuKien">Điều Kiện Áp Dụng:</label></td>
                             <td>
-                                <input type="text" name="txtDieuKien" id="txtDieuKien" value="" required>
+                                <input type="text" name="txtDieuKien" id="txtDieuKien" value="<?php if (isset($dieukien)) {
+                                                                                                    echo $dieukien;
+                                                                                                } ?>" required>
                             </td>
                         </tr>
                         <tr>
 
                             <td colspan="2">
-                                <button name="btnCapNhat" class="update-btn">Cập nhật</button>
-                                <button value="Làm Lại" class="cancel-btn">Hủy bỏ </button>
+                                <button name="btnupdate" class="update-btn">Cập nhật </button>
+                                <input type="button" value="Hủy" class="cancel-btn" onclick="window.history.back();">
                             </td>
                         </tr>
                     </table>
                 </form>
             </div>
-            </form>
+            <?php
+            if (isset($_REQUEST['btnupdate'])) {
+                $updatekm = $p->updateKM($_REQUEST['idkm'], $_REQUEST['txtTenKM'], $_REQUEST['txtNoiDung'], $_REQUEST['txtMucGiamGia'], $_REQUEST['txtDieuKien']);
+                if ($updatekm) {
+                    echo "<script>alert('Cập nhật thông tin khuyến mãi thành công');</script>";
+                    echo "<script>window.location.href = 'QLKM.php';</script>";
+                } else {
+                    echo "<script>alert('Cập nhật thông tin khuyến mãi không  thành công');</script>";
+                    echo "<script>window.location.href = 'QLKM.php';</script>";
+                }
+            }
+            ?>
 
 
         </div>

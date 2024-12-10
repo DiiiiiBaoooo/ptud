@@ -73,5 +73,24 @@
             $p->DongKetNoi($con);
             return $kq;
         }
+        public function xemlichsutap($idtv)
+        {
+            $p = new clsketnoi();
+            $con = $p->MoKetNoi();
+            $query = "SELECT * from lichsutapluyen where IDThanhVien =$idtv";
+            $kq = mysqli_query($con, $query);
+            $p->DongKetNoi($con);
+            return $kq;
+        }
+        public function thoigiantap($idtv)
+        {
+            $p = new clsketnoi();
+            $con = $p->MoKetNoi();
+            $query = "SELECT t.TenThanhVien, count(t.IDThanhVien) as SoLan from lichsutapluyen l join thanhvien t on l.IDThanhVien =t.IDThanhVien  where l.IDThanhVien =$idtv  
+GROUP BY t.IDThanhVien, t.TenThanhVien;";
+            $kq = mysqli_query($con, $query);
+            $p->DongKetNoi($con);
+            return $kq;
+        }
     }
 ?>

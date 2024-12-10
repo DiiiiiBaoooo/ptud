@@ -22,6 +22,7 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/them.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
@@ -48,13 +49,10 @@ session_start();
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -92,64 +90,62 @@ session_start();
                     <p>Menu</p>
                     <ul>
                         <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                       echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
-                       switch($_SESSION['dn'])
-                       {
-                        case 1:
-                            {
-                                echo' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
-                                echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
-                                echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
-                                break;
-                            }
-                            case 2:
-                                {
-                                    echo' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
+                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
+                        switch ($_SESSION['dn']) {
+                            case 1: {
+                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
+                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
+                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
+                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    break;
+                                }
+                            case 2: {
+                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     break;
                                 }
-                            case 3: 
-                                {
-                                    echo' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
+                            case 3: {
+                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
                                     echo  '<li><a href="Capnhattrangthai.php">Cập nhật tình trạng thanh toán</a></li>';
                                     break;
                                 }
-                       }
-                       
-                        
-                       
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
                 </div>
             </div>
+            <?php
+            if ($_SESSION['dn'] != 1) {
+                echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+            }
 
+            ?>
         </div>
         <?php
-            include_once("../controller/cGoiTap.php");
-            $p = new cGoiTap();
-            $tbl = $p->get1GT($_REQUEST['idgt']);
-            if($tbl)
-            {
-               while($r=mysqli_fetch_assoc($tbl)) 
-               {
-                $ten=$r['TenGoi'];
-                $gia=$r['Gia'];
-                $thoihan=$r['ThoiHan'];
-               }
+        include_once("../controller/cGoiTap.php");
+        $p = new cGoiTap();
+        $tbl = $p->get1GT($_REQUEST['idgt']);
+        if ($tbl) {
+            while ($r = mysqli_fetch_assoc($tbl)) {
+                $ten = $r['TenGoi'];
+                $gia = $r['Gia'];
+                $thoihan = $r['ThoiHan'];
             }
-            else{
-                echo "<script>alert('Thông tin gói tập không tồn tại');</script>";
-                echo "<script>window.location.href = 'QLGT.php';</script>"; 
-            }
+        } else {
+            echo "<script>alert('Thông tin gói tập không tồn tại');</script>";
+            echo "<script>window.location.href = 'QLGT.php';</script>";
+        }
         ?>
         <div class="right">
             <div class="update-info-container">
@@ -157,46 +153,42 @@ session_start();
 
                     <form action="" method="POST" enctype="multipart/form-data">
                         <label for="TenGoi">Tên gói</label>
-                        <input width="60%" type="text" id="TenGoi" name="TenGoi"
-                            value="<?php if(isset($ten)){echo $ten;} ?>">
+                        <input width="60%" type="text" id="TenGoi" name="TenGoi" value="<?php if (isset($ten)) {
+                                                                                            echo $ten;
+                                                                                        } ?>">
 
                         <label for="Gia">Giá gói:</label>
 
-                        <input type="decimal" id="Gia" name="Gia" value="<?php if(isset($gia)){echo $gia;} ?>">
+                        <input type="decimal" id="Gia" name="Gia" value="<?php if (isset($gia)) {
+                                                                                echo $gia;
+                                                                            } ?>">
                         <br>
                         <label for="thoihan">chọn Thời hạn</label>
 
                         <select style="width:calc(60%)" class="form-select" aria-label="Default select example"
                             name="thoihan">
                             <?php
-                                if($thoihan=="1 tháng")
-                                {
-                                    echo ' <option value="1 tháng" selected>1 Tháng</option>
+                            if ($thoihan == "1 tháng") {
+                                echo ' <option value="1 tháng" selected>1 Tháng</option>
                             <option value="3 tháng">3 Tháng</option>
                             <option value="6 tháng">6 Tháng</option>
                             <option value="12 tháng">12 tháng</option>';
-                                }
-                                elseif($thoihan=="3 tháng")
-                                {
-                                    echo ' <option value="1 tháng" >1 Tháng</option>
+                            } elseif ($thoihan == "3 tháng") {
+                                echo ' <option value="1 tháng" >1 Tháng</option>
                             <option value="3 tháng" selected>3 Tháng</option>
                             <option value="6 tháng">6 Tháng</option>
                             <option value="12 tháng">12 tháng</option>';
-                                }
-                                elseif($thoihan=="6 tháng")
-                                {
-                                    echo ' <option value="1 tháng" >1 Tháng</option>
+                            } elseif ($thoihan == "6 tháng") {
+                                echo ' <option value="1 tháng" >1 Tháng</option>
                             <option value="3 tháng" >3 Tháng</option>
                             <option value="6 tháng" selected>6 Tháng</option>
                             <option value="12 tháng">12 tháng</option>';
-                                }
-                                else
-                                {
-                                    echo ' <option value="1 tháng" >1 Tháng</option>
+                            } else {
+                                echo ' <option value="1 tháng" >1 Tháng</option>
                                     <option value="3 tháng" >3 Tháng</option>
                                     <option value="6 tháng" >6 Tháng</option>
-                                    <option value="12 tháng" selected>12 tháng</option>'; 
-                                }
+                                    <option value="12 tháng" selected>12 tháng</option>';
+                            }
                             ?>
 
 
@@ -210,23 +202,19 @@ session_start();
                     </form>
             </div>
             <?php
-      
-        if(isset($_REQUEST['btnadd']) && $_REQUEST['btnadd']=="Cập nhật")
-        {
-            $insertGT=$p->updateGT($_REQUEST['idgt'],$_REQUEST['TenGoi'], $_REQUEST['Gia'], $_REQUEST['thoihan']);
-            if($insertGT)
-            {
-                echo "<script>alert('cập nhật  thông tin gói tập thành công');</script>";
-                echo "<script>window.location.href = 'QLGT.php';</script>"; 
+
+            if (isset($_REQUEST['btnadd']) && $_REQUEST['btnadd'] == "Cập nhật") {
+                $insertGT = $p->updateGT($_REQUEST['idgt'], $_REQUEST['TenGoi'], $_REQUEST['Gia'], $_REQUEST['thoihan']);
+                if ($insertGT) {
+                    echo "<script>alert('cập nhật  thông tin gói tập thành công');</script>";
+                    echo "<script>window.location.href = 'QLGT.php';</script>";
+                } else {
+                    echo "<script>alert('cập nhật  thông tin gói tập không thành công');</script>";
+                    echo "<script>window.location.href = 'QLGT.php';</script>";
+                }
             }
-            else
-            {
-                echo "<script>alert('cập nhật  thông tin gói tập không thành công');</script>";
-                echo "<script>window.location.href = 'QLGT.php';</script>"; 
-            }
-        }
-       
-?>
+
+            ?>
 
         </div>
     </div>

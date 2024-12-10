@@ -22,7 +22,6 @@ session_start();
     <link rel="stylesheet" href="./login/css/qltb.css">
     <link rel="stylesheet" href="login/css/style.css">
     <link rel="stylesheet" href="../assets/css/icon-hover.css">
-    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
@@ -75,7 +74,7 @@ session_start();
             <div class="d-inline-flex">
                 <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Quản lý nhân viên</p>
+                <p class="m-0 text-white">Quản lý thiết bị</p>
             </div>
         </div>
     </div>
@@ -126,58 +125,46 @@ session_start();
             </div>
 
         </div>
+        <?php
+        if ($_SESSION['dn'] != 2) {
+            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+            echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+        }
+
+        ?>
         <div class="right">
             <div class="qltv">
-                <h1 align="center">Quản lý Nhân viên</h1>
-                <div class="search-bar">
+                <h1 align="center">Quản lý thiết bị lỗi</h1>
+                <div class="search-bar" id="bar-end">
                     <div class=" border-0 outline-0 d-flex  justify-content-start add-container ">
                         <button type="button" class="add-btn">
-                            <a href="./ThemNV.php" class="add-btn__link">Thêm Nhân viên</a>
+                            <a href="BCL.php" class="add-btn__link">Thêm thiết bị lỗi</a>
                         </button>
                     </div>
-                    <div class="search-container">
-                        <!-- Form tìm kiếm -->
-                        <form action="timkiemnhanvien.php" method="post">
-                            <input type="text" name="noidung" placeholder="Tìm nhân viên">
-                            <button type="submit" name="search-btn" class="search-btn">&#128269;</button>
-                        </form>
-
-                    </div>
-
-
-                    <?php
-                    if ($_SESSION['dn'] != 1) {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
-                    }
-
-                    ?>
+                    <input type="text" placeholder="Tìm thiết bị">
+                    <button class="search-btn">&#128269;</button>
                 </div>
                 <div class="list-container">
                     <div class="table-head">
                         <span>STT</span>
-                        <span style="margin-right:50px">Tên nhân viên</span>
+                        <span style="margin-right:50px">Tên</span>
                         <span style="margin-right:50px">Thao tác</span>
                     </div>
                     <?php
-                    include_once("../controller/cNhanVien.php");
-                    $q = new cNhanVien();
-                    $kq = $q->getAllNV();
+                    include_once("../controller/cThietBi.php");
+                    $q = new cThietBi();
+                    $kq = $q->getALLThietBiLoi();
                     if ($kq) {
                         while ($r = mysqli_fetch_assoc($kq)) {
-                            echo '<div class="list-item list-icon__hover hover-box ">
-                                <span class="name" style="margin-left:50px">
-                                     <a href="ChiTietNV.php?idnv=' . $r['IDNhanVien'] . '">' . $r['TenNhanVien'] . '</a>
-                                </span>
-                                <button type="button" onclick="window.location.href=\'CapNhatTTNV.php?idnv=' . $r['IDNhanVien'] . '\'" class="update-btn">Sửa</button>
-                                <button  class="delete-btn" type="button" onclick="window.location.href=\'XoaNhanVien.php?idnv=' . $r['IDNhanVien'] . '\'" ">Xoá</button>
-                                <button class="submit-btn">Ghi danh</button>
-                            </div>';
+                            echo '<div class="list-item">
+                        <span class="name" style="margin-left:20%">' . $r['TenThietBi'] . '</span>
+                        <button class="update-btn">Sửa</button>
+                        <button class="delete-btn">Xoá</button>
+                    </div>';
                         }
                     }
-
                     ?>
-                    <!-- Add more list items as needed -->
+
                 </div>
             </div>
 
@@ -257,6 +244,12 @@ session_start();
     <script src="../assets/js/main.js"></script>
 
     <style>
+        #bar-end {
+            display: flex;
+            justify-content: flex-end !important;
+        }
+
+
         .add-btn {
             outline: none;
             border: none;

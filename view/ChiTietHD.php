@@ -21,52 +21,53 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/chitiethd.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
-<STYle>
-h2.text-center {
-    margin-bottom: -50px;
-}
-
-form {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px;
-}
-
-.table {
-    margin-top: 0;
-}
-
-.back-btn {
-
-    margin-top: 20px;
-
-}
-
-.alert {
-    font-size: 12px;
-    font-weight: bold;
-    color: #fff;
-    padding: 12px;
-    border-radius: 10px;
-    margin: 10px;
-    text-transform: uppercase;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3), -4px -4px 10px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(145deg, #8B0000, #B22222);
-    animation: slideUp 2s ease-out;
-}
-
-@keyframes slideUp {
-    0% {
-        bottom: -100px;
+<style>
+    h2.text-center {
+        margin-bottom: -50px;
     }
 
-    100% {
-        bottom: 20px;
+    form {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px;
     }
-}
+
+    .table {
+        margin-top: 0;
+    }
+
+    .back-btn {
+
+        margin-top: 20px;
+
+    }
+
+    .alert {
+        font-size: 12px;
+        font-weight: bold;
+        color: #fff;
+        padding: 12px;
+        border-radius: 10px;
+        margin: 10px;
+        text-transform: uppercase;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3), -4px -4px 10px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(145deg, #8B0000, #B22222);
+        animation: slideUp 2s ease-out;
+    }
+
+    @keyframes slideUp {
+        0% {
+            bottom: -100px;
+        }
+
+        100% {
+            bottom: 20px;
+        }
+    }
 </STYle>
 
 <body class="bg-white">
@@ -91,13 +92,10 @@ form {
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -135,88 +133,89 @@ form {
                     <p>Menu</p>
                     <ul>
                         <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                       echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
-                       switch($_SESSION['dn'])
-                       {
-                        case 1:
-                            {
-                                echo' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
-                                echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
-                                echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
-                                break;
-                            }
-                            case 2:
-                                {
-                                    echo' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
+                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
+                        switch ($_SESSION['dn']) {
+                            case 1: {
+                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
+                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
+                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
+                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    break;
+                                }
+                            case 2: {
+                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     break;
                                 }
-                            case 3: 
-                                {
-                                    echo' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    echo' <li><a href="Taohoadon.php">Tạo hóa đơn</a></li>';
+                            case 3: {
+                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
+                                    echo ' <li><a href="Taohoadon.php">Tạo hóa đơn</a></li>';
                                     break;
                                 }
-                       }
-                       
-                        
-                       
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
                 </div>
             </div>
+            <?php
+            if ($_SESSION['dn'] != 3) {
+                echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+            }
 
+            ?>
         </div>
         <div class="right">
             <div class="update-info-container">
                 <?php
-include_once("../controller/cHoaDon.php");
+                include_once("../controller/cHoaDon.php");
 
-if (isset($_GET['idhd'])) {
-    $idhd = $_GET['idhd']; 
+                if (isset($_GET['idhd'])) {
+                    $idhd = $_GET['idhd'];
 
-    $q = new cHoaDon();
-    $kq = $q->getChiTietHoaDon($idhd); 
+                    $q = new cHoaDon();
+                    $kq = $q->getChiTietHoaDon($idhd);
 
-    if ($kq) {
-        $r = mysqli_fetch_assoc($kq);
-    } else {
-        echo '<p>Không tìm thấy hóa đơn này!</p>';
-        exit;
-    }
-} else {
-    echo '<p>Không có ID hóa đơn được cung cấp!</p>';
-    exit;
-}
+                    if ($kq) {
+                        $r = mysqli_fetch_assoc($kq);
+                    } else {
+                        echo '<p>Không tìm thấy hóa đơn này!</p>';
+                        exit;
+                    }
+                } else {
+                    echo '<p>Không có ID hóa đơn được cung cấp!</p>';
+                    exit;
+                }
 
-$p = new choadon();
+                $p = new choadon();
 
-if (isset($_POST['btXoa'])) {
-    $id = $_POST['btXoa'];
-    if ($p->xoahoadon($id)) {
-        echo "<div class='alert alert-success text-center'>Xóa thành công.</div>";
-        echo "<script>
+                if (isset($_POST['btXoa'])) {
+                    $id = $_POST['btXoa'];
+                    if ($p->xoahoadon($id)) {
+                        echo "<div class='alert alert-success text-center'>Xóa thành công.</div>";
+                        echo "<script>
                 setTimeout(function() {
                     window.location.href = 'QLHD.php';
                 }, 3000);
               </script>";
-    } else {
-      
-        echo "<div class='alert alert-danger text-center'>Xóa hóa đơn thất bại. Vui lòng thử lại.</div>";
-    }
-}
+                    } else {
+
+                        echo "<div class='alert alert-danger text-center'>Xóa hóa đơn thất bại. Vui lòng thử lại.</div>";
+                    }
+                }
 
 
-?>
+                ?>
 
                 <!-- HTML Display the Invoice Details -->
                 <h2 class="text-center">Chi Tiết Hóa Đơn</h2>

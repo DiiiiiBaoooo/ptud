@@ -21,71 +21,72 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login\css\them.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
     <style>
-    .confirmation {
-        border: 1px solid #ccc;
-        padding: 20px;
-        text-align: center;
-        width: 100%;
-        height: 300px;
-        margin: auto;
-        border-radius: 10px;
-        align-content: center;
-    }
+        .confirmation {
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            height: 300px;
+            margin: auto;
+            border-radius: 10px;
+            align-content: center;
+        }
 
-    button {
-        margin: 10px;
-    }
+        button {
+            margin: 10px;
+        }
 
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .left,
-    .right {
-        margin: 10px;
-    }
+        .left,
+        .right {
+            margin: 10px;
+        }
 
-    .left {
-        margin-right: 30px;
-        /* Adjust for spacing between the menu and confirmation form */
-    }
+        .left {
+            margin-right: 30px;
+            /* Adjust for spacing between the menu and confirmation form */
+        }
 
-    .confirmation {
-        border: 2px solid #ccc;
-        border-radius: 10px;
-        padding: 20px;
-        width: 500px;
-        height: 500px;
-        margin: auto;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
+        .confirmation {
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            width: 500px;
+            height: 500px;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .confirmation form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+        .confirmation form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    .confirmation input[type="number"],
-    .confirmation textarea {
-        width: 100%;
-        /* Đảm bảo các ô điền có cùng độ rộng với ô cha */
-        box-sizing: border-box;
-        /* Đảm bảo padding không làm thay đổi kích thước */
-        padding: 8px;
-        /* Khoảng cách bên trong ô điền */
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
+        .confirmation input[type="number"],
+        .confirmation textarea {
+            width: 100%;
+            /* Đảm bảo các ô điền có cùng độ rộng với ô cha */
+            box-sizing: border-box;
+            /* Đảm bảo padding không làm thay đổi kích thước */
+            padding: 8px;
+            /* Khoảng cách bên trong ô điền */
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
 
-    .confirmation table {
-        width: 100%;
-    }
+        .confirmation table {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -111,13 +112,10 @@ session_start();
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -155,29 +153,34 @@ session_start();
                     <p>Menu</p>
                     <ul>
                         <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                      
-                       
-                                echo  '<li><a href="ThongTinChungTV.php">Xem thông tin tài khoản</a></li>';
-                                echo' <li><a href="GiaHantv-1.php">Gia hạn </a></li>';
-                                echo  '<li><a href="Thanhtoan1.php">Thanh toán</a></li>';
-                                echo  '<li><a href="LSTT.php">Xem lịch sử thanh toán</a></li>';
-                               
-                    
-                        
-                       
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+                        echo  '<li><a href="ThongTinChungTV.php">Xem thông tin tài khoản</a></li>';
+                        echo ' <li><a href="GiaHantv-1.php">Gia hạn </a></li>';
+                        echo  '<li><a href="Thanhtoan1.php">Thanh toán</a></li>';
+                        echo  '<li><a href="LSTT.php">Xem lịch sử thanh toán</a></li>';
+
+
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
                 </div>
             </div>
+            <?php
+            if ($_SESSION['dn'] != 1) {
+                echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+            }
 
+            ?>
         </div>
         <div class="right">
             <div class="confirmation">
@@ -199,20 +202,20 @@ session_start();
                         <tr>
                             <td><label for="txtMucGiamGia">Mức Giảm Giá:</label></td>
                             <td>
-                                <input type="number" step="0.01" name="txtMucGiamGia" id="txtMucGiamGia" required>
+                                <input type="decimal" step="0.01" name="txtMucGiamGia" id="txtMucGiamGia" required>
                             </td>
                         </tr>
                         <tr>
                             <td><label for="txtDieuKien">Điều Kiện Áp Dụng:</label></td>
                             <td>
-                                <input type="text" name="txtDieuKien" id="txtDieuKien" required>
+                                <input type="decimal" name="txtDieuKien" id="txtDieuKien" required>
                             </td>
                         </tr>
                         <tr>
 
                             <td colspan="2">
-                                <button name="btnCapNhat" class="update-btn">Tạo </button>
-                                <button value="Làm Lại" class="cancel-btn">Hủy bỏ </button>
+                                <button name="btnadd" class="update-btn">Tạo </button>
+                                <input type="button" value="Hủy" class="cancel-btn" onclick="window.history.back();">
                             </td>
                         </tr>
                     </table>
@@ -220,7 +223,19 @@ session_start();
             </div>
             </form>
             <?php
-?>
+            include_once("../controller/cKhuyenMai.php");
+            $p = new cKhuyenMai();
+            if (isset($_REQUEST['btnadd'])) {
+                $insert = $p->creatKM($_REQUEST['txtTenKM'], $_REQUEST['txtNoiDung'], $_REQUEST['txtMucGiamGia'], $_REQUEST['txtDieuKien']);
+                if ($insert) {
+                    echo "<script>alert('thêm  thông tin khuyến mãi thành công');</script>";
+                    echo "<script>window.location.href = 'QLKM.php';</script>";
+                } else {
+                    echo "<script>alert('thêm  thông tin khuyến mãi không thành công');</script>";
+                    echo "<script>window.location.href = 'QLKM.php';</script>";
+                }
+            }
+            ?>
 
         </div>
     </div>

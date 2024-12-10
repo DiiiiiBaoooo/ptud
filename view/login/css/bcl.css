@@ -98,7 +98,7 @@ form input[type="email"] {
     justify-content: center;
 }
 
-.update-btn {
+.report-btn {
     background-color: #ee4f4f;
     color: #ffffff;
     padding: 10px 20px;
@@ -125,7 +125,7 @@ form input[type="email"] {
     cursor: pointer;
 }
 
-.update-btn:hover {
+.report-btn:hover {
     background-color: #d81b1b;
 }
 

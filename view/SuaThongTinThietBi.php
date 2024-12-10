@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +21,7 @@
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/update.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
@@ -47,13 +48,10 @@
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -81,7 +79,13 @@
         </div>
     </div>
     <!-- Page Header End -->
+    <?php
+    if ($_SESSION['dn'] != 2) {
+        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+        echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+    }
 
+    ?>
 
     <!-- Blog Start -->
     <div class="container pt-5">
@@ -91,40 +95,35 @@
                     <p>Menu</p>
                     <ul>
                         <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                       echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
-                       switch($_SESSION['dn'])
-                       {
-                        case 1:
-                            {
-                                echo' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
-                                echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
-                                echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
-                                break;
-                            }
-                            case 2:
-                                {
-                                    echo' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
+                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
+                        switch ($_SESSION['dn']) {
+                            case 1: {
+                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
+                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
+                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
+                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    break;
+                                }
+                            case 2: {
+                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     break;
                                 }
-                            case 3: 
-                                {
-                                    echo' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
+                            case 3: {
+                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
                                     echo  '<li><a href="Capnhattrangthai.php">Cập nhật tình trạng thanh toán</a></li>';
                                     break;
                                 }
-                       }
-                       
-                        
-                       
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
@@ -134,45 +133,46 @@
         </div>
 
         <?php
-         include_once("../controller/cThietBi.php");
-         $q= new cThietBi();
-         
-         $tbl = $q->get01TB($_REQUEST['idtb']);
-         if($tbl && mysqli_num_rows($tbl) > 0)
-         {
-            while($r=mysqli_fetch_assoc($tbl))
-	{
-        $tentb = $r['TenThietBi'];
-        $tt = $r['TinhTrang'];
-        $ngaysx = $r['NgaySanXuat'];
-        $noisx = $r['NoiSanXuat'];
-        
-	}
-         }
-         ?>
+        include_once("../controller/cThietBi.php");
+        $q = new cThietBi();
+
+        $tbl = $q->get01TB($_REQUEST['idtb']);
+        if ($tbl && mysqli_num_rows($tbl) > 0) {
+            while ($r = mysqli_fetch_assoc($tbl)) {
+                $tentb = $r['TenThietBi'];
+                $tt = $r['TinhTrang'];
+                $ngaysx = $r['NgaySanXuat'];
+                $noisx = $r['NoiSanXuat'];
+            }
+        }
+        ?>
 
         <div class="right">
             <div class="update-info-container">
                 <h2>Cập nhật thông tin thiết bị</h2>
                 <form action="" method="POST" enctype="multipart/form-data">
                     <label for="name">Tên Thiết Bị</label>
-                    <input type="text" id="name" name="tentb" value="<?php if(isset($tentb)) {echo $tentb;}  ?>"
-                        placeholder="Nhập tên thiết bị" required>
+                    <input type="text" id="name" name="tentb" value="<?php if (isset($tentb)) {
+                                                                            echo $tentb;
+                                                                        }  ?>" placeholder="Nhập tên thiết bị"
+                        required>
 
                     <label for="address">Tình Trạng</label>
-                    <input type="text" id="tt" name="tt" value="<?php if(isset($tt)) {
-	 echo $tt;
-}  ?>" placeholder="Nhập tình trạng">
+                    <input type="text" id="tt" name="tt" value="<?php if (isset($tt)) {
+                                                                    echo $tt;
+                                                                }  ?>" placeholder="Nhập tình trạng">
 
                     <label for="date">Ngày Sản Xuất</label>
-                    <input type="date" id="date" name="ngaysx" value="<?php if(isset($ngaysx)) {
-	 echo $ngaysx;
-}  ?>" placeholder="Nhập ngày sản xuất" required>
+                    <input type="date" id="date" name="ngaysx" value="<?php if (isset($ngaysx)) {
+                                                                            echo $ngaysx;
+                                                                        }  ?>" placeholder="Nhập ngày sản xuất"
+                        required>
                     <br>
                     <label for="address">Nơi Sản Xuất</label>
-                    <input type="address" id="address" name="noisx" value="<?php if(isset($noisx)) {
-	 echo $noisx;
-}  ?>" placeholder="Nhập nơi sản xuất" required>
+                    <input type="address" id="address" name="noisx" value="<?php if (isset($noisx)) {
+                                                                                echo $noisx;
+                                                                            }  ?>" placeholder="Nhập nơi sản xuất"
+                        required>
 
 
                     <div class="button-group">
@@ -182,22 +182,19 @@
                 </form>
                 <?php
                 include_once("../controller/cThietBi.php");
-                $p= new cThietBi();
-                if(isset($_REQUEST['update-btn'])){
-	
-	$kq2 = $p->updateTB($_REQUEST['idtb'],$_REQUEST['tentb'],$_REQUEST['tt'],$_REQUEST['ngaysx'],$_REQUEST['noisx']);
-	if($kq2)
-	{
-		echo '<script>alert("Update thành công!")</script>';
-		echo "<script>window.location.href = 'QLTB.php';</script>";
-	}
-	else
-	{
-		echo '<script>alert("Update không thành công!")</script>';
-		echo "<script>window.location.href = 'QLTB.php';</script>";
-	}
-}
-?>
+                $p = new cThietBi();
+                if (isset($_REQUEST['update-btn'])) {
+
+                    $kq2 = $p->updateTB($_REQUEST['idtb'], $_REQUEST['tentb'], $_REQUEST['tt'], $_REQUEST['ngaysx'], $_REQUEST['noisx']);
+                    if ($kq2) {
+                        echo '<script>alert("Update thành công!")</script>';
+                        echo "<script>window.location.href = 'QLTB.php';</script>";
+                    } else {
+                        echo '<script>alert("Update không thành công!")</script>';
+                        echo "<script>window.location.href = 'QLTB.php';</script>";
+                    }
+                }
+                ?>
             </div>
 
 

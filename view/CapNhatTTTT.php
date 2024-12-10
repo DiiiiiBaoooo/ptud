@@ -3,46 +3,46 @@ session_start();
 ?>
 
 <STYle>
-/* CSS cho thông báo với hiệu ứng di chuyển từ dưới lên */
-.message-3d {
-    font-size: 12px;
-    /* Giảm kích thước chữ */
-    font-weight: bold;
-    color: #fff;
-    padding: 12px;
-    border-radius: 10px;
-    margin: 10px;
-    text-transform: uppercase;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3), -4px -4px 10px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(145deg, #8B0000, #B22222);
-    animation: slideUp 2s ease-out;
-    /* Áp dụng animation di chuyển lên */
-}
-
-@keyframes slideUp {
-    0% {
-        transform: translateY(50px);
-        /* Vị trí ban đầu (dưới) */
-        opacity: 0;
-        /* Ban đầu không hiển thị */
+    /* CSS cho thông báo với hiệu ứng di chuyển từ dưới lên */
+    .message-3d {
+        font-size: 12px;
+        /* Giảm kích thước chữ */
+        font-weight: bold;
+        color: #fff;
+        padding: 12px;
+        border-radius: 10px;
+        margin: 10px;
+        text-transform: uppercase;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3), -4px -4px 10px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(145deg, #8B0000, #B22222);
+        animation: slideUp 2s ease-out;
+        /* Áp dụng animation di chuyển lên */
     }
 
-    100% {
-        transform: translateY(0);
-        /* Vị trí cuối (ở vị trí ban đầu) */
-        opacity: 1;
-        /* Sau khi di chuyển lên, hiển thị */
-    }
-}
+    @keyframes slideUp {
+        0% {
+            transform: translateY(50px);
+            /* Vị trí ban đầu (dưới) */
+            opacity: 0;
+            /* Ban đầu không hiển thị */
+        }
 
-form {
-    max-width: 1000px;
-    /* Tăng chiều rộng form */
-    margin: 0 auto;
-    /* Căn giữa form */
-    padding: 40px;
-    /* Thêm khoảng cách bên trong */
-}
+        100% {
+            transform: translateY(0);
+            /* Vị trí cuối (ở vị trí ban đầu) */
+            opacity: 1;
+            /* Sau khi di chuyển lên, hiển thị */
+        }
+    }
+
+    form {
+        max-width: 1000px;
+        /* Tăng chiều rộng form */
+        margin: 0 auto;
+        /* Căn giữa form */
+        padding: 40px;
+        /* Thêm khoảng cách bên trong */
+    }
 </STYle>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,19 +64,20 @@ form {
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/chitiethd.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
 <STYle>
-h2.text-center {
-    margin-bottom: -50px;
-    /* Giảm khoảng cách dưới tiêu đề */
-}
+    h2.text-center {
+        margin-bottom: -50px;
+        /* Giảm khoảng cách dưới tiêu đề */
+    }
 
-.table {
-    margin-top: 0;
-    /* Giảm khoảng cách trên bảng */
-}
+    .table {
+        margin-top: 0;
+        /* Giảm khoảng cách trên bảng */
+    }
 </STYle>
 
 <body class="bg-white">
@@ -101,13 +102,10 @@ h2.text-center {
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -145,39 +143,34 @@ h2.text-center {
                     <p>Menu</p>
                     <ul>
                         <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                       echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
-                       switch($_SESSION['dn'])
-                       {
-                        case 1:
-                            {
-                                echo' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
-                                echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
-                                echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
-                                break;
-                            }
-                            case 2:
-                                {
-                                    echo' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
+                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
+                        switch ($_SESSION['dn']) {
+                            case 1: {
+                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
+                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
+                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
+                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    break;
+                                }
+                            case 2: {
+                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     break;
                                 }
-                            case 3: 
-                                {
-                                    echo' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
+                            case 3: {
+                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
                                     break;
                                 }
-                       }
-                       
-                        
-                       
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
@@ -190,33 +183,39 @@ h2.text-center {
             </div>
             <!-- Page Header End -->
             <?php
-include_once("../controller/cHoaDon.php");
+            include_once("../controller/cHoaDon.php");
 
-$successMessage = ''; // Biến để lưu thông báo thành công
-$errorMessage = ''; // Biến để lưu thông báo lỗi
+            $successMessage = ''; // Biến để lưu thông báo thành công
+            $errorMessage = ''; // Biến để lưu thông báo lỗi
 
-if (isset($_POST['btnUpdate'])) {
-    $idhd = $_GET['idhd']; // Lấy ID Hóa Đơn từ URL
-    $trangThai = $_POST['trangThai']; // Lấy trạng thái thanh toán từ form
+            if (isset($_POST['btnUpdate'])) {
+                $idhd = $_GET['idhd']; // Lấy ID Hóa Đơn từ URL
+                $trangThai = $_POST['trangThai']; // Lấy trạng thái thanh toán từ form
 
-    // Tạo đối tượng cHoaDon và gọi phương thức updateTT
-    $cHoaDon = new cHoaDon();
-    $result = $cHoaDon->updateTT($idhd, $trangThai);
+                // Tạo đối tượng cHoaDon và gọi phương thức updateTT
+                $cHoaDon = new cHoaDon();
+                $result = $cHoaDon->updateTT($idhd, $trangThai);
 
-    if ($result) {
-        $successMessage = 'Cập nhật trạng thái thanh toán thành công!'; // Lưu thông báo thành công
-        // Sau khi hiển thị thông báo, sẽ tự động chuyển hướng sau 3 giây
-        echo '<script>
+                if ($result) {
+                    $successMessage = 'Cập nhật trạng thái thanh toán thành công!'; // Lưu thông báo thành công
+                    // Sau khi hiển thị thông báo, sẽ tự động chuyển hướng sau 3 giây
+                    echo '<script>
                 setTimeout(function() {
                     window.location.href = "QLHD.php";
                 }, 1000); // Chuyển hướng sau 2 giây
               </script>';
-    } else {
-        $errorMessage = 'Cập nhật thất bại!'; // Lưu thông báo lỗi
-    }
-}
-?>
+                } else {
+                    $errorMessage = 'Cập nhật thất bại!'; // Lưu thông báo lỗi
+                }
+            }
+            ?>
+            <?php
+            if ($_SESSION['dn'] != 3) {
+                echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+            }
 
+            ?>
             <!-- Form HTML -->
             <div class="col-lg-9,center">
                 <div class="bg-light p-4">
@@ -224,16 +223,16 @@ if (isset($_POST['btnUpdate'])) {
 
                     <!-- Hiển thị thông báo thành công -->
                     <?php if ($successMessage): ?>
-                    <div class="alert alert-success text-center message-3d">
-                        <?php echo $successMessage; ?>
-                    </div>
+                        <div class="alert alert-success text-center message-3d">
+                            <?php echo $successMessage; ?>
+                        </div>
                     <?php endif; ?>
 
                     <!-- Hiển thị thông báo lỗi -->
                     <?php if ($errorMessage): ?>
-                    <div class="alert alert-danger text-center message-3d">
-                        <?php echo $errorMessage; ?>
-                    </div>
+                        <div class="alert alert-danger text-center message-3d">
+                            <?php echo $errorMessage; ?>
+                        </div>
                     <?php endif; ?>
 
                     <form action="" method="POST" class="mt-4">

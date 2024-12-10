@@ -49,13 +49,12 @@ body {
 
 
 
-
 .update-info-container {
     width: 100%;
-    max-width: 100%;
+    max-width: 500px;
     margin-left: 20px;
     padding: 20px;
-    background-color: #e6dddd96;
+    background-color: #b8b8b8c2;
     border-radius: 8px;
     color: #333333;
 }
@@ -66,35 +65,17 @@ body {
     margin-bottom: 20px;
 }
 
-form label {
+ label {
     display: inline-block;
     width: 150px;
-    margin-right: 5px;
+    margin-right: 10px;
     color: #333333;
-    font-weight: bold;
+    font-weight: 1000;
 }
 
-form input[type="text"],
-form input[type="tel"] ,
-form input[type='date'],
-form input[type='password']
-{
-    width: calc(100%);
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-form input[type="email"] {
-    width: calc(100%);
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+
 
 .button-group {
-    margin-top: 15px;
     display: flex;
     gap: 10px;
     justify-content: center;
@@ -118,6 +99,7 @@ form input[type="email"] {
     cursor: pointer;
 }
 
+
 .update-btn:hover {
     background-color: #d81b1b;
 }
@@ -130,25 +112,4 @@ form input[type="email"] {
 }
 .right{
     margin-left: 20px; 
-}
-.form-select {
-    width: calc(100%); /* Ensures the select takes the full width */
-    padding: 10px; /* Adds some padding inside the select */
-    border: 1px solid #ccc; /* Light grey border */
-    border-radius: 5px; /* Rounded corners */
-    background-color: #f9f9f9; /* Light background color */
-    font-size: 16px; /* Font size */
-    color: #333; /* Text color */
-    cursor: pointer; /* Change cursor to pointer */
-    transition: border-color 0.3s ease; /* Smooth border transition */
-}
-
-.form-select:hover {
-    border-color: #007bff; /* Change border color on hover */
-}
-
-.form-select:focus {
-    outline: none; /* Remove default focus outline */
-    border-color: #007bff; /* Change border color when focused */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a shadow effect */
 }

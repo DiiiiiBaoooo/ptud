@@ -100,7 +100,34 @@
 			return false;
 		}
         }
-
+        public function xemlslt($idtv)
+        {
+        $p = new mThanhVien();
+            
+		$kq= $p->xemlichsutap($idtv);
+		if(mysqli_num_rows($kq)>0)
+		{
+			return $kq;
+		}
+		else
+		{
+			return false;
+		}
+        }
+        public function xemthoigiantap($idtv)
+        {
+        $p = new mThanhVien();
+            
+		$kq= $p->thoigiantap($idtv);
+		if(mysqli_num_rows($kq)>0)
+		{
+			return $kq;
+		}
+		else
+		{
+			return false;
+		}
+        }
 
     }   
 ?>

@@ -1,0 +1,26 @@
+.list-icon__hover{
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    padding-right: 10px;
+}
+
+.hover-box {
+  
+    background-color: #fff;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.1s ease;
+    cursor: pointer;
+}
+
+/* Hiệu ứng khi hover */
+.hover-box:hover {
+    transform: translate(-10px, -10px); /* Di chuyển lên trên và qua trái */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Tạo bóng */
+}
+

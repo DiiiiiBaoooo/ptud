@@ -12,19 +12,95 @@ session_start();
     <meta content="Free Website Template" name="description">
 
     <!-- Favicon -->
-    <link href="../assets/img/logo.png" rel="icon">
+    <link href="../assets/img/favicon.ico" rel="icon">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Flaticon Font -->
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
-    <link rel="stylesheet" href="./login/css/qltb.css">
+    <link rel="stylesheet" href="login/css/chitiet.css">
     <link rel="stylesheet" href="login/css/style.css">
-    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
+    <style>
+        .content {
+
+            padding: 20px;
+        }
+
+        .stats,
+        .table-section {
+            margin-bottom: 30px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stats div {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stats div:not(:last-child) {
+            margin-right: 20px;
+        }
+
+        .stats div h3 {
+            color: #555;
+            font-size: 20px;
+        }
+
+        .stats div p {
+            font-size: 24px;
+            color: #007bff;
+        }
+
+        .table-section table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-section table,
+        .table-section th,
+        .table-section td {
+            border: 1px solid #ddd;
+        }
+
+        .table-section th,
+        .table-section td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .table-section th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .table-section td button {
+            padding: 5px 10px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .table-section td .hire-btn {
+            background-color: #28a745;
+        }
+
+        .table-section td .fire-btn {
+            background-color: #dc3545;
+        }
+    </style>
 </head>
 
 <body class="bg-white">
@@ -75,7 +151,7 @@ session_start();
             <div class="d-inline-flex">
                 <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Quản lý nhân viên</p>
+                <p class="m-0 text-white">Hồ sơ cá nhân</p>
             </div>
         </div>
     </div>
@@ -94,26 +170,13 @@ session_start();
                             echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
                             echo "<script>window.location.href = '../index.php';</script>";
                         }
-                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
-                        switch ($_SESSION['dn']) {
-                            case 1: {
-                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
-                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
-                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
-                                    break;
-                                }
-                            case 2: {
-                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
-                                    echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
-                                    break;
-                                }
-                            case 3: {
-                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    echo  '<li><a href="Capnhattrangthai.php">Cập nhật tình trạng thanh toán</a></li>';
-                                    break;
-                                }
-                        }
+
+
+                        echo  '<li><a href="ThongTinChungTV.php">Xem thông tin tài khoản</a></li>';
+                        echo ' <li><a href="GiaHantv-1.php">Gia hạn </a></li>';
+                        echo  '<li><a href="Thanhtoan1.php">Thanh toán</a></li>';
+                        echo  '<li><a href="LSTT.php">Xem lịch sử thanh toán</a></li>';
+
 
 
 
@@ -126,59 +189,73 @@ session_start();
             </div>
 
         </div>
+
         <div class="right">
-            <div class="qltv">
-                <h1 align="center">Quản lý Nhân viên</h1>
-                <div class="search-bar">
-                    <div class=" border-0 outline-0 d-flex  justify-content-start add-container ">
-                        <button type="button" class="add-btn">
-                            <a href="./ThemNV.php" class="add-btn__link">Thêm Nhân viên</a>
-                        </button>
-                    </div>
-                    <div class="search-container">
-                        <!-- Form tìm kiếm -->
-                        <form action="timkiemnhanvien.php" method="post">
-                            <input type="text" name="noidung" placeholder="Tìm nhân viên">
-                            <button type="submit" name="search-btn" class="search-btn">&#128269;</button>
-                        </form>
-
-                    </div>
-
-
-                    <?php
-                    if ($_SESSION['dn'] != 1) {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
-                    }
-
-                    ?>
-                </div>
-                <div class="list-container">
-                    <div class="table-head">
-                        <span>STT</span>
-                        <span style="margin-right:50px">Tên nhân viên</span>
-                        <span style="margin-right:50px">Thao tác</span>
-                    </div>
-                    <?php
-                    include_once("../controller/cNhanVien.php");
-                    $q = new cNhanVien();
-                    $kq = $q->getAllNV();
-                    if ($kq) {
-                        while ($r = mysqli_fetch_assoc($kq)) {
-                            echo '<div class="list-item list-icon__hover hover-box ">
-                                <span class="name" style="margin-left:50px">
-                                     <a href="ChiTietNV.php?idnv=' . $r['IDNhanVien'] . '">' . $r['TenNhanVien'] . '</a>
-                                </span>
-                                <button type="button" onclick="window.location.href=\'CapNhatTTNV.php?idnv=' . $r['IDNhanVien'] . '\'" class="update-btn">Sửa</button>
-                                <button  class="delete-btn" type="button" onclick="window.location.href=\'XoaNhanVien.php?idnv=' . $r['IDNhanVien'] . '\'" ">Xoá</button>
-                                <button class="submit-btn">Ghi danh</button>
-                            </div>';
+            <div class="update-info-container">
+                <div class="content">
+                    <div class="stats">
+                        <?php
+                        include_once("../controller/cThanhvien.php");
+                        $p = new cThanhVien();
+                        if (isset($_SESSION['id'])) {
+                            $idtv = $_SESSION['id'];
+                            $kq = $p->xemthoigiantap($idtv);
+                            if ($kq) {
+                                while ($r = mysqli_fetch_assoc($kq)) {
+                                    echo ' <div>
+                <h3>Họ và tên</h3>
+                <p>' . $r['TenThanhVien'] . '</p>
+            </div>
+            <div>
+                <h3>Số lần tham gia tập luyện</h3>
+                <p>' . $r['SoLan'] . '</p>
+            </div>
+            ';
+                                }
+                            }
                         }
-                    }
+                        ?>
 
-                    ?>
-                    <!-- Add more list items as needed -->
+                    </div>
+                    <div class="table-section">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Ngày tập</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $tbl2 = $p->xemlslt($idtv);
+                                if ($tbl2) {
+                                    $stt = 1;
+                                    while ($r = mysqli_fetch_assoc($tbl2)) {
+                                        echo '
+                                        <tr>
+                        <td>' . $stt . '</td>
+                        <td>' . date("d/m/Y", strtotime(explode(' ', $r['NgayTap'])[0])) . '</td>
+                       
+                       
+                    </tr>';
+                                        $stt++;
+                                    }
+                                }
+                                ?>
+
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
+
+
+
+
+
             </div>
 
 
@@ -188,11 +265,11 @@ session_start();
 
 
     <!-- Footer Start -->
-    <div class="footer container-fluid mt-3 py-5 px-sm-3 px-md-5 text-white">
+    <div class="footer container-fluid mt-5 py-5 px-sm-3 px-md-5 text-white">
         <div class="row pt-5">
             <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-primary mb-4">Gymnast</h4>
-                <p><i class="fa fa-map-marker-alt mr-2"></i>4 Nguyễn Văn Bảo, Gò Vấp, Thành phố Hồ Chí Minh</p>
+                <h4 class="text-primary mb-4">Get In Touch</h4>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
                 <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
                 <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
                 <div class="d-flex justify-content-start mt-4">
@@ -207,34 +284,40 @@ session_start();
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-primary mb-4">Liên kết</h4>
+                <h4 class="text-primary mb-4">Quick Links</h4>
                 <div class="d-flex flex-column justify-content-start">
-                    <a class="text-white mb-2" href="../index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
-
-                    <a class="text-white mb-2" href="./class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
-                    <a class="text-white" href="./contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Features</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Classes</a>
+                    <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-primary mb-4">Phổ biến</h4>
+                <h4 class="text-primary mb-4">Popular Links</h4>
                 <div class="d-flex flex-column justify-content-start">
-                    <a class="text-white mb-2" href="../index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
-
-                    <a class="text-white mb-2" href="./class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
-                    <a class="text-white" href="./contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Features</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Classes</a>
+                    <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-primary mb-4">Giờ mở cửa</h4>
+                <h4 class="text-primary mb-4">Opening Hours</h4>
                 <h5 class="text-white">Monday - Friday</h5>
                 <p>8.00 AM - 8.00 PM</p>
                 <h5 class="text-white">Saturday - Sunday</h5>
                 <p>2.00 PM - 8.00 PM</p>
             </div>
         </div>
-
+        <div class="container border-top border-dark pt-5">
+            <p class="m-0 text-center text-white">
+                &copy; <a class="text-white font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved. Designed
+                by
+                <a class="text-white font-weight-bold" href="https://htmlcodex.com">HTML Codex</a>
+            </p>
+        </div>
     </div>
     <!-- Footer End -->
 
@@ -255,39 +338,6 @@ session_start();
 
     <!-- Template Javascript -->
     <script src="../assets/js/main.js"></script>
-
-    <style>
-        .add-btn {
-            outline: none;
-            border: none;
-            width: 170px;
-            height: 40px;
-            border-radius: 6px;
-            background-color: red !important;
-            color: #fff !important;
-
-
-        }
-
-        .add-btn:hover {
-            background-color: #981d1b !important;
-            color: #fff !important;
-
-        }
-
-        .add-btn__link {
-            color: #fff !important;
-            text-decoration: none;
-        }
-
-        .add-container {
-            width: 68%;
-        }
-
-        .search-container {
-            height: 50px;
-        }
-    </style>
 </body>
 
 </html>

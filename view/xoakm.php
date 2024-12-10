@@ -21,39 +21,40 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login\css\delete.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
     <style>
-    .confirmation {
-        border: 1px solid #ccc;
-        padding: 20px;
-        text-align: center;
-        width: 100%;
-        height: 300px;
-        margin: auto;
-        border-radius: 10px;
-        align-content: center;
-    }
+        .confirmation {
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            height: 300px;
+            margin: auto;
+            border-radius: 10px;
+            align-content: center;
+        }
 
-    button {
-        margin: 10px;
-    }
+        button {
+            margin: 10px;
+        }
 
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .left,
-    .right {
-        margin: 10px;
-    }
+        .left,
+        .right {
+            margin: 10px;
+        }
 
-    .left {
-        margin-right: 30px;
-        /* Adjust for spacing between the menu and confirmation form */
-    }
+        .left {
+            margin-right: 30px;
+            /* Adjust for spacing between the menu and confirmation form */
+        }
     </style>
 </head>
 
@@ -79,13 +80,10 @@ session_start();
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -98,7 +96,13 @@ session_start();
         </nav>
     </div>
     <!-- Navbar End -->
+    <?php
+    if ($_SESSION['dn'] != 1) {
+        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+        echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+    }
 
+    ?>
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header mb-5">
@@ -137,13 +141,24 @@ session_start();
             <div class="confirmation">
                 <h2>Bạn có chắc chắn muốn xóa khuyến mãi này?</h2>
                 <form action="" method="post">
-                    <input type="submit" value="Xóa" class="delete-btn">
+                    <input name="btnxoa" type="submit" value="Xóa" class="delete-btn">
                     <input type="button" value="Hủy" class="cancel-btn" onclick="window.history.back();">
 
                 </form>
                 <?php
-    
-        ?>
+                if (isset($_REQUEST['btnxoa'])) {
+                    include_once("../controller/cKhuyenMai.php");
+                    $p = new cKhuyenMai();
+                    $xoakm = $p->deletekm($_REQUEST['idkm']);
+                    if ($xoakm) {
+                        echo "<script>alert('Xoá thông tin khuyến mãi thành công');</script>";
+                        echo "<script>window.location.href = 'QLKM.php';</script>";
+                    } else {
+                        echo "<script>alert('Xoá thông tin khuyến mãi không thành công');</script>";
+                        echo "<script>window.location.href = 'QLKM.php';</script>";
+                    }
+                }
+                ?>
 
 
             </div>

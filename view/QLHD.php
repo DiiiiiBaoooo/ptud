@@ -23,87 +23,88 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/qltb.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
 <style>
-/* Căn chỉnh container chứa các item */
-.list-container {
-    display: flex;
-    /* Sử dụng Flexbox để hiển thị các item theo chiều ngang */
-    flex-wrap: nowrap;
-    /* Không cho phép xuống dòng */
-    overflow-x: auto;
-    /* Cho phép cuộn ngang nếu các mục quá dài */
-    gap: 100px;
-    /* Khoảng cách giữa các phần tử */
-    padding: 10px;
-    /* Khoảng cách giữa các item và viền container */
-}
+    /* Căn chỉnh container chứa các item */
+    .list-container {
+        display: flex;
+        /* Sử dụng Flexbox để hiển thị các item theo chiều ngang */
+        flex-wrap: nowrap;
+        /* Không cho phép xuống dòng */
+        overflow-x: auto;
+        /* Cho phép cuộn ngang nếu các mục quá dài */
+        gap: 100px;
+        /* Khoảng cách giữa các phần tử */
+        padding: 10px;
+        /* Khoảng cách giữa các item và viền container */
+    }
 
-/* Căn chỉnh từng item hóa đơn */
-.list-item {
-    flex-shrink: 0;
-    /* Đảm bảo item không bị thu nhỏ */
-    width: 100%;
-    /* Đặt chiều rộng cho mỗi item */
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    transition: transform 0.3s ease;
-}
+    /* Căn chỉnh từng item hóa đơn */
+    .list-item {
+        flex-shrink: 0;
+        /* Đảm bảo item không bị thu nhỏ */
+        width: 100%;
+        /* Đặt chiều rộng cho mỗi item */
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        transition: transform 0.3s ease;
+    }
 
-/* Hiệu ứng khi hover */
-.list-item:hover {
-    transform: scale(1.05);
-}
+    /* Hiệu ứng khi hover */
+    .list-item:hover {
+        transform: scale(1.05);
+    }
 
-.item-content {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
+    .item-content {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
 
-.item-buttons {
-    display: flex;
-    gap: 10px;
-}
+    .item-buttons {
+        display: flex;
+        gap: 10px;
+    }
 
-.item-buttons button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+    .item-buttons button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-.update-btn {
-    background-color: #c62828;
-    color: white;
-}
+    .update-btn {
+        background-color: #c62828;
+        color: white;
+    }
 
-.submit-btn {
-    background-color: BLACK;
-    color: white;
-}
+    .submit-btn {
+        background-color: BLACK;
+        color: white;
+    }
 
-.update-btn:hover,
-.submit-btn:hover {
-    opacity: 0.8;
-}
+    .update-btn:hover,
+    .submit-btn:hover {
+        opacity: 0.8;
+    }
 
-/* Các thuộc tính cho các span (chữ) */
-.name,
-.id,
-.status {
-    display: block;
-    margin-bottom: 5px;
-}
+    /* Các thuộc tính cho các span (chữ) */
+    .name,
+    .id,
+    .status {
+        display: block;
+        margin-bottom: 5px;
+    }
 
 
 
-a:hover {
-    text-decoration: underline;
-}
+    a:hover {
+        text-decoration: underline;
+    }
 </style>
 
 <body class="bg-white">
@@ -128,13 +129,10 @@ a:hover {
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -172,41 +170,36 @@ a:hover {
                     <p>Menu</p>
                     <ul>
                         <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                       echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
-                       switch($_SESSION['dn'])
-                       {
-                        case 1:
-                            {
-                                echo' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
-                                echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
-                                echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
-                                break;
-                            }
-                            case 2:
-                                {
-                                    echo' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
+                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
+                        switch ($_SESSION['dn']) {
+                            case 1: {
+                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
+                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
+                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
+                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    break;
+                                }
+                            case 2: {
+                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     break;
                                 }
-                            case 3: 
-                                {
-                                    echo' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    echo' <li><a href="TaoHoaDon.php">Tạo hóa đơn</a></li>';
+                            case 3: {
+                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
+                                    echo ' <li><a href="TaoHoaDon.php">Tạo hóa đơn</a></li>';
 
                                     break;
                                 }
-                       }
-                       
-                        
-                       
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
@@ -214,23 +207,30 @@ a:hover {
             </div>
 
         </div>
+        <?php
+        if ($_SESSION['dn'] != 3) {
+            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+            echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+        }
+
+        ?>
         <div class="right">
             <div class="qlhd">
                 <h1 align="center">Quản lý Hóa đơn</h1>
 
                 <?php
-include_once("../controller/cHoaDon.php");
-$p = new cHoaDon();
+                include_once("../controller/cHoaDon.php");
+                $p = new cHoaDon();
 
-// Kiểm tra nếu người dùng tìm kiếm
-if (isset($_POST['submit']) && !empty($_POST['search']) || isset($_POST['submit_status'])) {
-    $keyword = htmlspecialchars(strip_tags($_POST['search'])); // Bảo vệ đầu vào
-    $status = isset($_POST['status']) ? $_POST['status'] : ''; // Lấy trạng thái thanh toán nếu có
-    $result = $p->getHDByName($keyword, $status); // Tìm kiếm theo tên và trạng thái thanh toán
-} else {
-    $result = $p->selectallhd(); // Lấy tất cả hóa đơn nếu không tìm kiếm
-}
-?>
+                // Kiểm tra nếu người dùng tìm kiếm
+                if (isset($_POST['submit']) && !empty($_POST['search']) || isset($_POST['submit_status'])) {
+                    $keyword = htmlspecialchars(strip_tags($_POST['search'])); // Bảo vệ đầu vào
+                    $status = isset($_POST['status']) ? $_POST['status'] : ''; // Lấy trạng thái thanh toán nếu có
+                    $result = $p->getHDByName($keyword, $status); // Tìm kiếm theo tên và trạng thái thanh toán
+                } else {
+                    $result = $p->selectallhd(); // Lấy tất cả hóa đơn nếu không tìm kiếm
+                }
+                ?>
 
                 <!-- Form tìm kiếm -->
                 <div class="search">
@@ -253,10 +253,10 @@ if (isset($_POST['submit']) && !empty($_POST['search']) || isset($_POST['submit_
 
                 <!-- Hiển thị kết quả -->
                 <?php
-if ($result) {
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo "<div class='list-item'>
+                if ($result) {
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<div class='list-item'>
     <span class='name' style='margin-left:30px ; '>
         <a href='ChiTietHD.php?idnv={$row['IDThanhVien']}'>" . $row['TenThanhVien'] . "</a>
     </span>
@@ -264,14 +264,14 @@ if ($result) {
     <button class='update-btn' onclick=\"window.location.href='CapNhatTTTT.php?idhd={$row['IDHoaDon']}';\">Cập nhật tình trạng thanh toán</button>
     <button class='submit-btn' onclick=\"window.location.href='ChiTietHD.php?idhd={$row['IDHoaDon']}';\">Xem chi tiết</button>
 </div>";
-        }
-    } else {
-        echo "<p>Không tìm thấy hóa đơn nào!</p>";
-    }
-} else {
-    echo "<p>Lỗi kết nối cơ sở dữ liệu!</p>";
-}
-?>
+                        }
+                    } else {
+                        echo "<p>Không tìm thấy hóa đơn nào!</p>";
+                    }
+                } else {
+                    echo "<p>Lỗi kết nối cơ sở dữ liệu!</p>";
+                }
+                ?>
 
 
                 <div>

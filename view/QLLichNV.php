@@ -21,6 +21,7 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/qltb.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
@@ -47,13 +48,10 @@ session_start();
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -91,46 +89,47 @@ session_start();
                     <p>Menu</p>
                     <ul>
                         <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                       echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
-                       switch($_SESSION['dn'])
-                       {
-                        case 1:
-                            {
-                                echo' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
-                                echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
-                                echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
-                                break;
-                            }
-                            case 2:
-                                {
-                                    echo' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
+                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
+                        switch ($_SESSION['dn']) {
+                            case 1: {
+                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
+                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
+                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
+                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    break;
+                                }
+                            case 2: {
+                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     break;
                                 }
-                            case 3: 
-                                {
-                                    echo' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
+                            case 3: {
+                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
                                     echo  '<li><a href="Capnhattrangthai.php">Cập nhật tình trạng thanh toán</a></li>';
                                     break;
                                 }
-                       }
-                       
-                        
-                       
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
                 </div>
             </div>
+            <?php
+            if ($_SESSION['dn'] != 1) {
+                echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+            }
 
+            ?>
         </div>
         <div class="right">
             <div class="qltv">
@@ -139,16 +138,16 @@ session_start();
                     include_once("../controller/cNhanVien.php");
                     $p = new cNhanVien();
                     $kq = $p->Query1NV($_REQUEST['idnv']);
-                    if($kq){
-                        while($r=mysqli_fetch_assoc($kq)){
-                            echo $r["TenNhanVien"].'</h1>';
+                    if ($kq) {
+                        while ($r = mysqli_fetch_assoc($kq)) {
+                            echo $r["TenNhanVien"] . '</h1>';
                         }
                     }
                     echo '<div style="float:right; padding:10px">
                     <a href=""></a>
-                    <button class="submit-btn" ><a  style="color:white;  " href="TaoLichLV.php?idnv='.$_REQUEST['idnv'].'">Tạo lịch mới</a></button>
+                    <button class="submit-btn" ><a  style="color:white;  " href="TaoLichLV.php?idnv=' . $_REQUEST['idnv'] . '">Tạo lịch mới</a></button>
                     </div>';
-                ?>
+                    ?>
 
                     <div class="list-container" style="clear: both">
                         <div class="table-head">
@@ -160,37 +159,37 @@ session_start();
                         </div>
 
                         <?php
-                            include_once("../controller/cNhanVien.php");
-                            $p = new cNhanVien();
-                            $kq = $p->getLichByID($_REQUEST['idnv']);
-                            if($kq){
-                                while($r=mysqli_fetch_assoc($kq)){
-                                    echo '<form method="post">';
-                                    echo '<div class="list-item">';
-                                    echo '<span class="name" style="margin-left:50px">' . $r['NgayLamViec']. '</span>';
-                                    echo '<span class="name" style="margin-left:50px">' . $r['CaLamViec']. '</span>';
-                                    echo '<span class="name" style="margin-left:50px">' . $r['TrangThai']. '</span>';
-                                    echo '<button class="delete-btn" onclick="return confirm(\'Bạn có chắc muốn xóa lịch này không?\')" type="submit" value="'.$r["IDLichLamViec"].'" name="xoaLich">Xóa</button>';
-                                    echo '<button class="update-btn"  value="'.$r["IDLichLamViec"].'" type="submit" name="capNhatLich" >Cập nhật</button></div>';
-                                    echo '</form>';
-                                }
-                            }else{
-                                echo '<center style="color:red">Lịch làm việc trống</center>';
+                        include_once("../controller/cNhanVien.php");
+                        $p = new cNhanVien();
+                        $kq = $p->getLichByID($_REQUEST['idnv']);
+                        if ($kq) {
+                            while ($r = mysqli_fetch_assoc($kq)) {
+                                echo '<form method="post">';
+                                echo '<div class="list-item">';
+                                echo '<span class="name" style="margin-left:50px">' . $r['NgayLamViec'] . '</span>';
+                                echo '<span class="name" style="margin-left:50px">' . $r['CaLamViec'] . '</span>';
+                                echo '<span class="name" style="margin-left:50px">' . $r['TrangThai'] . '</span>';
+                                echo '<button class="delete-btn" onclick="return confirm(\'Bạn có chắc muốn xóa lịch này không?\')" type="submit" value="' . $r["IDLichLamViec"] . '" name="xoaLich">Xóa</button>';
+                                echo '<button class="update-btn"  value="' . $r["IDLichLamViec"] . '" type="submit" name="capNhatLich" >Cập nhật</button></div>';
+                                echo '</form>';
                             }
-                            if(isset($_REQUEST["xoaLich"])){
-                                $result = $p->xoaLich($_REQUEST["xoaLich"]);
-                                if($result){
-                                    echo "<script>alert('Xoá lịch làm việc thành công!'); window.location.href = 'QLLichNV.php?idnv=".$_REQUEST['idnv']."';</script>";
-                                    exit();
-                                }else{
-                                    echo '<script>alert("Không thành công")</script>';
+                        } else {
+                            echo '<center style="color:red">Lịch làm việc trống</center>';
+                        }
+                        if (isset($_REQUEST["xoaLich"])) {
+                            $result = $p->xoaLich($_REQUEST["xoaLich"]);
+                            if ($result) {
+                                echo "<script>alert('Xoá lịch làm việc thành công!'); window.location.href = 'QLLichNV.php?idnv=" . $_REQUEST['idnv'] . "';</script>";
+                                exit();
+                            } else {
+                                echo '<script>alert("Không thành công")</script>';
                             }
-                            }
+                        }
 
-                            if(isset($_REQUEST["capNhatLich"])){
-                                echo "<script>window.location.href = 'CapNhatLich.php?idl=".$_REQUEST["capNhatLich"]."&&idnv=".$_REQUEST['idnv']."';</script>";
-                            }
-                       ?>
+                        if (isset($_REQUEST["capNhatLich"])) {
+                            echo "<script>window.location.href = 'CapNhatLich.php?idl=" . $_REQUEST["capNhatLich"] . "&&idnv=" . $_REQUEST['idnv'] . "';</script>";
+                        }
+                        ?>
                     </div>
             </div>
 

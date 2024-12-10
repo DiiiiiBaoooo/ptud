@@ -21,63 +21,64 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/LSTT.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
     <style>
-    /* Styling the table container for center alignment */
-    .table-container {
-        width: 80%;
-        margin: auto;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        overflow-x: auto;
-    }
-
-    /* Table styling */
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        font-family: Arial, sans-serif;
-    }
-
-    table th,
-    table td {
-        padding: 12px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-    table th {
-        background-color: #e31c25;
-        color: black;
-        font-weight: bold;
-    }
-
-
-
-    table tr:hover {
-        background-color: #f1f1f1;
-    }
-
-    /* Center-aligns and styles text in cells */
-    table td {
-        color: #333;
-    }
-
-    /* Responsive table on smaller screens */
-    @media (max-width: 768px) {
+        /* Styling the table container for center alignment */
         .table-container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        /* Table styling */
+        table {
             width: 100%;
-            padding: 10px;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
         }
 
         table th,
         table td {
-            padding: 10px;
-            font-size: 14px;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
         }
-    }
+
+        table th {
+            background-color: #e31c25;
+            color: black;
+            font-weight: bold;
+        }
+
+
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Center-aligns and styles text in cells */
+        table td {
+            color: #333;
+        }
+
+        /* Responsive table on smaller screens */
+        @media (max-width: 768px) {
+            .table-container {
+                width: 100%;
+                padding: 10px;
+            }
+
+            table th,
+            table td {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 
@@ -103,13 +104,10 @@ session_start();
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -144,21 +142,20 @@ session_start();
                     <p>Menu</p>
                     <ul>
                         <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                      
-                       
-                                echo  '<li><a href="ThongTinChungTV.php">Xem thông tin tài khoản</a></li>';
-                                echo' <li><a href="GiaHantv-1.php">Gia hạn </a></li>';
-                                echo  '<li><a href="Thanhtoan1.php">Thanh toán</a></li>';
-                                echo  '<li><a href="LSTT.php">Xem lịch sử thanh toán</a></li>';
-                               
-             
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+                        echo  '<li><a href="ThongTinChungTV.php">Xem thông tin tài khoản</a></li>';
+                        echo ' <li><a href="GiaHantv-1.php">Gia hạn </a></li>';
+                        echo  '<li><a href="Thanhtoan1.php">Thanh toán</a></li>';
+                        echo  '<li><a href="LSTT.php">Xem lịch sử thanh toán</a></li>';
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
@@ -171,13 +168,12 @@ session_start();
 
 
                 <?php
-    include_once("../controller/cHoaDon.php");
-    $p= new cHoaDon();
-    $kq= $p->getallhdbytv($_SESSION['id']);
-    if($kq)
-    {
-        
-        echo '
+                include_once("../controller/cHoaDon.php");
+                $p = new cHoaDon();
+                $kq = $p->getallhdbytv($_SESSION['id']);
+                if ($kq) {
+
+                    echo '
    
         <h3 align="center"><strong>Lịch Sử Thanh Toán</strong></h3>
             <form action="" method="POST">
@@ -202,25 +198,24 @@ session_start();
                     
                
     ';
-    $stt=1;
-    while($r=mysqli_fetch_assoc($kq))
-    {
-        echo'  <tr>
-                <td>'.$stt.'</td>
-                <td>'.$r['SoTien'].'</td>
-                <td>'.$r['TinhTrangThanhToan'].'</td>
-                <td>'.$r['NgayThanhToan'].'</td>
-                <td>'.$r['NgayLapHoaDon'].'</td>
+                    $stt = 1;
+                    while ($r = mysqli_fetch_assoc($kq)) {
+                        echo '  <tr>
+                <td>' . $stt . '</td>
+                <td>' . $r['SoTien'] . '</td>
+                <td>' . $r['TinhTrangThanhToan'] . '</td>
+                <td>' . $r['NgayThanhToan'] . '</td>
+                <td>' . $r['NgayLapHoaDon'] . '</td>
              
             </tr>';
-                    $stt++;
-    }
-    echo' </tbody>
+                        $stt++;
+                    }
+                    echo ' </tbody>
     </table>
 </div>
     </form>';
-    }
-?>
+                }
+                ?>
 
             </div>
 

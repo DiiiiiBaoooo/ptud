@@ -21,6 +21,7 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/update.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
@@ -47,13 +48,10 @@ session_start();
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -91,61 +89,60 @@ session_start();
                     <p>Menu</p>
                     <ul>
                         <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                       echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
-                       switch($_SESSION['dn'])
-                       {
-                        case 1:
-                            {
-                                echo' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
-                                echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
-                                echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
-                                break;
-                            }
-                            case 2:
-                                {
-                                    echo' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
+                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
+                        switch ($_SESSION['dn']) {
+                            case 1: {
+                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
+                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
+                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
+                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    break;
+                                }
+                            case 2: {
+                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     break;
                                 }
-                            case 3: 
-                                {
-                                    echo' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
+                            case 3: {
+                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
                                     echo  '<li><a href="Capnhattrangthai.php">Cập nhật tình trạng thanh toán</a></li>';
                                     break;
                                 }
-                       }
-                       
-                        
-                       
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
                 </div>
             </div>
+            <?php
+            if ($_SESSION['dn'] != 2) {
+                echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+            }
 
+            ?>
         </div>
         <?php
         include("../controller/cThanhVien.php");
-        $q= new cThanhVien();
+        $q = new cThanhVien();
         $kq = $q->Query1TV($_REQUEST['idtv']);
-        if($kq)
-        {
-            while($r=mysqli_fetch_assoc($kq)){
-                $tentv=$r['TenThanhVien'];
-                $sdt=$r['SoDienThoai'];
-                $diachi=$r['DiaChi'];
-                $email=$r['email'];
+        if ($kq) {
+            while ($r = mysqli_fetch_assoc($kq)) {
+                $tentv = $r['TenThanhVien'];
+                $sdt = $r['SoDienThoai'];
+                $diachi = $r['DiaChi'];
+                $email = $r['email'];
             }
-        }
-        else{
+        } else {
             echo 'ko co du lieu';
         }
         ?>
@@ -155,20 +152,20 @@ session_start();
                 <form action="" method="POST" enctype="multipart/form-data">
                     <label for="name">Tên thành viên</label>
                     <input type="text" id="name" name="name" placeholder="Nhập tên của thành viên" required
-                        value="<?php if(isset($tentv)) echo $tentv;?>">
+                        value="<?php if (isset($tentv)) echo $tentv; ?>">
 
                     <label for="address">Địa chỉ</label>
                     <input type="text" id="address" name="address" placeholder="Nhập địa chỉ"
-                        value="<?php if(isset($diachi)) echo $diachi;?>">
+                        value="<?php if (isset($diachi)) echo $diachi; ?>">
 
                     <label for="phone">SDT</label>
                     <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" pattern="[0-9]{10}"
-                        required value="<?php if(isset($sdt)) echo $sdt;?>">
+                        required value="<?php if (isset($sdt)) echo $sdt; ?>">
                     <label for="Email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Nhập Email" required
                         aria-label="Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                         title="Please enter a valid email address (e.g., example@domain.com)"
-                        value="<?php if(isset($email)) echo $email;?>">
+                        value="<?php if (isset($email)) echo $email; ?>">
 
 
                     <div class="button-group">
@@ -180,23 +177,19 @@ session_start();
             </div>
 
             <?php
-                include_once("../controller/cThanhVien.php");
-                if(isset($_REQUEST['update-btn']) && $_REQUEST['update-btn']=='Cập nhật' )
-                {
-                    $kq1= $q->CapNhat($_REQUEST['idtv'],$_REQUEST['name'],$_REQUEST['phone'],$_REQUEST['email'],$_REQUEST['address']);
-                    if($kq1)
-                    {
-                        echo "<script>alert('Cập nhật thông tin thành viên thành công');</script>";
-                        echo "<script>window.location.href = 'QLTV.php';</script>"; 
-                    }
-                    else
-                    {
-                        
-                        echo "<script>alert('Cập nhật thông tin thành viên không thành công');</script>";
-                        echo "<script>window.location.href = 'QLTV.php';</script>"; 
-                    }
+            include_once("../controller/cThanhVien.php");
+            if (isset($_REQUEST['update-btn']) && $_REQUEST['update-btn'] == 'Cập nhật') {
+                $kq1 = $q->CapNhat($_REQUEST['idtv'], $_REQUEST['name'], $_REQUEST['phone'], $_REQUEST['email'], $_REQUEST['address']);
+                if ($kq1) {
+                    echo "<script>alert('Cập nhật thông tin thành viên thành công');</script>";
+                    echo "<script>window.location.href = 'QLTV.php';</script>";
+                } else {
+
+                    echo "<script>alert('Cập nhật thông tin thành viên không thành công');</script>";
+                    echo "<script>window.location.href = 'QLTV.php';</script>";
                 }
-                
+            }
+
             ?>
 
         </div>

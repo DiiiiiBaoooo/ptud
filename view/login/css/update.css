@@ -135,3 +135,7 @@ form input[type="email"] {
 .right{
     margin-left: 20px; 
 }
+
+.error-background {
+    background-color: #ffcccc;
+}

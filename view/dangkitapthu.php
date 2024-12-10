@@ -28,7 +28,7 @@ session_start();
 
     <div class="d-lg-flex half">
         <div class="bg order-1 order-md-2"
-            style="background-image: url('./login/images/Register_head2_1900x800.jpg'); background-style:cover">
+            style="background-image: url('./login/images/Register_head2_1900x800.jpg'); background:cover">
             <h1 class="header-img">TRẢI NGHIỆM TẬP MIỄN PHÍ</h1>
             <h3 class="header-notification__img">Hãy để lại thông tin và chúng tôi sẽ liên hệ bạn trong vòng 24h!</h3>
         </div>
@@ -84,95 +84,95 @@ session_start();
 </body>
 
 <style>
-/* h1 */
-h1.header-img {
-    font-family: Oswald;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 64px;
-    line-height: 90px;
-    width: 60%;
-    margin-top: 40%;
-    color: #fff;
-    margin-left: 80px;
+    /* h1 */
+    h1.header-img {
+        font-family: Oswald;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 64px;
+        line-height: 90px;
+        width: 60%;
+        margin-top: 40%;
+        color: #fff;
+        margin-left: 80px;
 
-}
+    }
 
-h3.header-notification__img {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 22px;
-    width: 70%;
-    color: #fff;
-    margin-left: 88px;
-    margin-top: 30px;
-}
+    h3.header-notification__img {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 22px;
+        width: 70%;
+        color: #fff;
+        margin-left: 88px;
+        margin-top: 30px;
+    }
 
-b,
-strong {
-    font-weight: bolder;
-    font-family: Oswald;
-    font-size: 2rem;
-    color: #da2127;
-}
+    b,
+    strong {
+        font-weight: bolder;
+        font-family: Oswald;
+        font-size: 2rem;
+        color: #da2127;
+    }
 
-a.already-signup {
-    text-decoration: none;
-    margin-left: 60%;
-}
+    a.already-signup {
+        text-decoration: none;
+        margin-left: 60%;
+    }
 
-a.already-signup:hover {
-    color: #da2127;
-}
+    a.already-signup:hover {
+        color: #da2127;
+    }
 
-.form-group.error {
-    border-color: #e74c3c;
-}
+    .form-group.error {
+        border-color: #e74c3c;
+    }
 
-.form-group.succes {
-    border-color: #2691d9;
-}
+    .form-group.succes {
+        border-color: #2691d9;
+    }
 
 
-.form-group input {
-    width: 100%;
-    height: 40px;
-    font-size: 16px;
-    border: none;
-    background: none;
-    outline: none;
-}
+    .form-group input {
+        width: 100%;
+        height: 40px;
+        font-size: 16px;
+        border: none;
+        background: none;
+        outline: none;
+    }
 
-small {
-    position: absolute;
-    left: 0;
-    top: 100%;
-    margin-top: 3px;
-    color: #e74c3c;
-}
+    small {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        margin-top: 3px;
+        color: #e74c3c;
+    }
 
-.form-group span::before {
-    content: '';
-    position: absolute;
-    top: 40px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background: #2691d9;
-    transition: 0.3s;
-}
+    .form-group span::before {
+        content: '';
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background: #2691d9;
+        transition: 0.3s;
+    }
 
-.form-group input:focus~span::before {
-    width: 100%;
-}
+    .form-group input:focus~span::before {
+        width: 100%;
+    }
 
-form .form-group {
-    position: relative;
-    border-bottom: 2px solid #adadad;
-    margin: 26px 0;
-}
+    form .form-group {
+        position: relative;
+        border-bottom: 2px solid #adadad;
+        margin: 26px 0;
+    }
 </style>
 
 

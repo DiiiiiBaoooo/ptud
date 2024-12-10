@@ -23,6 +23,7 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/qltb.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
@@ -51,13 +52,10 @@ session_start();
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -97,40 +95,35 @@ session_start();
                     <p>Menu</p>
                     <ul>
                         <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                       echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
-                       switch($_SESSION['dn'])
-                       {
-                        case 1:
-                            {
-                                echo' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
-                                echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
-                                echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
-                                break;
-                            }
-                            case 2:
-                                {
-                                    echo' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
+                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
+                        switch ($_SESSION['dn']) {
+                            case 1: {
+                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
+                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
+                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
+                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    break;
+                                }
+                            case 2: {
+                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     break;
                                 }
-                            case 3: 
-                                {
-                                    echo' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
+                            case 3: {
+                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
                                     echo  '<li><a href="Capnhattrangthai.php">Cập nhật tình trạng thanh toán</a></li>';
                                     break;
                                 }
-                       }
-                       
-                        
-                       
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
@@ -138,6 +131,13 @@ session_start();
             </div>
 
         </div>
+        <?php
+        if ($_SESSION['dn'] != 1) {
+            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+            echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+        }
+
+        ?>
         <div class="right">
             <div class="qltv">
                 <h1 align="center">Quản lý Gói tập</h1>
@@ -243,39 +243,39 @@ session_start();
 
                 <!-- JavaScript để hiển thị form -->
                 <script>
-                // Lắng nghe sự kiện nhấn vào nút tạo gói tập mới
-                document.getElementById('createPackageBtn').addEventListener('click', function() {
-                    // Hiển thị form tạo gói tập
-                    document.getElementById('createPackageForm').style.display = 'block';
-                });
+                    // Lắng nghe sự kiện nhấn vào nút tạo gói tập mới
+                    document.getElementById('createPackageBtn').addEventListener('click', function() {
+                        // Hiển thị form tạo gói tập
+                        document.getElementById('createPackageForm').style.display = 'block';
+                    });
 
-                // Lắng nghe sự kiện nhấn vào nút hủy
-                document.getElementById('cancelCreate').addEventListener('click', function() {
-                    // Ẩn form tạo gói tập
-                    document.getElementById('createPackageForm').style.display = 'none';
-                });
-
-
+                    // Lắng nghe sự kiện nhấn vào nút hủy
+                    document.getElementById('cancelCreate').addEventListener('click', function() {
+                        // Ẩn form tạo gói tập
+                        document.getElementById('createPackageForm').style.display = 'none';
+                    });
 
 
-                //scrip cua sua
-                $(document).on('click', '.edit-package-btn', function() {
-                    var packageId = $(this).data('id');
-                    var packageName = $(this).data('name');
-                    var packagePrice = $(this).data('price');
-                    var packageDuration = $(this).data('duration');
 
-                    // Điền dữ liệu vào form sửa
-                    $('#editPackageId').val(packageId);
-                    $('#editPackageName').val(packageName);
-                    $('#editPackagePrice').val(packagePrice);
-                    $('#editPackageDuration').val(packageDuration);
 
-                    // Hiển thị form sửa
-                    $('#editPackageForm').show();
-                });
+                    //scrip cua sua
+                    $(document).on('click', '.edit-package-btn', function() {
+                        var packageId = $(this).data('id');
+                        var packageName = $(this).data('name');
+                        var packagePrice = $(this).data('price');
+                        var packageDuration = $(this).data('duration');
 
-                //
+                        // Điền dữ liệu vào form sửa
+                        $('#editPackageId').val(packageId);
+                        $('#editPackageName').val(packageName);
+                        $('#editPackagePrice').val(packagePrice);
+                        $('#editPackageDuration').val(packageDuration);
+
+                        // Hiển thị form sửa
+                        $('#editPackageForm').show();
+                    });
+
+                    //
                 </script>
 
             </div>
@@ -369,44 +369,44 @@ session_start();
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    // Khi form được submit
-    $("form#createPackageForm").submit(function(event) {
-        event.preventDefault(); // Ngừng hành động mặc định của form
+        // Khi form được submit
+        $("form#createPackageForm").submit(function(event) {
+            event.preventDefault(); // Ngừng hành động mặc định của form
 
-        // Lấy dữ liệu từ form
-        var formData = $(this).serialize();
+            // Lấy dữ liệu từ form
+            var formData = $(this).serialize();
 
-        // Gửi dữ liệu qua Ajax
-        $.ajax({
-            url: "add_goitap.php", // File xử lý dữ liệu
-            type: "POST",
-            data: formData,
-            success: function(response) {
-                // Sau khi lưu thành công, tải lại danh sách gói tập
-                loadPackageList();
-                alert("Gói tập đã được lưu thành công!");
-            },
-            error: function() {
-                alert("Có lỗi xảy ra khi lưu gói tập.");
-            }
+            // Gửi dữ liệu qua Ajax
+            $.ajax({
+                url: "add_goitap.php", // File xử lý dữ liệu
+                type: "POST",
+                data: formData,
+                success: function(response) {
+                    // Sau khi lưu thành công, tải lại danh sách gói tập
+                    loadPackageList();
+                    alert("Gói tập đã được lưu thành công!");
+                },
+                error: function() {
+                    alert("Có lỗi xảy ra khi lưu gói tập.");
+                }
+            });
         });
-    });
 
-    // Hàm tải lại danh sách gói tập từ cơ sở dữ liệu
-    function loadPackageList() {
-        $.ajax({
-            url: "get_goitap_list.php", // Tạo file này để lấy dữ liệu
-            success: function(response) {
-                // Cập nhật bảng danh sách gói tập
-                $("#packageTableBody").html(response);
-            }
+        // Hàm tải lại danh sách gói tập từ cơ sở dữ liệu
+        function loadPackageList() {
+            $.ajax({
+                url: "get_goitap_list.php", // Tạo file này để lấy dữ liệu
+                success: function(response) {
+                    // Cập nhật bảng danh sách gói tập
+                    $("#packageTableBody").html(response);
+                }
+            });
+        }
+
+        // Gọi hàm loadPackageList khi trang được tải
+        $(document).ready(function() {
+            loadPackageList();
         });
-    }
-
-    // Gọi hàm loadPackageList khi trang được tải
-    $(document).ready(function() {
-        loadPackageList();
-    });
     </script>
 
 </body>

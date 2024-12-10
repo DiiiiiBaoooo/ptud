@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +21,7 @@
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/update.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
@@ -47,13 +48,10 @@
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -90,41 +88,36 @@
                 <div class="menu">
                     <p>Menu</p>
                     <ul>
-                     <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                       echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
-                       switch($_SESSION['dn'])
-                       {
-                        case 1:
-                            {
-                                echo' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
-                                echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
-                                echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
-                                break;
-                            }
-                            case 2:
-                                {
-                                    echo' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
+                        <?php
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
+                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
+                        switch ($_SESSION['dn']) {
+                            case 1: {
+                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
+                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
+                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
+                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    break;
+                                }
+                            case 2: {
+                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     break;
                                 }
-                            case 3: 
-                                {
-                                    echo' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
+                            case 3: {
+                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
                                     echo  '<li><a href="Capnhattrangthai.php">Cập nhật tình trạng thanh toán</a></li>';
                                     break;
                                 }
-                       }
-                       
-                        
-                       
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
@@ -134,43 +127,43 @@
         </div>
 
         <?php
-         include_once("../controller/cNhanVien.php");
-         $q= new cNhanVien();
-         $idnv=$_SESSION['id'];
-         $tbl =$q->Query1NV( $idnv);
-         if($tbl)
-         {
-            while($r=mysqli_fetch_assoc($tbl))
-	{
-		$tennv=$r['TenNhanVien'];
-		$email=$r['Email'];
-		$sdt=$r['SoDienThoai'];
-        $diachi=$r['DiaChi'];
-	}
-         }
-         
+        include_once("../controller/cNhanVien.php");
+        $q = new cNhanVien();
+        $idnv = $_SESSION['id'];
+        $tbl = $q->Query1NV($idnv);
+        if ($tbl) {
+            while ($r = mysqli_fetch_assoc($tbl)) {
+                $tennv = $r['TenNhanVien'];
+                $email = $r['Email'];
+                $sdt = $r['SoDienThoai'];
+                $diachi = $r['DiaChi'];
+            }
+        }
+
         ?>
         <div class="right">
             <div class="update-info-container">
                 <h2>Cập nhật thông tin</h2>
                 <form action="" method="POST" enctype="multipart/form-data">
                     <label for="name">Tên</label>
-                    <input type="text" id="name" name="name" value="<?php if(isset($tennv)) {echo $tennv;}  ?>"
+                    <input type="text" id="name" name="name" value="<?php if (isset($tennv)) {
+                                                                        echo $tennv;
+                                                                    }  ?>"
                         placeholder="Nhập tên của bạn" required>
 
                     <label for="address">Địa chỉ</label>
-                    <input type="text" id="address" name="address" value="<?php if(isset($diachi)) {
-	 echo $diachi;
-}  ?>" placeholder="Nhập địa chỉ">
+                    <input type="text" id="address" name="address" value="<?php if (isset($diachi)) {
+                                                                                echo $diachi;
+                                                                            }  ?>" placeholder="Nhập địa chỉ">
 
                     <label for="phone">SDT</label>
-                    <input type="tel" id="phone" name="phone" value="<?php if(isset($sdt)) {
-	 echo $sdt;
-}  ?>" placeholder="Nhập số điện thoại" pattern="[0-9]{10}" required>
+                    <input type="tel" id="phone" name="phone" value="<?php if (isset($sdt)) {
+                                                                            echo $sdt;
+                                                                        }  ?>" placeholder="Nhập số điện thoại" pattern="[0-9]{10}" required>
                     <label for="Email">Email</label>
-                    <input type="email" id="email" name="email" value="<?php if(isset($email)) {
-	 echo $email;
-}  ?>" placeholder="Nhập Email" required aria-label="Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    <input type="email" id="email" name="email" value="<?php if (isset($email)) {
+                                                                            echo $email;
+                                                                        }  ?>" placeholder="Nhập Email" required aria-label="Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                         title="Please enter a valid email address (e.g., example@domain.com)">
 
 
@@ -181,22 +174,19 @@
                 </form>
                 <?php
                 include_once("../controller/cNhanVien.php");
-                $p= new cNhanVien();
-                if(isset($_REQUEST['update-btn'])){
-	
-	$kq2 = $p->CapNhat($_SESSION['id'],$_REQUEST['name'],$_REQUEST['phone'],$_REQUEST['email'],$_REQUEST['address']);
-	if($kq2)
-	{
-		echo '<script>alert("Update thành công!")</script>';
-		echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
-	}
-	else
-	{
-		echo '<script>alert("Update không thành công!")</script>';
-		header('refresh:0.5, url=ThongTinChungNV.php');
-	}
-}
-?>
+                $p = new cNhanVien();
+                if (isset($_REQUEST['update-btn'])) {
+
+                    $kq2 = $p->CapNhat($_SESSION['id'], $_REQUEST['name'], $_REQUEST['phone'], $_REQUEST['email'], $_REQUEST['address']);
+                    if ($kq2) {
+                        echo '<script>alert("Update thành công!")</script>';
+                        echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+                    } else {
+                        echo '<script>alert("Update không thành công!")</script>';
+                        header('refresh:0.5, url=ThongTinChungNV.php');
+                    }
+                }
+                ?>
             </div>
 
 

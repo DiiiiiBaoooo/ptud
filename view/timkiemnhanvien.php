@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +24,8 @@
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/qltb.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
@@ -26,7 +34,7 @@
     <!-- Navbar Start -->
     <div class="container-fluid p-0 nav-bar">
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
-            <a href="" class="navbar-brand">
+            <a href="../index.php" class="navbar-brand">
                 <h1 class="m-0 display-4 font-weight-bold text-uppercase text-white">Gymnast</h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -34,18 +42,27 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-4 bg-secondary">
-                    <a href="../index.php" class="nav-item nav-link">Home</a>
-                    <a href="about.php" class="nav-item nav-link">About Us</a>
-                    <a href="feature.php" class="nav-item nav-link">Our Features</a>
-                    <a href="class.php" class="nav-item nav-link">Classes</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu text-capitalize">
-                            <a href="blog.php" class="dropdown-item">Blog Grid</a>
-                            <a href="single.php" class="dropdown-item">Blog Detail</a>
-                        </div>
-                    </div>
-                    <a href="contact.php" class="nav-item nav-link">Contact</a>
+                    <a href="../index.php" class="nav-item nav-link active">Trang chủ</a>
+                    <a href="about.php" class="nav-item nav-link">Về chúng tôi</a>
+                    <a href="feature.php" class="nav-item nav-link">Tin tức</a>
+                    <a href="class.php" class="nav-item nav-link">Lớp học</a>
+
+                    <a href="contact.php" class="nav-item nav-link">Liên hệ</a>
+                    <?php
+                    if (!isset($_SESSION['dn'])) {
+                        echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
+                        echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
+                            echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
+                        } else {
+                            echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
+                        }
+                        echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
+                    }
+                    ?>
+
+
                 </div>
             </div>
         </nav>
@@ -54,88 +71,165 @@
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header mb-5">
-        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
-            <h4 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase font-weight-bold">Quản Lý Nhân Viên</h4>
+        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
+            style="min-height: 400px">
+            <h4 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase font-weight-bold">Quản lý</h4>
             <div class="d-inline-flex">
-                <p class="m-0 text-white"><a class="text-white" href="../index.php">Home</a></p>
+                <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Quản Lý</p>
+                <p class="m-0 text-white">Quản lý nhân viên</p>
             </div>
         </div>
     </div>
     <!-- Page Header End -->
-  <!-- Search form -->
-<!-- Header section -->
-<menu>
-    <form action="" method="POST" style="float:right; width:30%;">
-        <input type="text" name="txtSearch" placeholder="Tìm kiếm nhân viên..." required>
-        <input type="submit" name="btnSearch" value="Tìm kiếm">
-    </form>
-</menu>
+    <div class="container pt-5">
+        <div class="left">
+            <div class="sidebar">
+                <div class="menu">
+                    <p>Menu</p>
+                    <ul>
+                        <?php
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
+                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
+                        switch ($_SESSION['dn']) {
+                            case 1: {
+                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
+                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
+                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
+                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    break;
+                                }
+                            case 2: {
+                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
+                                    echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
+                                    break;
+                                }
+                            case 3: {
+                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
+                                    echo  '<li><a href="Capnhattrangthai.php">Cập nhật tình trạng thanh toán</a></li>';
+                                    break;
+                                }
+                        }
 
-<aside>
-    <h2>TÌM KIẾM NHÂN VIÊN</h2>    
-</aside>
 
-<section>
-    <?php
-    echo '<div style="display: flex; flex-wrap: wrap; float: left; width: 100%;">';
-    // $obj = new database();
-    
-    // if (isset($_POST['btnTK'])) {
-    //     $name = $_POST["txtTK"];
-    //     $sql = "SELECT * FROM NhanVien WHERE IDNhanVien LIKE N'%$name%' OR TenNhanVien LIKE N'%$name%'";
-    // } else {
-    //     $sql = 'SELECT * FROM NhanVien';
-    // }
 
-    // $nhanVien = $obj->xuatdulieu($sql);
-    
-    if ($nhanVien) {
-        for ($i = 0; $i < count($nhanVien); $i++) {
-            echo '
-            <div class="sp">
-                <div class="IDNhanVien">ID Nhân Viên: ' . number_format($nhanVien[$i]['IDNhanVien']) . '</div>
-                <div class="TenNhanVien">Tên Nhân Viên: ' . htmlspecialchars($nhanVien[$i]['TenNhanVien']) . '</div>
-                <div class="SDT">Số Điện Thoại: ' . htmlspecialchars($nhanVien[$i]['SDT']) . '</div>
-                <div class="Email">Email: ' . htmlspecialchars($nhanVien[$i]['Email']) . '</div>
-                <a href="index.php?page=chitietnhanvien&ID=' . $nhanVien[$i]['IDNhanVien'] . '">Xem chi tiết nhân viên</a>
-                <a href="index.php?page=capnhatnhanvien&ID=' . $nhanVien[$i]['IDNhanVien'] . '">Cập nhật thông tin</a>
-            </div>';
-        }
-    } else {
-        echo '<div style="width: 100%; text-align: center; color: red;">Không có nhân viên nào</div>';
-    }
-    
-    echo '</div>';
-    ?>
-</section>
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+                        ?>
+                    </ul>
+                </div>
+            </div>
+
         </div>
+        <div class="right">
+            <aside>
+                <h2>TÌM KIẾM NHÂN VIÊN</h2>
+            </aside>
+            <section>
+                <?php
+
+                include_once("../controller/cNhanVien.php");
+
+                if (isset($_POST['search-btn'])) {
+                    $keyword = trim($_POST['noidung']);
+                    $q = new cNhanVien();
+                    if ($keyword === "") {
+                        echo "<script>alert('Vui lòng nhâp từ khoá để tìm kiếm');</script>";
+                        echo "<script>window.location.href = 'QLNV.php';</script>";;
+                    }
+                    $result = $q->searchNV($keyword);
+                    if ($result) {
+                        echo '<div class="list-container">';
+                        echo '<div class="table-head">
+                    <span>STT</span>
+                    <span style="margin-right:50px">Tên nhân viên</span>
+                    <span style="margin-right:50px">Thao tác</span>
+                  </div>';
+                        $stt = 1;
+
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<div class="list-item list-icon__hover">
+                        <span>' . $stt . '</span>
+                        <span class="name" style="margin-left:50px">
+                            <a href="ChiTietNV.php?idnv=' . $row['IDNhanVien'] . '">' . $row['TenNhanVien'] . '</a>
+                        </span>
+                        <button type="button" onclick="window.location.href=\'CapNhatTTNV.php?idnv=' . $row['IDNhanVien'] . '\'" class="update-btn">Sửa</button>
+                        <button type="button" onclick="window.location.href=\'XoaNhanVien.php?idnv=' . $row['IDNhanVien'] . '\'" class="delete-btn">Xóa</button>
+                        <button class="submit-btn">Ghi danh</button>
+                        </div>';
+                            $stt++;
+                        }
+                        echo '</div>';
+                    } else {
+                        echo "<script>alert('Nhân viên không tồn tại');</script>";
+                        echo "<script>window.location.href = 'QLNV.php';</script>";;
+                    }
+                }
+
+                ?>
+            </section>
+        </div>
+    </div>
+    <!-- Search form -->
+    <!-- Header section -->
+
+
+
+    </div>
     </div>
 
     <!-- Footer Start -->
-    <div class="footer container-fluid mt-5 py-5 px-sm-3 px-md-5 text-white">
+    <div class="footer container-fluid mt-3 py-5 px-sm-3 px-md-5 text-white">
         <div class="row pt-5">
             <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-primary mb-4">Get In Touch</h4>
-                <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
+                <h4 class="text-primary mb-4">Gymnast</h4>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>4 Nguyễn Văn Bảo, Gò Vấp, Thành phố Hồ Chí Minh</p>
                 <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
                 <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
                 <div class="d-flex justify-content-start mt-4">
-                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0"
+                        style="width: 40px; height: 40px;" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0"
+                        style="width: 40px; height: 40px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0"
+                        style="width: 40px; height: 40px;" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0"
+                        style="width: 40px; height: 40px;" href="#"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <!-- Additional Footer Content -->
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-primary mb-4">Liên kết</h4>
+                <div class="d-flex flex-column justify-content-start">
+                    <a class="text-white mb-2" href="../index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                    <a class="text-white mb-2" href="./about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+
+                    <a class="text-white mb-2" href="./class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
+                    <a class="text-white" href="./contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-primary mb-4">Phổ biến</h4>
+                <div class="d-flex flex-column justify-content-start">
+                    <a class="text-white mb-2" href="../index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                    <a class="text-white mb-2" href="./about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+
+                    <a class="text-white mb-2" href="./class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
+                    <a class="text-white" href="./contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-primary mb-4">Giờ mở cửa</h4>
+                <h5 class="text-white">Monday - Friday</h5>
+                <p>8.00 AM - 8.00 PM</p>
+                <h5 class="text-white">Saturday - Sunday</h5>
+                <p>2.00 PM - 8.00 PM</p>
+            </div>
         </div>
-        <div class="container border-top border-dark pt-5">
-            <p class="m-0 text-center text-white">
-                &copy; <a class="text-white font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved. Designed by
-                <a class="text-white font-weight-bold" href="https://htmlcodex.com">HTML Codex</a>
-            </p>
-        </div>
+
     </div>
     <!-- Footer End -->
 
@@ -153,4 +247,3 @@
 </body>
 
 </html>
-

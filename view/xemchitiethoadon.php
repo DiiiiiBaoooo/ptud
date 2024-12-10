@@ -21,6 +21,7 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/qltb.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
@@ -47,13 +48,10 @@ session_start();
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -92,41 +90,47 @@ session_start();
     <aside>
         <h2>Chi Tiết Hóa Đơn</h2>
     </aside>
+    <?php
+    if ($_SESSION['dn'] != 1) {
+        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+        echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+    }
 
+    ?>
     <!-- Invoice list section -->
     <section>
         <?php
-    echo '<div style="display: flex; flex-wrap: wrap; float: left; width: 100%;">';
+        echo '<div style="display: flex; flex-wrap: wrap; float: left; width: 100%;">';
 
-   // $obj = new model();
-    
-    // SQL query condition based on search or category
-    if ($cate) {
-        $sql = "SELECT * FROM hoadon WHERE IDHoaDon='$cate'";
-    } elseif (isset($_POST['btnTK'])) {
-        $name = $_POST["txtTK"];
-        $sql = "SELECT * FROM hoadon WHERE IDHoaDon LIKE N'%$name%'";
-    } else {
-        $sql = 'SELECT * FROM hoadon';
-    }
-    //$invoices = $obj->xuatdulieu($sql);
-    
-    echo '
+        // $obj = new model();
+
+        // SQL query condition based on search or category
+        if ($cate) {
+            $sql = "SELECT * FROM hoadon WHERE IDHoaDon='$cate'";
+        } elseif (isset($_POST['btnTK'])) {
+            $name = $_POST["txtTK"];
+            $sql = "SELECT * FROM hoadon WHERE IDHoaDon LIKE N'%$name%'";
+        } else {
+            $sql = 'SELECT * FROM hoadon';
+        }
+        //$invoices = $obj->xuatdulieu($sql);
+
+        echo '
     <form action="" method="POST">
         <table style="width: 100%; border-collapse: collapse;center;">
             <tr>
                 <td>
                     <ul>
-                        <li><strong>ID Hóa Đơn:</strong> '.$hoadon[0]['IDHoaDon'].'</li>
-                        <li><strong>Số Tiền:</strong> '.$hoadon[0]['SoTien'].'</li>
-                        <li><strong>Trạng Thái Thanh Toán:</strong> '.$hoadon[0]['TrangThaiThanhToan'].'</li>
-                        <li><strong>Ngày Thanh Toán:</strong> '.$hoadon[0]['NgayThanhToan'].'</li>
-                        <li><strong>Ngày Lập Hóa Đơn:</strong> '.$hoadon[0]['NgayLapHoaDon'].'</li>
-                        <li><strong>Loại Giao Dịch:</strong> '.$hoadon[0]['LoaiGiaoDich'].'</li>
-                        <li><strong>ID Thành Viên:</strong> '.$hoadon[0]['IDThanhVien'].'</li>
-                        <li><strong>Tên Thành Viên:</strong> '.$hoadon[0]['TenThanhVien'].'</li>
-                        <li><strong>ID Nhân Viên:</strong> '.$hoadon[0]['IDNhanVien'].'</li>
-                        <li><strong>tên Nhân Viên:</strong> '.$hoadon[0]['TienNhanVien'].'</li>
+                        <li><strong>ID Hóa Đơn:</strong> ' . $hoadon[0]['IDHoaDon'] . '</li>
+                        <li><strong>Số Tiền:</strong> ' . $hoadon[0]['SoTien'] . '</li>
+                        <li><strong>Trạng Thái Thanh Toán:</strong> ' . $hoadon[0]['TrangThaiThanhToan'] . '</li>
+                        <li><strong>Ngày Thanh Toán:</strong> ' . $hoadon[0]['NgayThanhToan'] . '</li>
+                        <li><strong>Ngày Lập Hóa Đơn:</strong> ' . $hoadon[0]['NgayLapHoaDon'] . '</li>
+                        <li><strong>Loại Giao Dịch:</strong> ' . $hoadon[0]['LoaiGiaoDich'] . '</li>
+                        <li><strong>ID Thành Viên:</strong> ' . $hoadon[0]['IDThanhVien'] . '</li>
+                        <li><strong>Tên Thành Viên:</strong> ' . $hoadon[0]['TenThanhVien'] . '</li>
+                        <li><strong>ID Nhân Viên:</strong> ' . $hoadon[0]['IDNhanVien'] . '</li>
+                        <li><strong>tên Nhân Viên:</strong> ' . $hoadon[0]['TienNhanVien'] . '</li>
                     </ul>
                 </td>
             </tr>
@@ -136,7 +140,7 @@ session_start();
         </div>
     </form>
     ';
-    ?>
+        ?>
     </section>
     <<div>
 

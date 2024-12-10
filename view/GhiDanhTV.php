@@ -21,39 +21,40 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login\css\ghidanh.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
     <style>
-    .confirmation {
-        border: 1px solid #ccc;
-        padding: 20px;
-        text-align: center;
-        width: 100%;
-        height: 300px;
-        margin: auto;
-        border-radius: 10px;
-        align-content: center;
-    }
+        .confirmation {
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            height: 300px;
+            margin: auto;
+            border-radius: 10px;
+            align-content: center;
+        }
 
-    button {
-        margin: 10px;
-    }
+        button {
+            margin: 10px;
+        }
 
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .left,
-    .right {
-        margin: 10px;
-    }
+        .left,
+        .right {
+            margin: 10px;
+        }
 
-    .left {
-        margin-right: 30px;
-        /* Adjust for spacing between the menu and confirmation form */
-    }
+        .left {
+            margin-right: 30px;
+            /* Adjust for spacing between the menu and confirmation form */
+        }
     </style>
 </head>
 
@@ -79,13 +80,10 @@ session_start();
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -123,40 +121,35 @@ session_start();
                     <p>Menu</p>
                     <ul>
                         <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                       echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
-                       switch($_SESSION['dn'])
-                       {
-                        case 1:
-                            {
-                                echo' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
-                                echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
-                                echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
-                                break;
-                            }
-                            case 2:
-                                {
-                                    echo' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
+                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
+                        switch ($_SESSION['dn']) {
+                            case 1: {
+                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
+                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
+                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
+                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    break;
+                                }
+                            case 2: {
+                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     break;
                                 }
-                            case 3: 
-                                {
-                                    echo' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
+                            case 3: {
+                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
                                     echo  '<li><a href="Capnhattrangthai.php">Cập nhật tình trạng thanh toán</a></li>';
                                     break;
                                 }
-                       }
-                       
-                        
-                       
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
@@ -170,32 +163,28 @@ session_start();
                 <p class="title">Ghi danh thành viên ngày</p>
                 <form action="" method="POST">
                     <label for="date">Ngày vào tập:</label>
-                    <input type="date" name="date" id="id" value="<?php $currentDateTime = date('Y-m-d') ;
-                    echo $currentDateTime;?>">
+                    <input type="date" name="date" id="id" value="<?php $currentDateTime = date('Y-m-d');
+                                                                    echo $currentDateTime; ?>">
                     <input type="submit" value="Ghi Danh" name="submit-btn" class="submit-btn">
                     <input type="button" value="Hủy" class="cancel-btn" onclick="window.history.back();">
                 </form>
             </div>
             </form>
             <?php
-include_once("../controller/cThanhVien.php");
-$p = new cThanhVien();
-if(isset($_REQUEST['submit-btn']) && $_REQUEST['submit-btn']=="Ghi Danh")
-{
-    $kq = $p->GhiDanh($_REQUEST['date'],$_REQUEST['idtv']);
-    if($kq)
-    {
-        echo "<script>alert('Ghi danh  thành viên thành công');</script>";
-                            echo "<script>window.location.href = 'QLTV.php';</script>"; 
-    }
-    else
-    {
-        echo "<script>alert('Ghi danh thành viên không thành công');</script>";
-                            echo "<script>window.location.href = 'QLTV.php';</script>"; 
-    }
-}
+            include_once("../controller/cThanhVien.php");
+            $p = new cThanhVien();
+            if (isset($_REQUEST['submit-btn']) && $_REQUEST['submit-btn'] == "Ghi Danh") {
+                $kq = $p->GhiDanh($_REQUEST['date'], $_REQUEST['idtv']);
+                if ($kq) {
+                    echo "<script>alert('Ghi danh  thành viên thành công');</script>";
+                    echo "<script>window.location.href = 'QLTV.php';</script>";
+                } else {
+                    echo "<script>alert('Ghi danh thành viên không thành công');</script>";
+                    echo "<script>window.location.href = 'QLTV.php';</script>";
+                }
+            }
 
-?>
+            ?>
 
         </div>
     </div>

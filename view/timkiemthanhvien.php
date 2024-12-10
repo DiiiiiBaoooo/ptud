@@ -18,6 +18,7 @@
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/qltb.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
@@ -64,40 +65,40 @@
         </div>
     </div>
     <!-- Page Header End -->
-  <!-- Search form -->
-<!-- Header section -->
-<menu>
-    <form action="" method="POST" style="float:right; width:30%;">
-        <input type="text" name="txtSearch" placeholder="Tìm kiếm thành viên..." required>
-        <input type="submit" name="btnSearch" value="Tìm kiếm">
-    </form>
-</menu>
+    <!-- Search form -->
+    <!-- Header section -->
+    <menu>
+        <form action="" method="POST" style="float:right; width:30%;">
+            <input type="text" name="txtSearch" placeholder="Tìm kiếm thành viên..." required>
+            <input type="submit" name="btnSearch" value="Tìm kiếm">
+        </form>
+    </menu>
 
-<aside>
-    <h2>TÌM KIẾM THÀNH VIÊN</h2>    
-</aside>
+    <aside>
+        <h2>TÌM KIẾM THÀNH VIÊN</h2>
+    </aside>
 
-<section>
-    <?php
-    echo '<div style="display: flex; flex-wrap: wrap; float: left; width: 100%;">';
-    
-    // $obj = new database(); // Khởi tạo đối tượng database (nếu bạn đã định nghĩa class này)
+    <section>
+        <?php
+        echo '<div style="display: flex; flex-wrap: wrap; float: left; width: 100%;">';
 
-    // // Kiểm tra nút tìm kiếm
-    // if (isset($_POST['btnSearch'])) {
-    //     $name = $_POST["txtSearch"];
-    //     $sql = "SELECT * FROM ThanhVien WHERE IDThanhVien LIKE N'%$name%' OR HoTen LIKE N'%$name%'";
-    // } else {
-    //     $sql = 'SELECT * FROM ThanhVien';
-    // // }
+        // $obj = new database(); // Khởi tạo đối tượng database (nếu bạn đã định nghĩa class này)
 
-    // // Lấy dữ liệu thành viên
-    // $thanhVien = $obj->xuatdulieu($sql);
-    
-    // Kiểm tra và hiển thị dữ liệu
-    if ($thanhVien) {
-        for ($i = 0; $i < count($thanhVien); $i++) {
-            echo '
+        // // Kiểm tra nút tìm kiếm
+        // if (isset($_POST['btnSearch'])) {
+        //     $name = $_POST["txtSearch"];
+        //     $sql = "SELECT * FROM ThanhVien WHERE IDThanhVien LIKE N'%$name%' OR HoTen LIKE N'%$name%'";
+        // } else {
+        //     $sql = 'SELECT * FROM ThanhVien';
+        // // }
+
+        // // Lấy dữ liệu thành viên
+        // $thanhVien = $obj->xuatdulieu($sql);
+
+        // Kiểm tra và hiển thị dữ liệu
+        if ($thanhVien) {
+            for ($i = 0; $i < count($thanhVien); $i++) {
+                echo '
             <div class="member">
                 <div class="IDThanhVien">ID Thành Viên: ' . number_format($thanhVien[$i]['IDThanhVien']) . '</div>
                 <div class="HoTen">Họ Tên: ' . htmlspecialchars($thanhVien[$i]['HoTen']) . '</div>
@@ -107,15 +108,15 @@
                 <a href="index.php?page=chitietthanhvien&ID=' . $thanhVien[$i]['IDThanhVien'] . '">Xem chi tiết thành viên</a>
                 <a href="index.php?page=capnhatthanhvien&ID=' . $thanhVien[$i]['IDThanhVien'] . '">Cập nhật thông tin</a>
             </div>';
+            }
+        } else {
+            echo '<div style="width: 100%; text-align: center; color: red;">Không có thành viên nào</div>';
         }
-    } else {
-        echo '<div style="width: 100%; text-align: center; color: red;">Không có thành viên nào</div>';
-    }
-    
-    echo '</div>';
-    ?>
-</section>
-        </div>
+
+        echo '</div>';
+        ?>
+    </section>
+    </div>
     </div>
 
     <!-- Footer Start -->
@@ -158,4 +159,3 @@
 </body>
 
 </html>
-

@@ -18,6 +18,7 @@
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/qltb.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
@@ -64,41 +65,41 @@
         </div>
     </div>
     <!-- Page Header End -->
-  <!-- Search form -->
-<menu>
-    <form action="" method="POST" style="float:right; width:30%;">
-        <input type="text" name="txtTK" placeholder="Tìm kiếm hóa đơn..." required>
-        <input type="submit" name="btnTK" value="Tìm kiếm">
-    </form>
-</menu>
+    <!-- Search form -->
+    <menu>
+        <form action="" method="POST" style="float:right; width:30%;">
+            <input type="text" name="txtTK" placeholder="Tìm kiếm hóa đơn..." required>
+            <input type="submit" name="btnTK" value="Tìm kiếm">
+        </form>
+    </menu>
 
-<!-- Header section -->
-<aside>
-    <h2>QUẢN LÝ HÓA ĐƠN</h2>    
-</aside>
+    <!-- Header section -->
+    <aside>
+        <h2>QUẢN LÝ HÓA ĐƠN</h2>
+    </aside>
 
-<!-- Invoice list section -->
-<section>
-    <?php
-    echo '<div style="display: flex; flex-wrap: wrap; float: left; width: 100%;">';
+    <!-- Invoice list section -->
+    <section>
+        <?php
+        echo '<div style="display: flex; flex-wrap: wrap; float: left; width: 100%;">';
 
-   // $obj = new model();
-    
-    // SQL query condition based on search or category
-    if ($cate) {
-        $sql = "SELECT * FROM hoadon WHERE IDHoaDon='$cate'";
-    } elseif (isset($_POST['btnTK'])) {
-        $name = $_POST["txtTK"];
-        $sql = "SELECT * FROM hoadon WHERE IDHoaDon LIKE N'%$name%'";
-    } else {
-        $sql = 'SELECT * FROM hoadon';
-    }
+        // $obj = new model();
 
-    //$invoices = $obj->xuatdulieu($sql);
-    
-    if ($invoices) {
-        foreach ($invoices as $invoice) {
-            echo '
+        // SQL query condition based on search or category
+        if ($cate) {
+            $sql = "SELECT * FROM hoadon WHERE IDHoaDon='$cate'";
+        } elseif (isset($_POST['btnTK'])) {
+            $name = $_POST["txtTK"];
+            $sql = "SELECT * FROM hoadon WHERE IDHoaDon LIKE N'%$name%'";
+        } else {
+            $sql = 'SELECT * FROM hoadon';
+        }
+
+        //$invoices = $obj->xuatdulieu($sql);
+
+        if ($invoices) {
+            foreach ($invoices as $invoice) {
+                echo '
             <div class="sp">
                 <div class="IDHoaDon">ID Hóa Đơn: ' . htmlspecialchars(number_format($invoice['IDHoaDon'])) . '</div>
                 <div class="SoTien">Số Tiền: ' . htmlspecialchars(number_format($invoice['SoTien'])) . ' VND</div>
@@ -106,15 +107,15 @@
                 <a href="index.php?page=chitiethoadon&ID=' . urlencode($invoice['IDHoaDon']) . '">Xem chi tiết hóa đơn</a>
                 <a href="index.php?page=capnhattrangthai&ID=' . urlencode($invoice['IDHoaDon']) . '">Cập nhật trạng thái thanh toán</a>
             </div>';
+            }
+        } else {
+            echo '<div style="width: 100%; text-align: center; color: red;">Không có hóa đơn nào</div>';
         }
-    } else {
-        echo '<div style="width: 100%; text-align: center; color: red;">Không có hóa đơn nào</div>';
-    }
-    
-    echo '</div>';
-    ?>
-</section>
-        </div>
+
+        echo '</div>';
+        ?>
+    </section>
+    </div>
     </div>
 
     <!-- Footer Start -->
@@ -157,4 +158,3 @@
 </body>
 
 </html>
-

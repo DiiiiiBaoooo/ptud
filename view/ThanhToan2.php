@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,48 +21,49 @@
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login\css\thanhtoan.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
     <style>
-    button {
-        margin: 10px;
-    }
+        button {
+            margin: 10px;
+        }
 
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .left,
-    .right {
-        margin: 10px;
-    }
+        .left,
+        .right {
+            margin: 10px;
+        }
 
-    .left {
-        margin-right: 30px;
-        /* Adjust for spacing between the menu and confirmation form */
-    }
+        .left {
+            margin-right: 30px;
+            /* Adjust for spacing between the menu and confirmation form */
+        }
 
-    .confirmation {
-        border: 2px solid #ccc;
-        border-radius: 10px;
-        padding: 20px;
-        width: 500px;
-        height: fit-content;
-        margin: auto;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
+        .confirmation {
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            width: 500px;
+            height: fit-content;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .confirmation form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+        .confirmation form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    .confirmation table {
-        width: 100%;
-    }
+        .confirmation table {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -88,13 +89,10 @@
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -132,23 +130,22 @@
                     <p>Menu</p>
                     <ul>
                         <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                      
-                       
-                                echo  '<li><a href="ThongTinChungTV.php">Xem thông tin tài khoản</a></li>';
-                                echo' <li><a href="GiaHantv-1.php">Gia hạn </a></li>';
-                                echo  '<li><a href="Thanhtoan1.php">Thanh toán</a></li>';
-                                echo  '<li><a href="LSTT.php">Xem lịch sử thanh toán</a></li>';
-                               
-                    
-                        
-                       
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+                        echo  '<li><a href="ThongTinChungTV.php">Xem thông tin tài khoản</a></li>';
+                        echo ' <li><a href="GiaHantv-1.php">Gia hạn </a></li>';
+                        echo  '<li><a href="Thanhtoan1.php">Thanh toán</a></li>';
+                        echo  '<li><a href="LSTT.php">Xem lịch sử thanh toán</a></li>';
+
+
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
@@ -163,87 +160,81 @@
                 <form method="post">
                     <!-- Chọn gói gia hạn -->
                     <?php
-                        include_once('../controller/cHoaDon.php');
-                        $p= new cHoaDon();
-                        $kq = $p->get1HD($_SESSION['IDHD']);
-                        if($kq)
-                        {
-                           while($r=mysqli_fetch_assoc($kq))
-                           {
-                           $_SESSION['TongTien']=$r['SoTien'];
+                    include_once('../controller/cHoaDon.php');
+                    $p = new cHoaDon();
+                    $kq = $p->get1HD($_SESSION['IDHD']);
+                    if ($kq) {
+                        while ($r = mysqli_fetch_assoc($kq)) {
+                            $_SESSION['TongTien'] = $r['SoTien'];
                             echo ' <div class="package-details">
                         <p align="center"><strong>Thông tin hóa đơn</strong></p>
-                        <p><strong>Tổng tiền:</strong> &emsp; '.$r['SoTien'].'</p>
-                        <p><strong>Tình trạng Thanh Toán:</strong> &emsp; '.$r['TinhTrangThanhToan'].'</p>
-                        <p><strong>Ngày lập hóa đơn:</strong> &emsp; '.$r['NgayLapHoaDon'].'</p>
+                        <p><strong>Tổng tiền:</strong> &emsp; ' . $r['SoTien'] . '</p>
+                        <p><strong>Tình trạng Thanh Toán:</strong> &emsp; ' . $r['TinhTrangThanhToan'] . '</p>
+                        <p><strong>Ngày lập hóa đơn:</strong> &emsp; ' . $r['NgayLapHoaDon'] . '</p>
                         <p><strong>Ngày lập hóa đơn:</strong> &emsp; 05/11/2024</p>
                     </div>';
-                   
-                    
-                           }
                         }
+                    }
                     ?>
 
                     <!-- Hiển thị chi tiết gói -->
 
                     <?php
-    include_once("../controller/cKhuyenMai.php");
-    $q= new cKhuyenMai();
-    $kq2=$q->getDKKM($_SESSION['TongTien']);
-    if ($kq2) {
-        echo '<fieldset>
+                    include_once("../controller/cKhuyenMai.php");
+                    $q = new cKhuyenMai();
+                    $kq2 = $q->getDKKM($_SESSION['TongTien']);
+                    if ($kq2) {
+                        echo '<fieldset>
                   <label style="align-self: center;" for="khuyenmai">Khuyến mãi:</label>';
-        
-        // Counter for unique IDs
-        $counter = 1;
-        
-        while ($r = mysqli_fetch_assoc($kq2)) {
-            
-            $id = 'svelt' . $counter;  // Generate unique ID for each radio button
-            echo '
+
+                        // Counter for unique IDs
+                        $counter = 1;
+
+                        while ($r = mysqli_fetch_assoc($kq2)) {
+
+                            $id = 'svelt' . $counter;  // Generate unique ID for each radio button
+                            echo '
                 <div class="button-group">
                     <input type="radio" id="' . $id . '" class="svelt1" name="khuyenmai" value="' . ($r['MucGiamGia']) . '"     />
                     <label for="' . $id . '">' . ($r['TenKhuyenMai']) . '</label>
                 </div>';
-                
-            $counter++;
-        }
-        
-        echo '</fieldset>
+
+                            $counter++;
+                        }
+
+                        echo '</fieldset>
         
         <input style="margin-left:5px; float:right  " name="apdung" type="submit" class="renew-button"
                             value="Áp dụng"><br>';
-    }
-    
-?>
+                    }
+
+                    ?>
 
                     <?php
-                     $mucgiam =0;
-                    $_SESSION['thanhtien']=(float)$_SESSION['TongTien']-(float)$mucgiam;
-                   
-                    if(isset($_REQUEST['apdung']))
-                    {
-                        
-                        $_SESSION['KM']=$_REQUEST['khuyenmai'];
-                        $mucgiam=$_REQUEST['khuyenmai'];
-                        $_SESSION['thanhtien']=(float)$_SESSION['TongTien']-(float)$mucgiam;
-                        echo'<div class="thanhtien">
+                    $mucgiam = 0;
+                    $_SESSION['thanhtien'] = (float)$_SESSION['TongTien'] - (float)$mucgiam;
+
+                    if (isset($_REQUEST['apdung'])) {
+
+                        $_SESSION['KM'] = $_REQUEST['khuyenmai'];
+                        $mucgiam = $_REQUEST['khuyenmai'];
+                        $_SESSION['thanhtien'] = (float)$_SESSION['TongTien'] - (float)$mucgiam;
+                        echo '<div class="thanhtien">
                         <br>
-                        <label style="float:right" for="Tthanhtien">Thành tiền: &emsp;'. (float)$_SESSION['TongTien']-(float)$mucgiam.'
+                        <label style="float:right" for="Tthanhtien">Thành tiền: &emsp;' . (float)$_SESSION['TongTien'] - (float)$mucgiam . '
                     </label>
                     <br>
             </div>';
-            }
-            else{
-                $_SESSION['thanhtien']=(float)$_SESSION['TongTien']-$mucgiam;
-                echo'<div class="thanhtien">
+                    } else {
+                        $_SESSION['thanhtien'] = (float)$_SESSION['TongTien'] - $mucgiam;
+                        echo '<div class="thanhtien">
                 <br>
-                <label style="float:right" for="Tthanhtien">Thành tiền: &emsp;'. (float)$_SESSION['TongTien'].'
+                <label style="float:right" for="Tthanhtien">Thành tiền: &emsp;' . (float)$_SESSION['TongTien'] . '
             </label>
             <br>
     </div>';
-            }
-            ?>
+                    }
+                    ?>
 
                     <br>
 
@@ -271,30 +262,24 @@
                     </div>
 
                 </form>
-                <?php 
-                    if(isset($_REQUEST['ThanhToan']))
-                    {
-                        $HinhThucTT=$_REQUEST['HTTT'];
-                        
-                        $currentDateTime = date('Y-m-d H:i:s');
-                       
-                        if($HinhThucTT==='Tiền Mặt')
-                        { $kq3=$p->CapNhatHD($_SESSION['IDHD'],$_SESSION['thanhtien'],$HinhThucTT,$currentDateTime);
-                            echo'<script>window.location.href="TienMat.php"</script>';
-                        }
-                        else
-                        {
-                            $kq3=$p->CapNhatHD($_SESSION['IDHD'],$_SESSION['thanhtien'],$HinhThucTT,$currentDateTime);
-                            echo'<script>window.location.href="TKNH.php"</script>';
-                        }
-                       
-                        
-                       
+                <?php
+                if (isset($_REQUEST['ThanhToan'])) {
+                    $HinhThucTT = $_REQUEST['HTTT'];
+
+                    $currentDateTime = date('Y-m-d H:i:s');
+
+                    if ($HinhThucTT === 'Tiền Mặt') {
+                        $kq3 = $p->CapNhatHD($_SESSION['IDHD'], $_SESSION['thanhtien'], $HinhThucTT, $currentDateTime);
+                        echo '<script>window.location.href="TienMat.php"</script>';
+                    } else {
+                        $kq3 = $p->CapNhatHD($_SESSION['IDHD'], $_SESSION['thanhtien'], $HinhThucTT, $currentDateTime);
+                        echo '<script>window.location.href="TKNH.php"</script>';
                     }
-                    
-                        
-                       
-                    
+                }
+
+
+
+
                 ?>
             </div>
         </div>

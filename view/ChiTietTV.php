@@ -21,6 +21,7 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/chitiettttv.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
 </head>
@@ -47,13 +48,10 @@ session_start();
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -81,7 +79,13 @@ session_start();
         </div>
     </div>
     <!-- Page Header End -->
+    <?php
+    if ($_SESSION['dn'] != 2) {
+        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+        echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+    }
 
+    ?>
 
     <!-- Blog Start -->
     <div class="container pt-5">
@@ -91,40 +95,35 @@ session_start();
                     <p>Menu</p>
                     <ul>
                         <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                       echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
-                       switch($_SESSION['dn'])
-                       {
-                        case 1:
-                            {
-                                echo' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
-                                echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
-                                echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
-                                break;
-                            }
-                            case 2:
-                                {
-                                    echo' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
+                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
+                        switch ($_SESSION['dn']) {
+                            case 1: {
+                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
+                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
+                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
+                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    break;
+                                }
+                            case 2: {
+                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     break;
                                 }
-                            case 3: 
-                                {
-                                    echo' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
+                            case 3: {
+                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
                                     echo  '<li><a href="Capnhattrangthai.php">Cập nhật tình trạng thanh toán</a></li>';
                                     break;
                                 }
-                       }
-                       
-                        
-                       
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
@@ -134,47 +133,44 @@ session_start();
         </div>
         <?php
         include("../controller/cThanhVien.php");
-        $q= new cThanhVien();
+        $q = new cThanhVien();
         $kq = $q->Query1TV($_REQUEST['idtv']);
-        if($kq)
-        {
-            echo' <div class="right">
+        if ($kq) {
+            echo ' <div class="right">
             <div class="update-info-container"><h2>Thông Tin thành viên </h2>';
-            while($r=mysqli_fetch_assoc($kq)){
-                $tentv=$r['TenThanhVien'];
-                $sdt=$r['SoDienThoai'];
-                $diachi=$r['DiaChi'];
-                $email=$r['email'];
-                $date=$r['NgayThamGia'];
-                echo' 
+            while ($r = mysqli_fetch_assoc($kq)) {
+                $tentv = $r['TenThanhVien'];
+                $sdt = $r['SoDienThoai'];
+                $diachi = $r['DiaChi'];
+                $email = $r['email'];
+                $date = $r['NgayThamGia'];
+                echo ' 
                 <label for="name">Tên:</label>
-                <span class="Ten">'.$tentv.'</span>
+                <span class="Ten">' . $tentv . '</span>
                 <br>
 
                 <label for="address">Địa chỉ:</label>
-                <span class="diachi">'.$diachi.'</span>
+                <span class="diachi">' . $diachi . '</span>
                 <br>
 
                 <label for="phone">SDT:</label>
-                <span class="sdt">'.$sdt.'</span>
+                <span class="sdt">' . $sdt . '</span>
                 <br>
                 <label for="Email">Email:</label>
-                <span class="email">'.$email.'</span>
+                <span class="email">' . $email . '</span>
                 <br>
                 <label for="Email">Ngày tham gia:</label>
-                <span class="ngaythamgia">'.$date.'</span>
+                <span class="ngaythamgia">' . $date . '</span>
                 <br>
 ';
-
             }
             echo '  <div class="">
-                    <a href="CapNhatTTTV.php?idtv='.$_REQUEST['idtv'].'"  class="update-btn">Sửa</a>
-                    <a  href="GhiDanhTV.php?idtv='.$_REQUEST['idtv'].'"  class="submit-btn">Ghi Danh</a>
-                    <a  href="XoaTV.php?idtv='.$_REQUEST['idtv'].'"   class="delete-btn">Xoá</a>
+                    <a href="CapNhatTTTV.php?idtv=' . $_REQUEST['idtv'] . '"  class="update-btn">Sửa</a>
+                    <a  href="GhiDanhTV.php?idtv=' . $_REQUEST['idtv'] . '"  class="submit-btn">Ghi Danh</a>
+                    <a  href="XoaTV.php?idtv=' . $_REQUEST['idtv'] . '"   class="delete-btn">Xoá</a>
 
                 </div>';
-        }
-        else{
+        } else {
             echo 'ko co du lieu';
         }
         ?>

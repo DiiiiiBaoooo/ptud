@@ -22,48 +22,49 @@ session_start();
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link rel="stylesheet" href="login/css/giahan1.css">
     <link rel="stylesheet" href="login/css/style.css">
+    <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
     <style>
-    button {
-        margin: 10px;
-    }
+        button {
+            margin: 10px;
+        }
 
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .left,
-    .right {
-        margin: 10px;
-    }
+        .left,
+        .right {
+            margin: 10px;
+        }
 
-    .left {
-        margin-right: 30px;
-        /* Adjust for spacing between the menu and confirmation form */
-    }
+        .left {
+            margin-right: 30px;
+            /* Adjust for spacing between the menu and confirmation form */
+        }
 
-    .confirmation {
-        border: 2px solid #ccc;
-        border-radius: 10px;
-        padding: 20px;
-        width: 500px;
-        height: fit-content;
-        margin: auto;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
+        .confirmation {
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            width: 500px;
+            height: fit-content;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .confirmation form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+        .confirmation form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    .confirmation table {
-        width: 100%;
-    }
+        .confirmation table {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -89,13 +90,10 @@ session_start();
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if ($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3) {
                             echo '<a href="thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -133,23 +131,22 @@ session_start();
                     <p>Menu</p>
                     <ul>
                         <?php
-                       if(!$_SESSION['dn'])
-                       {
-                        echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
-                        echo "<script>window.location.href = '../index.php';</script>";
-                       }
-                      
-                       
-                                echo  '<li><a href="ThongTinChungTV.php">Xem thông tin tài khoản</a></li>';
-                                echo' <li><a href="GiaHantv-1.php">Gia hạn </a></li>';
-                                echo  '<li><a href="Thanhtoan1.php">Thanh toán</a></li>';
-                                echo  '<li><a href="LSTT.php">Xem lịch sử thanh toán</a></li>';
-                               
-                    
-                        
-                       
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
 
-                     echo   '<li><a href="dangxuat.php">Logout</a></li>';
+
+                        echo  '<li><a href="ThongTinChungTV.php">Xem thông tin tài khoản</a></li>';
+                        echo ' <li><a href="GiaHantv-1.php">Gia hạn </a></li>';
+                        echo  '<li><a href="Thanhtoan1.php">Thanh toán</a></li>';
+                        echo  '<li><a href="LSTT.php">Xem lịch sử thanh toán</a></li>';
+
+
+
+
+
+                        echo   '<li><a href="dangxuat.php">Logout</a></li>';
 
                         ?>
                     </ul>
@@ -167,34 +164,32 @@ session_start();
                     <div class="package-details">
 
                         <?php
-                
-        if(isset($_SESSION['idgt']))
-        {
-            include_once("../controller/cGoiTap.php");
-                    $p= new cGoiTap();
-          
-            
-           $kq2= $p->get1GT($_SESSION['idgt']);
-           if($kq2)
-           {
-            while($r=mysqli_fetch_assoc($kq2))
-            {$tengoi=$r['TenGoi'];
-                $gia=$r['Gia'];
-                $_SESSION['giagoi']=$r['Gia'];
-                $ThoiHan=$r['ThoiHan'];
-                echo'
+
+                        if (isset($_SESSION['idgt'])) {
+                            include_once("../controller/cGoiTap.php");
+                            $p = new cGoiTap();
+
+
+                            $kq2 = $p->get1GT($_SESSION['idgt']);
+                            if ($kq2) {
+                                while ($r = mysqli_fetch_assoc($kq2)) {
+                                    $tengoi = $r['TenGoi'];
+                                    $gia = $r['Gia'];
+                                    $_SESSION['giagoi'] = $r['Gia'];
+                                    $ThoiHan = $r['ThoiHan'];
+                                    echo '
                        
                         
                         <p align="center"><strong>Thông tin chi tiết gói tập</strong></p>
-                        <p><strong>Tên gói:</strong> &emsp; '.$tengoi.'</p>
-                        <p><strong>Giá:</strong> &emsp; '.$gia.'</p>
-                        <p><strong>Thời hạn:</strong> &emsp; '.$ThoiHan.'</p>
+                        <p><strong>Tên gói:</strong> &emsp; ' . $tengoi . '</p>
+                        <p><strong>Giá:</strong> &emsp; ' . $gia . '</p>
+                        <p><strong>Thời hạn:</strong> &emsp; ' . $ThoiHan . '</p>
                     </div>
                     ';
-            }
-           }
-        }
-?>
+                                }
+                            }
+                        }
+                        ?>
 
 
                         <!-- Hiển thị chi tiết gói -->
@@ -205,20 +200,19 @@ session_start();
                             value="Gia Hạn">
                 </form>
                 <?php
-                if(isset($_REQUEST['btn-GH']))
-                {
+                if (isset($_REQUEST['btn-GH'])) {
                     include_once('../controller/cHoaDon.php');
                     $q = new cHoaDon();
                     $currentDateTime = date('Y-m-d H:i:s');
-                    
-                    $kq= $q->createHD($_SESSION['giagoi'],$currentDateTime,$_SESSION['id']);
-                    if($kq){
-                        echo"<script>alert('Gửi yêu cầu gia hạn thành công')</script>";
+
+                    $kq = $q->createHD($_SESSION['giagoi'], $currentDateTime, $_SESSION['id']);
+                    if ($kq) {
+                        echo "<script>alert('Gửi yêu cầu gia hạn thành công')</script>";
                         echo "<script>window.location.href = 'ThanhToan1.php';</script>";
-                       }else{
-                        echo"<script>alert('Gửi yêu cầu gia hạn thất bại')</script>";
+                    } else {
+                        echo "<script>alert('Gửi yêu cầu gia hạn thất bại')</script>";
                         echo "<script>window.location.href = 'GiaHanTV-1.php';</script>";
-                       }
+                    }
                 }
                 ?>
             </div>
