@@ -136,10 +136,14 @@ session_start();
                 <h2>Cập Nhật Thông Tin Nhân Viên</h2>
                 <form action="update_info.php" method="POST" enctype="multipart/form-data">
                     <label for="name">Tên Nhân Viên</label>
-                    <input type="text" id="name" name="name" placeholder="Nhập tên của nhân viên" required>
+                    <input type="text" id="name" name="name" placeholder="Nhập tên của nhân viên"
+                        pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s]+"
+                        required>
 
                     <label for="address">Địa chỉ</label>
-                    <input type="text" id="address" name="address" placeholder="Nhập địa chỉ">
+                    <input type="text" id="address" name="address" placeholder="Nhập địa chỉ"
+                        pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s0-9]+"
+                        required>
 
                     <label for="phone">Số Điện Thoại</label>
                     <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" pattern="[0-9]{10}"

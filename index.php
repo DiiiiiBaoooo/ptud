@@ -51,13 +51,10 @@ session_start();
                     if (!isset($_SESSION['dn'])) {
                         echo '<a href="view/dieukien.php" class="nav-item nav-link">Đăng nhập</a>';
                         echo '<a href="view/dangkitapthu.php" class="nav-item nav-link">Đăng ký tập thử</a>';
-                    }
-                    else{
-                        if($_SESSION['dn']== 1 || $_SESSION['dn']==2 ||$_SESSION['dn']==3)
-                        {
+                    } else {
+                        if (($_SESSION['dn'] == 1 || $_SESSION['dn'] == 2 || $_SESSION['dn'] == 3)) {
                             echo '<a href="view/thongtinchungnv.php" class="nav-item nav-link">Hồ sơ</a>';
-                        }
-                        else{
+                        } else {
                             echo '<a href="view/thongtinchungtv.php" class="nav-item nav-link">Hồ sơ</a>';
                         }
                         echo '<a href="view/dangxuat.php" class="nav-item nav-link">Đăng xuất</a>';
@@ -903,22 +900,18 @@ session_start();
             </div>
             <?php
             include_once("controller/cDanhGia.php");
-            $q= new cDanhGia();
-            if(isset($_REQUEST['btndg']))
-            {
-                $insertdg=$q->TaoDanhGia($_SESSION['id'],$_REQUEST['danhgia']);
-                if($insertdg)
-                {
+            $q = new cDanhGia();
+            if (isset($_REQUEST['btndg'])) {
+                $insertdg = $q->TaoDanhGia($_SESSION['id'], $_REQUEST['danhgia']);
+                if ($insertdg) {
                     echo "<script>alert('Gửi đánh giá thành công!');</script>";
-        echo "<script>window.location.href='index.php#a';</script>";
-                }
-                else
-                {
+                    echo "<script>window.location.href='index.php#a';</script>";
+                } else {
                     echo "<script>alert('gửi ko thành công!');</script>";
-        echo "<script>window.location.href='index.php#a';</script>";
+                    echo "<script>window.location.href='index.php#a';</script>";
                 }
             }
-               
+
             ?>
         </form>
     </div>
@@ -937,35 +930,33 @@ session_start();
                             </ol> -->
                             <div class="carousel-inner" role="listbox">
                                 <?php
-                                                include_once("controller/cDanhGia.php");
-                                                $p= new cDanhGia();
-                                                $tbl= $p->getDanhgia();
-                                                if($tbl)
-                                                {
-                                                    $stt=1;
-                                                    echo'<div class="carousel-item active">';
-                                                    while($r=mysqli_fetch_array($tbl))
-                                                    {
-                                                        echo'
+                                include_once("controller/cDanhGia.php");
+                                $p = new cDanhGia();
+                                $tbl = $p->getDanhgia();
+                                if ($tbl) {
+                                    $stt = 1;
+                                    echo '<div class="carousel-item active">';
+                                    while ($r = mysqli_fetch_array($tbl)) {
+                                        echo '
                                     <div class="d-flex align-items-center mb-4 text-white">
                                         <img width="80" height="80" class="rounded-circle bg-dark p-2"
                                             src="./assets/img/testimonial-1.jpg" alt="Image">
                                         <div class="pl-4">
-                                            <h4 class="text-primary">'.$r['TenThanhVien'].'</h4>
+                                            <h4 class="text-primary">' . $r['TenThanhVien'] . '</h4>
                                             <p class="m-0">Nhân viên văn phòng</p>
                                         </div>
                                     </div>
                                     <div class="testimonial-text position-relative border bg-dark text-white mb-5 p-4">
-                                        '.$r['NoiDung'].'
+                                        ' . $r['NoiDung'] . '
                                     </div>
                                 ';
-                                $stt++;
-                                                    }
-                                                    echo'</div>';
-                                                }
-                                                else
-                                                { echo 'ko co dl';}
-                                            ?>
+                                        $stt++;
+                                    }
+                                    echo '</div>';
+                                } else {
+                                    echo 'ko co dl';
+                                }
+                                ?>
 
 
                             </div>

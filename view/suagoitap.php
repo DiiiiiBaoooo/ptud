@@ -153,7 +153,9 @@ session_start();
 
                     <form action="" method="POST" enctype="multipart/form-data">
                         <label for="TenGoi">Tên gói</label>
-                        <input width="60%" type="text" id="TenGoi" name="TenGoi" value="<?php if (isset($ten)) {
+                        <input width="60%"
+                            pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s0-9]+"
+                            type="text" id="TenGoi" name="TenGoi" value="<?php if (isset($ten)) {
                                                                                             echo $ten;
                                                                                         } ?>">
 

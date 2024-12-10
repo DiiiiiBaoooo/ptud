@@ -152,10 +152,12 @@ session_start();
                 <form action="" method="POST" enctype="multipart/form-data">
                     <label for="name">Tên thành viên</label>
                     <input type="text" id="name" name="name" placeholder="Nhập tên của thành viên" required
+                        pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s]+"
                         value="<?php if (isset($tentv)) echo $tentv; ?>">
 
                     <label for="address">Địa chỉ</label>
                     <input type="text" id="address" name="address" placeholder="Nhập địa chỉ"
+                        pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s0-9]+"
                         value="<?php if (isset($diachi)) echo $diachi; ?>">
 
                     <label for="phone">SDT</label>

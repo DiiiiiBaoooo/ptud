@@ -146,24 +146,29 @@ session_start();
                 <h2>Cập nhật thông tin</h2>
                 <form action="" method="POST" enctype="multipart/form-data">
                     <label for="name">Tên</label>
-                    <input type="text" id="name" name="name" value="<?php if (isset($tennv)) {
-                                                                        echo $tennv;
-                                                                    }  ?>"
-                        placeholder="Nhập tên của bạn" required>
+                    <input type="text" id="name" name="name"
+                        pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s]+"
+                        value="<?php if (isset($tennv)) {
+                                    echo $tennv;
+                                }  ?>" placeholder="Nhập tên của bạn" required>
 
                     <label for="address">Địa chỉ</label>
-                    <input type="text" id="address" name="address" value="<?php if (isset($diachi)) {
-                                                                                echo $diachi;
-                                                                            }  ?>" placeholder="Nhập địa chỉ">
+                    <input type="text" id="address"
+                        pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s0-9]+"
+                        name="address" value="<?php if (isset($diachi)) {
+                                                    echo $diachi;
+                                                }  ?>" placeholder="Nhập địa chỉ">
 
                     <label for="phone">SDT</label>
                     <input type="tel" id="phone" name="phone" value="<?php if (isset($sdt)) {
                                                                             echo $sdt;
-                                                                        }  ?>" placeholder="Nhập số điện thoại" pattern="[0-9]{10}" required>
+                                                                        }  ?>" placeholder="Nhập số điện thoại"
+                        pattern="[0-9]{10}" required>
                     <label for="Email">Email</label>
                     <input type="email" id="email" name="email" value="<?php if (isset($email)) {
                                                                             echo $email;
-                                                                        }  ?>" placeholder="Nhập Email" required aria-label="Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                                                        }  ?>" placeholder="Nhập Email" required
+                        aria-label="Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                         title="Please enter a valid email address (e.g., example@domain.com)">
 
 

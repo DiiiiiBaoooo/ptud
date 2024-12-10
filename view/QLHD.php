@@ -246,6 +246,9 @@ session_start();
                             <option value="Chưa thanh toán"
                                 <?php echo (isset($_POST['status']) && $_POST['status'] == 'Chưa thanh toán') ? 'selected' : ''; ?>>
                                 Chưa thanh toán</option>
+                            <option value="Chờ xác nhận"
+                                <?php echo (isset($_POST['status']) && $_POST['status'] == 'Chờ xác nhận') ? 'selected' : ''; ?>>
+                                Chờ xác nhận</option>
                         </select>
                         <button type="submit" name="submit_status">&#128269;</button>
                     </form>

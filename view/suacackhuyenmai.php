@@ -196,17 +196,21 @@ session_start();
                         <tr>
                             <td><label for="txtTenKM">Tên Khuyến Mãi:</label></td>
                             <td>
-                                <input type="text" name="txtTenKM" id="txtTenKM" value="<?php if (isset($tenkm)) {
-                                                                                            echo $tenkm;
-                                                                                        } ?>" required>
+                                <input type="text"
+                                    pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s0-9]+"
+                                    name="txtTenKM" id="txtTenKM" value="<?php if (isset($tenkm)) {
+                                                                                echo $tenkm;
+                                                                            } ?>" required>
                             </td>
                         </tr>
                         <tr>
                             <td><label for="txtNoiDung">Nội Dung:</label></td>
                             <td>
-                                <input type="text" name="txtNoiDung" id="txtNoiDung" value="<?php if (isset($nd)) {
-                                                                                                echo $nd;
-                                                                                            } ?>" required>
+                                <input type="text"
+                                    pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s0-9]+"
+                                    name="txtNoiDung" id="txtNoiDung" value="<?php if (isset($nd)) {
+                                                                                    echo $nd;
+                                                                                } ?>" required>
                             </td>
                         </tr>
                         <tr>

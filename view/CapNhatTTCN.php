@@ -93,26 +93,13 @@ session_start();
                             echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
                             echo "<script>window.location.href = '../index.php';</script>";
                         }
-                        echo '<li><a href="ThongTinChungTV.php">Thông tin chung</a></li>';
-                        switch ($_SESSION['dn']) {
-                            case 1: {
-                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
-                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
-                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
-                                    break;
-                                }
-                            case 2: {
-                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
-                                    echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
-                                    break;
-                                }
-                            case 3: {
-                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    echo  '<li><a href="capnhattrangthai.php">Cập nhật tình trạng thanh toán</a></li>';
-                                    break;
-                                }
-                        }
+
+
+                        echo  '<li><a href="ThongTinChungTV.php">Xem thông tin tài khoản</a></li>';
+                        echo ' <li><a href="GiaHantv-1.php">Gia hạn </a></li>';
+                        echo  '<li><a href="Thanhtoan1.php">Thanh toán</a></li>';
+                        echo  '<li><a href="LSTT.php">Xem lịch sử thanh toán</a></li>';
+
 
 
 
@@ -147,20 +134,24 @@ session_start();
                 <h2>Cập nhật thông tin</h2>
                 <form action="" method="POST" enctype="multipart/form-data">
                     <label for="name">Tên</label>
-                    <input type="text" id="name" name="name" value="<?php if (isset($tentv)) {
-                                                                        echo $tentv;
-                                                                    }  ?>" placeholder="Nhập tên của bạn" required>
+                    <input type="text" id="name"
+                        pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s]+"
+                        name="name" value="<?php if (isset($tentv)) {
+                                                echo $tentv;
+                                            }  ?>" placeholder="Nhập tên của bạn" required>
 
                     <label for="address">Địa chỉ</label>
-                    <input type="text" id="address" name="address" value="<?php if (isset($diachi)) {
-                                                                                echo $diachi;
-                                                                            }  ?>" placeholder="Nhập địa chỉ">
+                    <input type="text"
+                        pattern="[A-Za-z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s,.+-]+"
+                        id="address" name="address" value="<?php if (isset($diachi)) {
+                                                                echo $diachi;
+                                                            }  ?>" placeholder="Nhập địa chỉ">
 
                     <label for="phone">SDT</label>
-                    <input type="tel" id="phone" name="phone" value="<?php if (isset($sdt)) {
-                                                                            echo $sdt;
-                                                                        }  ?>" placeholder="Nhập số điện thoại"
-                        pattern="[0-9]{10}" required>
+                    <input type="tel" id="phone" pattern="(03|07|08|09|01[2|6|8|9])[0-9]{8}" name="phone"
+                        value="<?php if (isset($sdt)) {
+                                    echo $sdt;
+                                }  ?>" placeholder="Nhập số điện thoại" required>
                     <label for="Email">Email</label>
                     <input type="email" id="email" name="email" value="<?php if (isset($email)) {
                                                                             echo $email;
