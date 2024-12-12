@@ -167,7 +167,7 @@ session_start();
                             while ($r = mysqli_fetch_assoc($tbl)) {
                                 echo ' <div class="list-item list-icon__hover hover-box" > 
 
-                            <span class="name" style="margin-left:50px"><a href="ChiTietKM.php?IDKhuyenMai=' . $r['IDKhuyenMai'] . '">' . $r['TenKhuyenMai'] . '</a></span>
+                            <span class="name" style="margin-left:50px"><a href="ChiTietKM.php?idkm=' . $r['IDKhuyenMai'] . '">' . $r['TenKhuyenMai'] . '</a></span>
                            <a class="update-btn" href="suacackhuyenmai.php?idkm=' . $r['IDKhuyenMai'] . '">Sửa</a>
                          <a class="delete-btn" href="xoakm.php?idkm=' . $r['IDKhuyenMai'] . '">Xóa</a>
                             <a href="chitietkm.php?idkm=' . $r['IDKhuyenMai'] . '" class="submit-btn">Xem</a>
@@ -257,39 +257,39 @@ session_start();
     <script src="../assets/js/main.js"></script>
 </body>
 <style>
-    button.add-btn {
-        margin-right: auto;
-    }
+button.add-btn {
+    margin-right: auto;
+}
 
-    .add-btn {
-        outline: none;
-        border: none;
-        width: 170px;
-        height: 40px;
-        border-radius: 6px;
-        background-color: red !important;
-        color: #fff !important;
+.add-btn {
+    outline: none;
+    border: none;
+    width: 170px;
+    height: 40px;
+    border-radius: 6px;
+    background-color: red !important;
+    color: #fff !important;
 
-    }
+}
 
-    .add-btn:hover {
-        background-color: #981d1b !important;
-        color: #fff !important;
+.add-btn:hover {
+    background-color: #981d1b !important;
+    color: #fff !important;
 
-    }
+}
 
-    .add-btn__link {
-        color: #fff !important;
-        text-decoration: none;
-    }
+.add-btn__link {
+    color: #fff !important;
+    text-decoration: none;
+}
 
-    .add-container {
-        width: 65%;
-    }
+.add-container {
+    width: 65%;
+}
 
-    .search-container {
-        height: 50px;
-    }
+.search-container {
+    height: 50px;
+}
 </style>
 
 </html>

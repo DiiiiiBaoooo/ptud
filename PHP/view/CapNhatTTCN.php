@@ -137,22 +137,23 @@ session_start();
                 <form action="" method="POST" enctype="multipart/form-data">
                     <label for="name">Tên</label>
                     <input type="text" id="name"
-                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂậẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s]+$"
+                        pattern="[A-Za-zÀỌÁÂÃấẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂậẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s]+$"
                         name="name" value="<?php if (isset($tentv)) {
                                                 echo $tentv;
                                             }  ?>" placeholder="Nhập tên của bạn" required>
 
                     <label for="address">Địa chỉ</label>
                     <input type="text"
-                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉậÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲậẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
+                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉậÊờÌấẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲậẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
                         id="address" name="address" value="<?php if (isset($diachi)) {
                                                                 echo $diachi;
                                                             }  ?>" placeholder="Nhập địa chỉ">
 
                     <label for="phone">SDT</label>
-                    <input type="tel" id="phone" pattern="(03|07|08|09|01[2|6|8|9])[0-9]{8}" name="phone" value="<?php if (isset($sdt)) {
-                                                                                                                        echo $sdt;
-                                                                                                                    }  ?>" placeholder="Nhập số điện thoại" required>
+                    <input type="tel" id="phone" pattern="(03|07|08|09|01[2|6|8|9])[0-9]{8}" name="phone"
+                        value="<?php if (isset($sdt)) {
+                                    echo $sdt;
+                                }  ?>" placeholder="Nhập số điện thoại" required>
                     <label for="Email">Email</label>
                     <input type="email" id="email" name="email" value="<?php if (isset($email)) {
                                                                             echo $email;

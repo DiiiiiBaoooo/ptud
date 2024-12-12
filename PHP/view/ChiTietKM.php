@@ -163,7 +163,7 @@ session_start();
                 <br>
 
                 <label for="phone">Điều kiện:</label>
-                <span class="sdt">Hóa đơn hơn' . $r['DieuKien'] . ' </span>
+                <span class="sdt">Hóa đơn hơn ' . $r['DieuKien'] . ' VNĐ </span>
               
                 <br>
                   <label for="muc giảm">Mức giảm giá:</label>
