@@ -100,7 +100,7 @@ GROUP BY t.IDThanhVien, t.TenThanhVien;";
     {
         $p = new clsketnoi();
         $con = $p->MoKetNoi();
-        $query = "SELECT * from  thanhvien where TenThanhVien like '%$timkiem%' OR SoDienThoai like '%$timkiem%' ;";
+        $query = "SELECT * from  thanhvien where TenThanhVien like '%$timkiem%' OR SoDienThoai like '$timkiem' ;";
         $kq = mysqli_query($con, $query);
         $p->DongKetNoi($con);
         return $kq;
