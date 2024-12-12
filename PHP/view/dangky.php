@@ -68,8 +68,9 @@ session_start();
                             <div class="form-group last mb-3">
                                 <label for="address">Địa chỉ </label>
                                 <input type="text" class="form-control" placeholder="Địa chỉ" id="address"
-                                    name="address" pattern="^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơĂẮẰẲẶẴẸẺẼỀỀỂỆỄẾÌÍỊỈÒÓỌỎỐỒỔỘỚỜỞỢÙÚỤỦƯỪỨỮỰỳỵỷỹẠạẢảẤấẦầẨẩẬậẪẫẮắẰằẲẳẶặẸẹẺẻẼẽỀềỂểỆệỄễỐốỒồỔổỘộỚớỜờỞởỢợỤụỦủỨứỪừỬửỮữự\s0-9]+$
-" required>
+                                    name="address"
+                                    pattern="^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơĂẮẰẲẶẴẸẺẼỀỀỂỆỄẾÌÍỊỈÒÓỌỎỐỒỔỘỚỜỞỢÙÚỤỦƯỪỨỮỰỳỵỷỹẠạẢảẤấẦầẨẩẬậẪẫẮắẰằẲẳẶặẸẹẺẻẼẽỀềỂểỆệỄễỐốỒồỔổỘộỚớỜờỞởỢợỤụỦủỨứỪừỬửỮữự\s0-9]+$"
+                                    required>
                                 <span></span>
                                 <small></small>
                             </div>
@@ -105,14 +106,22 @@ session_start();
                             $diachi = $_REQUEST['address'];
                             $email = $_REQUEST['email'];
                             $ngaythamgia = date("Y/m/d");
-
-                            $password = $_REQUEST['password'];
-
-                            $kq = $p->registerTK($tentv, $sdt, $diachi, $email, $ngaythamgia, $password);
-                            if (!$kq) {
-                                echo "<script>alert('Đăng ký ko thành công');</script>";
+                            if ($_REQUEST['pass-reset'] != $_REQUEST['password']) {
+                                echo "<script>alert('mật khẩu không trùng');</script>";
                             } else {
-                                echo "<script>window.location.href = 'QLTV.php';</script>";
+                                $password = $_REQUEST['password'];
+
+                                $ktsdt = $p->KTDangKi($_REQUEST['telephone']);
+                                if ($ktsdt) {
+                                    echo "<script>alert('Số điện thoại đã được đăng ký');</script>";
+                                } else {
+                                    $kq = $p->registerTK($tentv, $sdt, $diachi, $email, $ngaythamgia, $password);
+                                    if (!$kq) {
+                                        echo "<script>alert('Đăng ký ko thành công');</script>";
+                                    } else {
+                                        echo "<script>window.location.href = 'QLTV.php';</script>";
+                                    }
+                                }
                             }
                         }
                         ?>

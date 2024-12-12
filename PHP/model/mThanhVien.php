@@ -105,4 +105,13 @@ GROUP BY t.IDThanhVien, t.TenThanhVien;";
         $p->DongKetNoi($con);
         return $kq;
     }
+    public function ktdk($sdt)
+    {
+        $p = new clsketnoi();
+        $con = $p->MoKetNoi();
+        $query = "SELECT * from  thanhvien where  SoDienThoai = '$sdt' ;";
+        $kq = mysqli_query($con, $query);
+        $p->DongKetNoi($con);
+        return $kq;
+    }
 }
