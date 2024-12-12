@@ -43,7 +43,8 @@ session_start();
                                 <label for="username">Họ tên</label>
                                 <input type="text" class="form-control" placeholder="Họ tên*" id="username"
                                     name="username"
-                                    pattern="[A-Za-zÀỌÁÂÃẤắÈÉậÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲậẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$" required>
+                                    pattern="[A-Za-zÀỌÁÂÃẤắÈÉậÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲậẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
+                                    required>
                                 <span></span>
                                 <small></small>
                             </div>
@@ -67,8 +68,8 @@ session_start();
                             <div class="form-group last mb-3">
                                 <label for="address">Địa chỉ </label>
                                 <input type="text" class="form-control" placeholder="Địa chỉ" id="address"
-                                    name="address"
-                                    pattern="[A-Za-zÀỌÁÂÃẤắÈÉậÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲậẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$" required>
+                                    name="address" pattern="^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơĂẮẰẲẶẴẸẺẼỀỀỂỆỄẾÌÍỊỈÒÓỌỎỐỒỔỘỚỜỞỢÙÚỤỦƯỪỨỮỰỳỵỷỹẠạẢảẤấẦầẨẩẬậẪẫẮắẰằẲẳẶặẸẹẺẻẼẽỀềỂểỆệỄễỐốỒồỔổỘộỚớỜờỞởỢợỤụỦủỨứỪừỬửỮữự\s0-9]+$
+" required>
                                 <span></span>
                                 <small></small>
                             </div>
