@@ -158,16 +158,49 @@ session_start();
                 <div class="menu">
                     <p>Menu</p>
                     <ul>
-                        <li><a href="#home">Thông tin chung</a></li>
-                        <li><a href="#profile">Quản lý thành viên</a></li>
-                        <li><a href="#settings">Quản lý thiết bị</a></li>
-                        <li><a href="#settings">Quản lý khuyến mãi</a></li>
+                        <?php
+                        if (!$_SESSION['dn']) {
+                            echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                            echo "<script>window.location.href = '../index.php';</script>";
+                        }
+                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
+                        switch ($_SESSION['dn']) {
+                            case 1: {
+                                    echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
+                                    echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
+                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
+                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    break;
+                                }
+                            case 2: {
+                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
+                                    echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
+                                    echo  '<li><a href="QLTBloi.php">Quản lý lỗi thiết bị</a></li>';
+                                    break;
+                                }
+                            case 3: {
+                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
 
-                        <li><a href="#logout">Logout</a></li>
+                                    break;
+                                }
+                        }
+
+
+
+
+                        echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
+
+                        ?>
                     </ul>
                 </div>
             </div>
+            <?php
+            if ($_SESSION['dn'] != 1) {
+                echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
+                echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
+            }
 
+            ?>
         </div>
         <div class="right">
             <div class="confirmation">
