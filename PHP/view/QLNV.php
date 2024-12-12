@@ -176,7 +176,7 @@ session_start();
                                 </span>
                                 <button type="button" onclick="window.location.href=\'CapNhatTTNV.php?idnv=' . $r['IDNhanVien'] . '\'" class="update-btn">Sửa</button>
                                 <button  class="delete-btn" type="button" onclick="window.location.href=\'XoaNhanVien.php?idnv=' . $r['IDNhanVien'] . '\'" ">Xoá</button>
-                                 <a href="ChiTietNV.php?idnv=' . $r['IDNhanVien'] . '" class="submit-btn">Báo cáo lỗi</a>
+                                 <a href="ChiTietNV.php?idnv=' . $r['IDNhanVien'] . '" class="submit-btn">Xem</a>
                             </div>';
                         }
                     }
