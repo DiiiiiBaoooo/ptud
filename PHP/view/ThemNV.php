@@ -138,8 +138,7 @@ include_once("../model/ketnoi.php");
                     <!-- name -->
                     <label for="name">Tên Nhân Viên</label>
                     <input type="text" id="txtname"
-                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
-                        name="txtname" placeholder="Nhập tên của nhân viên" required>
+                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉậÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲậẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$" name="txtname" placeholder="Nhập tên của nhân viên" required>
                     <!-- phone -->
                     <label for="phone">Số Điện Thoại</label>
                     <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" pattern="[0-9]{10}"
@@ -150,8 +149,7 @@ include_once("../model/ketnoi.php");
                     <!-- address -->
                     <label for="address">Địa chỉ</label>
                     <input type="text"
-                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
-                        id="txtaddress" name="txtaddress" placeholder="Nhập địa chỉ">
+                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉậÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲậẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$" id="txtaddress" name="txtaddress" placeholder="Nhập địa chỉ">
                     <!-- email -->
                     <label for="Email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Nhập Email" required

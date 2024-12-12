@@ -165,7 +165,15 @@ session_start();
                 <br>
                 <label for="thanhvien">Chức vụ:</label>
                 <span class="thanhvien">' . $r['TenViTri'] . '</span>
-                <br>';
+                <br>
+                <div class="button-group">
+
+                    <a href="CapNhatTTNV.php?idnd=' . $r['IDNhanVien'] . '" class="update-btn">Cập nhật thông tin nhân viên
+                    </a>
+                    <a href="QLNV.php" class="submit-btn">OK
+                    </a>
+
+                </div>';
                         }
                     }
                 }
@@ -176,12 +184,7 @@ session_start();
 
 
 
-                <div class="button-group">
 
-                    <button type="submit" class="update-btn">Cập nhật TTTT</button>
-                    <button type="button" class="submit-btn">OK</button>
-
-                </div>
 
             </div>
 

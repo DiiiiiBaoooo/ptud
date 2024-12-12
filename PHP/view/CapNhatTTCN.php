@@ -144,10 +144,9 @@ session_start();
 
                     <label for="address">Địa chỉ</label>
                     <input type="text"
-                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
-                        id="address" name="address" value="<?php if (isset($diachi)) {
-                                                                echo $diachi;
-                                                            }  ?>" placeholder="Nhập địa chỉ">
+                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉậÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲậẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$" id="address" name="address" value="<?php if (isset($diachi)) {
+                                                                                                                                                                                                                echo $diachi;
+                                                                                                                                                                                                            }  ?>" placeholder="Nhập địa chỉ">
 
                     <label for="phone">SDT</label>
                     <input type="tel" id="phone" pattern="(03|07|08|09|01[2|6|8|9])[0-9]{8}" name="phone" value="<?php if (isset($sdt)) {

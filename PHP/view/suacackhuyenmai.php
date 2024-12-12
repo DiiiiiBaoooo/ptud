@@ -240,10 +240,9 @@ session_start();
                             <td><label for="txtNoiDung">Nội Dung:</label></td>
                             <td>
                                 <input type="text"
-                                    pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
-                                    name="txtNoiDung" id="txtNoiDung" value="<?php if (isset($nd)) {
-                                                                                    echo $nd;
-                                                                                } ?>" required>
+                                    pattern="[A-Za-zÀỌÁÂÃẤắÈÉậÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲậẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$" name="txtNoiDung" id="txtNoiDung" value="<?php if (isset($nd)) {
+                                                                                                                                                                                                                                echo $nd;
+                                                                                                                                                                                                                            } ?>" required>
                             </td>
                         </tr>
                         <tr>
