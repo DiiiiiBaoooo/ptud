@@ -38,11 +38,13 @@ session_start();
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-7">
                         <h3 style=" margin-left: 80px; margin-bottom:30px;"><strong>Đăng ký thành viên</strong></h3>
-                        <form  method="post">
+                        <form method="post">
                             <div class="form-group first">
                                 <label for="username">Họ tên</label>
                                 <input type="text" class="form-control" placeholder="Họ tên*" id="username"
-                                    name="username" required>
+                                    name="username"
+                                    pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
+                                    required>
                                 <span></span>
                                 <small></small>
                             </div>
@@ -50,7 +52,7 @@ session_start();
                             <div class="form-group first">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" placeholder="your-email@gmail.com*" id="email"
-                                    name="email" required>
+                                    name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                 <span></span>
                                 <small></small>
                             </div>
@@ -58,7 +60,7 @@ session_start();
                             <div class="form-group last mb-3">
                                 <label for="telephone">Số điện thoại</label>
                                 <input type="text" class="form-control" placeholder="Số điện thoại*" id="telephone"
-                                    name="telephone" required>
+                                    name="telephone" pattern="[0-9]{10}" required>
                                 <span></span>
                                 <small></small>
                             </div>
@@ -66,7 +68,9 @@ session_start();
                             <div class="form-group last mb-3">
                                 <label for="address">Địa chỉ </label>
                                 <input type="text" class="form-control" placeholder="Địa chỉ" id="address"
-                                    name="address" required>
+                                    name="address"
+                                    pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
+                                    required>
                                 <span></span>
                                 <small></small>
                             </div>
@@ -81,44 +85,41 @@ session_start();
 
                             <div class="form-group last mb-3">
                                 <label for="pass-reset"> Nhập lại mật khẩu</label>
-                                <input type="password" class="form-control" placeholder="Nhập Password"
-                                    id="pass-reset" name="pass-reset" required>
+                                <input type="password" class="form-control" placeholder="Nhập Password" id="pass-reset"
+                                    name="pass-reset" required>
                                 <span></span>
                                 <small></small>
                             </div>
 
-                            <input type="submit"   name="btn-dangky" class="btn btn-block mt-5" value="Đăng ký"
+                            <input type="submit" name="btn-dangky" class="btn btn-block mt-5" value="Đăng ký"
                                 style="background-color: #da2127; color: #fff6f4; font-weight: 600; font-size:1.2rem; ">
-                                
+
 
                         </form>
                         <?php
-                            if (isset($_POST['btn-dangky']) && $_POST['btn-dangky'] == 'Đăng ký') 
-                            { 
-                               
-                                include_once("../controller/cThanhVien.php");
-                                $p = new cThanhVien();
-                                $tentv=$_REQUEST['username'];
-                                $sdt=$_REQUEST['telephone'];
-                                $diachi=$_REQUEST['address'];
-                                $email=$_REQUEST['email'];
-                                $ngaythamgia= date("Y/m/d");
-                                
-                                $password=$_REQUEST['password'];
-                                
-                                $kq= $p->registerTK($tentv,$sdt,$diachi,$email,$ngaythamgia,$password);
-                                if(!$kq)
-                                {
-                                    echo "<script>alert('Đăng ký ko thành công');</script>";
-                                }
-                                else{
-                                    echo "<script>window.location.href = 'QLTV.php';</script>";
-                                }
+                        if (isset($_POST['btn-dangky']) && $_POST['btn-dangky'] == 'Đăng ký') {
+
+                            include_once("../controller/cThanhVien.php");
+                            $p = new cThanhVien();
+                            $tentv = $_REQUEST['username'];
+                            $sdt = $_REQUEST['telephone'];
+                            $diachi = $_REQUEST['address'];
+                            $email = $_REQUEST['email'];
+                            $ngaythamgia = date("Y/m/d");
+
+                            $password = $_REQUEST['password'];
+
+                            $kq = $p->registerTK($tentv, $sdt, $diachi, $email, $ngaythamgia, $password);
+                            if (!$kq) {
+                                echo "<script>alert('Đăng ký ko thành công');</script>";
+                            } else {
+                                echo "<script>window.location.href = 'QLTV.php';</script>";
                             }
-                    ?>
+                        }
+                        ?>
                         <a class="already-signup" href="./dangnhap-tv.php">Bạn đã có tài khoản</a>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
@@ -135,95 +136,95 @@ session_start();
 </body>
 
 <style>
-/* h1 */
-h1.header-img {
-    font-family: Oswald;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 64px;
-    line-height: 90px;
-    width: 60%;
-    margin-top: 40%;
-    color: #fff;
-    margin-left: 80px;
+    /* h1 */
+    h1.header-img {
+        font-family: Oswald;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 64px;
+        line-height: 90px;
+        width: 60%;
+        margin-top: 40%;
+        color: #fff;
+        margin-left: 80px;
 
-}
+    }
 
-h3.header-notification__img {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 22px;
-    width: 70%;
-    color: #fff;
-    margin-left: 88px;
-    margin-top: 30px;
-}
+    h3.header-notification__img {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 22px;
+        width: 70%;
+        color: #fff;
+        margin-left: 88px;
+        margin-top: 30px;
+    }
 
-b,
-strong {
-    font-weight: bolder;
-    font-family: Oswald;
-    font-size: 2rem;
-    color: #da2127;
-}
+    b,
+    strong {
+        font-weight: bolder;
+        font-family: Oswald;
+        font-size: 2rem;
+        color: #da2127;
+    }
 
-a.already-signup {
-    text-decoration: none;
-    margin-left: 60%;
-}
+    a.already-signup {
+        text-decoration: none;
+        margin-left: 60%;
+    }
 
-a.already-signup:hover {
-    color: #da2127;
-}
+    a.already-signup:hover {
+        color: #da2127;
+    }
 
-.form-group.error {
-    border-color: #e74c3c;
-}
+    .form-group.error {
+        border-color: #e74c3c;
+    }
 
-.form-group.succes {
-    border-color: #2691d9;
-}
+    .form-group.succes {
+        border-color: #2691d9;
+    }
 
 
-.form-group input {
-    width: 100%;
-    height: 40px;
-    font-size: 16px;
-    border: none;
-    background: none;
-    outline: none;
-}
+    .form-group input {
+        width: 100%;
+        height: 40px;
+        font-size: 16px;
+        border: none;
+        background: none;
+        outline: none;
+    }
 
-small {
-    position: absolute;
-    left: 0;
-    top: 100%;
-    margin-top: 3px;
-    color: #e74c3c;
-}
+    small {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        margin-top: 3px;
+        color: #e74c3c;
+    }
 
-.form-group span::before {
-    content: '';
-    position: absolute;
-    top: 40px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background: #2691d9;
-    transition: 0.3s;
-}
+    .form-group span::before {
+        content: '';
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background: #2691d9;
+        transition: 0.3s;
+    }
 
-.form-group input:focus~span::before {
-    width: 100%;
-}
+    .form-group input:focus~span::before {
+        width: 100%;
+    }
 
-form .form-group {
-    position: relative;
-    border-bottom: 2px solid #adadad;
-    margin: 26px 0;
-}
+    form .form-group {
+        position: relative;
+        border-bottom: 2px solid #adadad;
+        margin: 26px 0;
+    }
 </style>
 
 

@@ -105,19 +105,19 @@ session_start();
                                     echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
                                     break;
                                 }
-                          case 2: {
+                            case 2: {
                                     echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     echo  '<li><a href="QLTBloi.php">Quản lý lỗi thiết bị</a></li>';
                                     break;
                                 }
-                             case 3: {
+                            case 3: {
                                     echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    
+
                                     break;
                                 }
                         }
-                         echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
+                        echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
                         ?>
                     </ul>
                 </div>
@@ -161,17 +161,18 @@ session_start();
 
                     <label for="ttl">Thông Tin lỗi</label>
                     <input type="text" id="ttl" name="ttl" placeholder="Nhập thông tin lỗi của thiết bị"
-                        pattern="[A-Za-z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s,.-]+"
+                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
                         required><br>
 
                     <label for="kq">Kết Quả Bảo Trì</label>
 
-                    <select id="kq" name="kq" style="width:calc(100%)" class="form-select" aria-label="Default select example">
+                    <select id="kq" name="kq" style="width:calc(100%)" class="form-select"
+                        aria-label="Default select example">
                         <option value="Đã sửa">Đã sửa</option>
                         <option value="Đang sửa lỗi">Đang sửa lỗi</option>
                         <option value="Không sửa được">Không sửa được</option>
                     </select>
-                    <label style=" margin-top: 5px;"  for="cp">Chi Phí Bảo Trì</label>
+                    <label style=" margin-top: 5px;" for="cp">Chi Phí Bảo Trì</label>
                     <input type="number" id="cp" name="cp" placeholder="Nhập số tiền bảo trì của thiết bị" required><br>
 
                     <div class="button-group">

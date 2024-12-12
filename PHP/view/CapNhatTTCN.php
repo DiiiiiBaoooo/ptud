@@ -12,7 +12,7 @@ session_start();
     <meta content="Free Website Template" name="description">
 
     <!-- Favicon -->
-      <link href="../assets/img/logo.png" rel="icon">
+    <link href="../assets/img/logo.png" rel="icon">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -106,7 +106,7 @@ session_start();
 
 
 
-                         echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
+                        echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
 
                         ?>
                     </ul>
@@ -137,23 +137,22 @@ session_start();
                 <form action="" method="POST" enctype="multipart/form-data">
                     <label for="name">Tên</label>
                     <input type="text" id="name"
-                        pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s]+"
+                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s]+$"
                         name="name" value="<?php if (isset($tentv)) {
                                                 echo $tentv;
                                             }  ?>" placeholder="Nhập tên của bạn" required>
 
                     <label for="address">Địa chỉ</label>
                     <input type="text"
-                        pattern="[A-Za-z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s,.+-]+"
+                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
                         id="address" name="address" value="<?php if (isset($diachi)) {
                                                                 echo $diachi;
                                                             }  ?>" placeholder="Nhập địa chỉ">
 
                     <label for="phone">SDT</label>
-                    <input type="tel" id="phone" pattern="(03|07|08|09|01[2|6|8|9])[0-9]{8}" name="phone"
-                        value="<?php if (isset($sdt)) {
-                                    echo $sdt;
-                                }  ?>" placeholder="Nhập số điện thoại" required>
+                    <input type="tel" id="phone" pattern="(03|07|08|09|01[2|6|8|9])[0-9]{8}" name="phone" value="<?php if (isset($sdt)) {
+                                                                                                                        echo $sdt;
+                                                                                                                    }  ?>" placeholder="Nhập số điện thoại" required>
                     <label for="Email">Email</label>
                     <input type="email" id="email" name="email" value="<?php if (isset($email)) {
                                                                             echo $email;
@@ -213,7 +212,8 @@ session_start();
                 <h4 class="text-primary mb-4">Liên kết</h4>
                 <div class="d-flex flex-column justify-content-start">
                     <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>
@@ -221,8 +221,9 @@ session_start();
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-primary mb-4">Phổ biến</h4>
                 <div class="d-flex flex-column justify-content-start">
-                <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>
