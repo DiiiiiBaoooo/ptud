@@ -102,15 +102,15 @@ session_start();
                                     echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
                                     break;
                                 }
-                          case 2: {
+                            case 2: {
                                     echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     echo  '<li><a href="QLTBloi.php">Quản lý lỗi thiết bị</a></li>';
                                     break;
                                 }
-                             case 3: {
+                            case 3: {
                                     echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    
+
                                     break;
                                 }
                         }
@@ -118,7 +118,7 @@ session_start();
 
 
 
-                         echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
+                        echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
 
                         ?>
                     </ul>
@@ -137,7 +137,7 @@ session_start();
                     </div>
                     <div class="search-container">
                         <!-- Form tìm kiếm -->
-                        <form  method="post">
+                        <form method="post">
                             <input type="text" name="noidung" placeholder="Nhập tên, SDT">
                             <button type="submit" name="search-btn" class="search-btn">&#128269;</button>
                         </form>
@@ -162,13 +162,10 @@ session_start();
                     <?php
                     include_once("../controller/cNhanVien.php");
                     $q = new cNhanVien();
-                    
-                    if(isset($_REQUEST['noidung']))
 
-                    {
+                    if (isset($_REQUEST['noidung'])) {
                         $kq = $q->searchnhanvien($_REQUEST['noidung']);
-                    }
-                    else{
+                    } else {
                         $kq = $q->getAllNV();
                     }
                     if ($kq) {
@@ -179,7 +176,7 @@ session_start();
                                 </span>
                                 <button type="button" onclick="window.location.href=\'CapNhatTTNV.php?idnv=' . $r['IDNhanVien'] . '\'" class="update-btn">Sửa</button>
                                 <button  class="delete-btn" type="button" onclick="window.location.href=\'XoaNhanVien.php?idnv=' . $r['IDNhanVien'] . '\'" ">Xoá</button>
-                                <button class="submit-btn">Ghi danh</button>
+                                 <a href="ChiTietNV.php?idnv=' . $r['IDNhanVien'] . '" class="submit-btn">Báo cáo lỗi</a>
                             </div>';
                         }
                     }
