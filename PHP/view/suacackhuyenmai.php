@@ -230,7 +230,7 @@ session_start();
                             <td><label for="txtTenKM">Tên Khuyến Mãi:</label></td>
                             <td>
                                 <input type="text"
-                                    pattern="[A-Za-zÀỌÁÂÃẤÈÉÊÌẪÍÒÓÔÕÙÚÒĂĐẬêĨŨƠỄàảáạệẠồỄỆâãèÔéỂẹỎẽôêìíỐòóôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồỠỢÙÚỦỤỰốỲỴÝỶỸửữựỳỵỷỹ\s0-9]+$"
+                                    pattern="^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯàáâãèéêìíòóôõùúăđĩũơưĂẮẰẲẶẴẸẺẼỀỀỂỆỄẾÌÍỊỈÒÓỌỎỐỒỔỘỚỜỞỢÙÚỤỦƯỪỨỮỰỳỵỷỹẠạẢảẤấẦầẨẩẬậẪẫẮắẰằẲẳẶặẸẹẺẻẼẽỀềỂểỆệỄễỐốỒồỔổỘộỚớỜờỞởỢợỤụỦủỨứỪừỬửỮữự\s0-9]+$"
                                     name="txtTenKM" id="txtTenKM" value="<?php if (isset($tenkm)) {
                                                                                 echo $tenkm;
                                                                             } ?>" required>
@@ -240,9 +240,12 @@ session_start();
                             <td><label for="txtNoiDung">Nội Dung:</label></td>
                             <td>
                                 <input type="text"
-                                    pattern="[A-Za-zÀỌÁÂÃẤắÈÉậÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲậẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$" name="txtNoiDung" id="txtNoiDung" value="<?php if (isset($nd)) {
-                                                                                                                                                                                                                                echo $nd;
-                                                                                                                                                                                                                            } ?>" required>
+                                    pattern="[A-Za-zÀỌÁÂÃẤắÈÉậÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲậẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
+                                    name="txtNoiDung" id="txtNoiDung"
+                                    value="<?php if (isset($nd)) {
+                                                echo $nd;
+                                            } ?>"
+                                    required>
                             </td>
                         </tr>
                         <tr>
