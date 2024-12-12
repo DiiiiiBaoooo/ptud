@@ -13,14 +13,14 @@ session_start();
     <meta content="Free Website Template" name="description">
 
     <!-- Favicon -->
-      <link href="../assets/img/logo.png" rel="icon">
+    <link href="../assets/img/logo.png" rel="icon">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Flaticon Font -->
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
-    <link rel="stylesheet" href="login/css/them.css">
+    <link rel="stylesheet" href="login/css/them2.css">
     <link rel="stylesheet" href="login/css/style.css">
     <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
@@ -103,15 +103,15 @@ session_start();
                                     echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
                                     break;
                                 }
-                          case 2: {
+                            case 2: {
                                     echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     echo  '<li><a href="QLTBloi.php">Quản lý lỗi thiết bị</a></li>';
                                     break;
                                 }
-                             case 3: {
+                            case 3: {
                                     echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    
+
                                     break;
                                 }
                         }
@@ -119,7 +119,7 @@ session_start();
 
 
 
-                         echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
+                        echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
 
                         ?>
                     </ul>
@@ -150,59 +150,61 @@ session_start();
         ?>
         <div class="right">
             <div class="update-info-container">
-                <h2>Sửa thông tin gói tập
+                <h2 align="center">Sửa thông tin gói tập</h2>
 
-                    <form action="" method="POST" enctype="multipart/form-data">
-                        <label for="TenGoi">Tên gói</label>
-                        <input width="60%"
-                            pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s0-9]+"
-                            type="text" id="TenGoi" name="TenGoi" value="<?php if (isset($ten)) {
-                                                                                            echo $ten;
-                                                                                        } ?>">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <label for="TenGoi">Tên gói</label>
+                    <input
+                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
+                        type="text" id="TenGoi" name="TenGoi" value="<?php if (isset($ten)) {
+                                                                            echo $ten;
+                                                                        } ?>" required>
 
-                        <label for="Gia">Giá gói:</label>
 
-                        <input type="decimal" id="Gia" name="Gia" value="<?php if (isset($gia)) {
-                                                                                echo $gia;
-                                                                            } ?>">
-                        <br>
-                        <label for="thoihan">chọn Thời hạn</label>
 
-                        <select style="width:calc(60%)" class="form-select" aria-label="Default select example"
-                            name="thoihan">
-                            <?php
-                            if ($thoihan == "1 tháng") {
-                                echo ' <option value="1 tháng" selected>1 Tháng</option>
+                    <label for="Gia">Giá gói:</label>
+
+                    <input type="number" id="Gia" name="Gia" value="<?php if (isset($gia)) {
+                                                                        echo $gia;
+                                                                    } ?>">
+                    <br>
+                    <label for="thoihan">chọn Thời hạn</label>
+
+                    <select style="width:calc(60%)" class="form-select" aria-label="Default select example"
+                        name="thoihan">
+                        <?php
+                        if ($thoihan == "1 tháng") {
+                            echo ' <option value="1 tháng" selected>1 Tháng</option>
                             <option value="3 tháng">3 Tháng</option>
                             <option value="6 tháng">6 Tháng</option>
                             <option value="12 tháng">12 tháng</option>';
-                            } elseif ($thoihan == "3 tháng") {
-                                echo ' <option value="1 tháng" >1 Tháng</option>
+                        } elseif ($thoihan == "3 tháng") {
+                            echo ' <option value="1 tháng" >1 Tháng</option>
                             <option value="3 tháng" selected>3 Tháng</option>
                             <option value="6 tháng">6 Tháng</option>
                             <option value="12 tháng">12 tháng</option>';
-                            } elseif ($thoihan == "6 tháng") {
-                                echo ' <option value="1 tháng" >1 Tháng</option>
+                        } elseif ($thoihan == "6 tháng") {
+                            echo ' <option value="1 tháng" >1 Tháng</option>
                             <option value="3 tháng" >3 Tháng</option>
                             <option value="6 tháng" selected>6 Tháng</option>
                             <option value="12 tháng">12 tháng</option>';
-                            } else {
-                                echo ' <option value="1 tháng" >1 Tháng</option>
+                        } else {
+                            echo ' <option value="1 tháng" >1 Tháng</option>
                                     <option value="3 tháng" >3 Tháng</option>
                                     <option value="6 tháng" >6 Tháng</option>
                                     <option value="12 tháng" selected>12 tháng</option>';
-                            }
-                            ?>
+                        }
+                        ?>
 
 
-                        </select>
+                    </select>
 
 
-                        <div class="button-group">
-                            <input type="submit" class="update-btn" name="btnadd" value="Cập nhật">
-                            <input type="button" value="Hủy" class="cancel-btn" onclick="window.history.back();">
-                        </div>
-                    </form>
+                    <div class="button-group">
+                        <input type="submit" class="update-btn" name="btnadd" value="Cập nhật">
+                        <input type="button" value="Hủy" class="cancel-btn" onclick="window.history.back();">
+                    </div>
+                </form>
             </div>
             <?php
 
@@ -247,7 +249,8 @@ session_start();
                 <h4 class="text-primary mb-4">Liên kết</h4>
                 <div class="d-flex flex-column justify-content-start">
                     <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>
@@ -255,8 +258,9 @@ session_start();
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-primary mb-4">Phổ biến</h4>
                 <div class="d-flex flex-column justify-content-start">
-                <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>

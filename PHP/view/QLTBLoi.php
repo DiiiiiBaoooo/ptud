@@ -102,15 +102,15 @@ session_start();
                                     echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
                                     break;
                                 }
-                          case 2: {
+                            case 2: {
                                     echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     echo  '<li><a href="QLTBloi.php">Quản lý lỗi thiết bị</a></li>';
                                     break;
                                 }
-                             case 3: {
+                            case 3: {
                                     echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    
+
                                     break;
                                 }
                         }
@@ -118,7 +118,7 @@ session_start();
 
 
 
-                         echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
+                        echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
 
                         ?>
                     </ul>
@@ -137,17 +137,17 @@ session_start();
             <div class="qltv">
                 <h1 align="center">Quản lý thiết bị lỗi</h1>
                 <form method="post">
-                <div class="search-bar" id="bar-end">
-                    <div class=" border-0 outline-0 d-flex  justify-content-start add-container ">
-                        <button type="button" class="add-btn">
-                            <a href="BCL.php" class="add-btn__link">Thêm thiết bị lỗi</a>
-                        </button>
+                    <div class="search-bar" id="bar-end">
+                        <div class=" border-0 outline-0 d-flex  justify-content-start add-container ">
+                            <button type="button" class="add-btn">
+                                <a href="BCL.php" class="add-btn__link">Thêm thiết bị lỗi</a>
+                            </button>
+                        </div>
+
+                        <input type="text" name="searchtbl" placeholder="Tìm thiết bị">
+                        <button class="search-btn">&#128269;</button>
+
                     </div>
-                  
-                    <input type="text" name="searchtbl" placeholder="Tìm thiết bị">
-                    <button class="search-btn">&#128269;</button>
-    
-                </div>
                 </form>
                 <div class="list-container">
                     <div class="table-head">
@@ -158,19 +158,17 @@ session_start();
                     <?php
                     include_once("../controller/cThietBi.php");
                     $q = new cThietBi();
-                    if(isset($_REQUEST['searchtbl']))
-                    {
+                    if (isset($_REQUEST['searchtbl'])) {
                         $kq = $q->timkiemtbloi($_REQUEST['searchtbl']);
-                    }
-                    else{
+                    } else {
                         $kq = $q->getALLThietBiLoi();
                     }
-                    
+
                     if ($kq) {
                         while ($r = mysqli_fetch_assoc($kq)) {
                             echo ' <div class="list-item list-icon__hover hover-box" > 
                         <span class="name" style="margin-left:20%">' . $r['TenThietBi'] . '</span>
-                        <button class="update-btn">Xem</button>
+                        <a href="ChiTietTBLoi.php?idtbl=' . $r['IDTBL'] . '" class="update-btn">Xem</a>
                      
                     </div>';
                         }

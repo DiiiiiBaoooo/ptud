@@ -19,11 +19,22 @@ session_start();
 
     <!-- Flaticon Font -->
     <link href="../assets/lib/flaticon/font/flaticon.css" rel="stylesheet">
-    <link rel="stylesheet" href="login/css/update.css">
+    <link rel="stylesheet" href="login/css/chitiettttv.css">
     <link rel="stylesheet" href="login/css/style.css">
     <link rel="stylesheet" href="../assets/css/icon-hover.css">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/style.min.css" rel="stylesheet">
+    <style>
+        label {
+            width: fit-content;
+            padding: 10px;
+        }
+
+
+        span {
+            font-size: 20px !important;
+        }
+    </style>
 </head>
 
 <body class="bg-white">
@@ -74,13 +85,13 @@ session_start();
             <div class="d-inline-flex">
                 <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Quản lý</p>
+                <p class="m-0 text-white">Quản lý thành viên</p>
             </div>
         </div>
     </div>
     <!-- Page Header End -->
     <?php
-    if ($_SESSION['dn'] != 2) {
+    if ($_SESSION['dn'] != 1) {
         echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
         echo "<script>window.location.href = 'ThongTinChungNV.php';</script>";
     }
@@ -132,76 +143,45 @@ session_start();
             </div>
 
         </div>
-
         <?php
-        include_once("../controller/cThietBi.php");
-        $q = new cThietBi();
+        include("../controller/cKhuyenMai.php");
+        $q = new cKhuyenMai();
+        $kq = $q->select1km($_REQUEST['idkm']);
+        if ($kq) {
+            echo ' <div class="right">
+            <div class="update-info-container"><h2>Thông Tin khuyến mãi </h2>';
+            while ($r = mysqli_fetch_assoc($kq)) {
 
-        $tbl = $q->get01TB($_REQUEST['idtb']);
-        if ($tbl && mysqli_num_rows($tbl) > 0) {
-            while ($r = mysqli_fetch_assoc($tbl)) {
-                $tentb = $r['TenThietBi'];
-                $tt = $r['TinhTrang'];
-                $ngaysx = $r['NgaySanXuat'];
-                $noisx = $r['NoiSanXuat'];
+                echo ' 
+                <label for="name">Tên khuyến mãi:</label>
+                <span class="Ten">' . $r['TenKhuyenMai'] . '</span>
+                <br>
+
+                <label for="address">Nội dung khuyến mãi:</label>
+                <span class="diachi">' . $r['NoiDung'] . '</span>
+                <br>
+
+                <label for="phone">Điều kiện:</label>
+                <span class="sdt">Hóa đơn hơn' . $r['DieuKien'] . ' </span>
+              
+                <br>
+                  <label for="muc giảm">Mức giảm giá:</label>
+                <span class="sdt"> ' . $r['MucGiamGia'] . ' </span>
+                ';
             }
+        } else {
+            echo 'ko co du lieu';
         }
         ?>
 
-        <div class="right">
-            <div class="update-info-container">
-                <h2>Cập nhật thông tin thiết bị</h2>
-                <form action="" method="POST" enctype="multipart/form-data">
-                    <label for="name">Tên Thiết Bị</label>
-                    <input type="text" id="name" name="tentb"
-                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
-
-                        value="<?php if (isset($tentb)) {
-                                    echo $tentb;
-                                }  ?>" placeholder="Nhập tên thiết bị" required>
-
-                    <label for="address">Tình Trạng</label>
-                    <input type="text" id="tt" name="tt" value="<?php if (isset($tt)) {
-                                                                    echo $tt;
-                                                                }  ?>" placeholder="Nhập tình trạng">
-
-                    <label for="date">Ngày Sản Xuất</label>
-                    <input type="date" id="date" name="ngaysx" value="<?php if (isset($ngaysx)) {
-                                                                            echo $ngaysx;
-                                                                        }  ?>" placeholder="Nhập ngày sản xuất"
-                        required>
-                    <br>
-                    <label for="address">Nơi Sản Xuất</label>
-                    <input type="address" id="address" name="noisx" value="<?php if (isset($noisx)) {
-                                                                                echo $noisx;
-                                                                            }  ?>" placeholder="Nhập nơi sản xuất"
-                        required>
 
 
-                    <div class="button-group">
-                        <input type="submit" class="update-btn" name='update-btn' value="Cập nhật">
-                        <input type="button" class="cancel-btn" value="Hủy">
-                    </div>
-                </form>
-                <?php
-                include_once("../controller/cThietBi.php");
-                $p = new cThietBi();
-                if (isset($_REQUEST['update-btn'])) {
-
-                    $kq2 = $p->updateTB($_REQUEST['idtb'], $_REQUEST['tentb'], $_REQUEST['tt'], $_REQUEST['ngaysx'], $_REQUEST['noisx']);
-                    if ($kq2) {
-                        echo '<script>alert("Update thành công!")</script>';
-                        echo "<script>window.location.href = 'QLTB.php';</script>";
-                    } else {
-                        echo '<script>alert("Update không thành công!")</script>';
-                        echo "<script>window.location.href = 'QLTB.php';</script>";
-                    }
-                }
-                ?>
-            </div>
 
 
-        </div>
+    </div>
+
+
+    </div>
     </div>
     <!-- Blog End -->
 

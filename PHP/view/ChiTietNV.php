@@ -12,7 +12,7 @@ session_start();
     <meta content="Free Website Template" name="description">
 
     <!-- Favicon -->
-      <link href="../assets/img/logo.png" rel="icon">
+    <link href="../assets/img/logo.png" rel="icon">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -93,20 +93,28 @@ session_start();
                             echo "<script>alert('Bạn không có quyền truy cập vào trang');</script>";
                             echo "<script>window.location.href = '../index.php';</script>";
                         }
-                        echo '<li><a href="ThongTinChungNV.php">Thông tin chung</a></li>';
+                        echo '<li><a href="ThongTinchungNV.php">Thông tin chung</a></li>';
                         switch ($_SESSION['dn']) {
                             case 1: {
                                     echo ' <li><a href="QLNV.php">Quản lý nhân viên</a></li>';
                                     echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
-                                    echo  '<li><a href="QLLLv.php">Quản lý lịch làm việc</a></li>';
-                                    echo  '<li><a href="QLGT.php">Quản lý gói tập</a></li>';
+                                    echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
+                                    echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    break;
+                                }
+                            case 2: {
+                                    echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
+                                    echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
+                                    echo  '<li><a href="QLTBloi.php">Quản lý lỗi thiết bị</a></li>';
+                                    break;
+                                }
+                            case 3: {
+                                    echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
+
                                     break;
                                 }
                         }
-                        if ($_SESSION['dn'] == 2) {
-                            echo ' <li><a href="QLTV.php">Quản lý thành viên</a></li>';
-                            echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
-                        }
+
 
 
 
@@ -206,7 +214,8 @@ session_start();
                 <h4 class="text-primary mb-4">Liên kết</h4>
                 <div class="d-flex flex-column justify-content-start">
                     <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>
@@ -214,8 +223,9 @@ session_start();
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-primary mb-4">Phổ biến</h4>
                 <div class="d-flex flex-column justify-content-start">
-                <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>

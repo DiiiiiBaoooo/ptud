@@ -12,7 +12,7 @@ session_start();
     <meta content="Free Website Template" name="description">
 
     <!-- Favicon -->
-      <link href="../assets/img/logo.png" rel="icon">
+    <link href="../assets/img/logo.png" rel="icon">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -197,7 +197,7 @@ session_start();
                             <td><label for="txtTenKM">Tên Khuyến Mãi:</label></td>
                             <td>
                                 <input type="text"
-                                    pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s0-9]+"
+                                    pattern="[A-Za-zÀỌÁÂÃẤÈÉÊÌẪÍÒÓÔÕÙÚÒĂĐẬêĨŨƠỄàảáạệẠồỄỆâãèÔéỂẹỎẽôêìíỐòóôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồỠỢÙÚỦỤỰốỲỴÝỶỸửữựỳỵỷỹ\s0-9]+$"
                                     name="txtTenKM" id="txtTenKM" value="<?php if (isset($tenkm)) {
                                                                                 echo $tenkm;
                                                                             } ?>" required>
@@ -207,7 +207,7 @@ session_start();
                             <td><label for="txtNoiDung">Nội Dung:</label></td>
                             <td>
                                 <input type="text"
-                                    pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s0-9]+"
+                                    pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
                                     name="txtNoiDung" id="txtNoiDung" value="<?php if (isset($nd)) {
                                                                                     echo $nd;
                                                                                 } ?>" required>
@@ -225,7 +225,7 @@ session_start();
                         <tr>
                             <td><label for="txtDieuKien">Điều Kiện Áp Dụng:</label></td>
                             <td>
-                                <input type="text" name="txtDieuKien" id="txtDieuKien" value="<?php if (isset($dieukien)) {
+                                <input type="number" name="txtDieuKien" id="txtDieuKien" value="<?php if (isset($dieukien)) {
                                                                                                     echo $dieukien;
                                                                                                 } ?>" required>
                             </td>
@@ -282,7 +282,8 @@ session_start();
                 <h4 class="text-primary mb-4">Liên kết</h4>
                 <div class="d-flex flex-column justify-content-start">
                     <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>
@@ -290,8 +291,9 @@ session_start();
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-primary mb-4">Phổ biến</h4>
                 <div class="d-flex flex-column justify-content-start">
-                <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>

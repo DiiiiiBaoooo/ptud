@@ -105,19 +105,19 @@ include_once("../model/ketnoi.php");
                                     echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
                                     break;
                                 }
-                          case 2: {
+                            case 2: {
                                     echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     echo  '<li><a href="QLTBloi.php">Quản lý lỗi thiết bị</a></li>';
                                     break;
                                 }
-                             case 3: {
+                            case 3: {
                                     echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    
+
                                     break;
                                 }
                         }
-                         echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
+                        echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
                         ?>
                     </ul>
                 </div>
@@ -137,7 +137,9 @@ include_once("../model/ketnoi.php");
                 <form action="ThemNV.php" method="POST" enctype="multipart/form-data">
                     <!-- name -->
                     <label for="name">Tên Nhân Viên</label>
-                    <input type="text" id="txtname" name="txtname" placeholder="Nhập tên của nhân viên" required>
+                    <input type="text" id="txtname"
+                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
+                        name="txtname" placeholder="Nhập tên của nhân viên" required>
                     <!-- phone -->
                     <label for="phone">Số Điện Thoại</label>
                     <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" pattern="[0-9]{10}"
@@ -147,7 +149,9 @@ include_once("../model/ketnoi.php");
                     <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
                     <!-- address -->
                     <label for="address">Địa chỉ</label>
-                    <input type="text" id="txtaddress" name="txtaddress" placeholder="Nhập địa chỉ">
+                    <input type="text"
+                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
+                        id="txtaddress" name="txtaddress" placeholder="Nhập địa chỉ">
                     <!-- email -->
                     <label for="Email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Nhập Email" required

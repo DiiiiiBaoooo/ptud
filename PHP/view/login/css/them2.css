@@ -79,13 +79,13 @@ form input[type="tel"] ,
 form input[type='date'],
 form input[type='password']
 {
-    width: calc(100%);
+    width: calc(60%);
     padding: 8px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-form input[type="email"] {
+form input[type="number"] {
     width: calc(100%);
     padding: 8px;
     margin-bottom: 15px;
@@ -132,7 +132,7 @@ form input[type="email"] {
     margin-left: 20px; 
 }
 .form-select {
-    width: calc(100%); /* Ensures the select takes the full width */
+    width: calc(60%) !important; /* Ensures the select takes the full width */
     padding: 10px; /* Adds some padding inside the select */
     border: 1px solid #ccc; /* Light grey border */
     border-radius: 5px; /* Rounded corners */

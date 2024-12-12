@@ -102,7 +102,7 @@ session_start();
                                     echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
                                     break;
                                 }
-                          case 2: {
+                            case 2: {
                                     echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     echo  '<li><a href="QLTBloi.php">Quản lý lỗi thiết bị</a></li>';
@@ -110,7 +110,7 @@ session_start();
                                 }
                             case 3: {
                                     echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    
+
                                     break;
                                 }
                         }
@@ -118,7 +118,7 @@ session_start();
 
 
 
-                         echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
+                        echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
 
                         ?>
                     </ul>
@@ -142,13 +142,13 @@ session_start();
                     </button>
                 </div> -->
                 <div class="search-bar">
-                <button type="button" class="add-btn">
+                    <button type="button" class="add-btn">
                         <a href="./TaoGoiTap.php" class="add-btn__link">Thêm gói tập</a>
                     </button>
                     <form method="post">
-                    <input type="text" name="searchgt" placeholder="Tìm gói tập">
-                    <button class="search-btn">&#128269;</button>
-    </form>
+                        <input type="text" name="searchgt" placeholder="Tìm gói tập">
+                        <button class="search-btn">&#128269;</button>
+                    </form>
                 </div>
                 <div class="list-container">
                     <div class="table-head">
@@ -159,22 +159,21 @@ session_start();
                     <?php
                     include_once("../controller/cGoiTap.php");
                     $p = new cGoiTap();
-                    if(isset($_REQUEST['searchgt']))
-                    {
+                    if (isset($_REQUEST['searchgt'])) {
                         $tbl = $p->searchgt($_REQUEST['searchgt']);
+                    } else {
+                        $tbl = $p->getAllGT();
                     }
-                    else
-                    {$tbl = $p->getAllGT();}
-                    
+
                     if ($tbl) {
                         while ($r = mysqli_fetch_assoc($tbl)) {
                             echo '  <div class="list-item list-icon__hover hover-box" > 
-                        <span class="name" style="margin-left:50px"><a href="ChiTietGoiTap.php?idtb=' . $r['IDGoiTap'] . '">' . $r['TenGoi'] . '</a></span>
+                        <span class="name" style="margin-left:50px"><a href="ChiTietGt.php?idgt=' . $r['IDGoiTap'] . '">' . $r['TenGoi'] . '</a></span>
                       
                         <a class="update-btn" href="suagoitap.php?idgt=' . $r['IDGoiTap'] . '">Sửa</a>
                          <a class="delete-btn" href="xoagoitap.php?idgt=' . $r['IDGoiTap'] . '">Xóa</a>
                      
-                        <button class="submit-btn">Xem</button>
+                        <a href="chitietgt.php?idgt=' . $r['IDGoiTap'] . '" class="submit-btn">Xem</a>
                     </div>';
                         }
                     }
@@ -215,7 +214,8 @@ session_start();
                 <h4 class="text-primary mb-4">Liên kết</h4>
                 <div class="d-flex flex-column justify-content-start">
                     <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>
@@ -224,7 +224,8 @@ session_start();
                 <h4 class="text-primary mb-4">Phổ biến</h4>
                 <div class="d-flex flex-column justify-content-start">
                     <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>
@@ -263,36 +264,38 @@ session_start();
 </html>
 
 <style>
-     .add-btn {
-            outline: none;
-            border: none;
-            width: 170px;
-            height: 40px;
-            border-radius: 6px;
-            background-color: red !important;
-            color: #fff !important;
+    .add-btn {
+        outline: none;
+        border: none;
+        width: 170px;
+        height: 40px;
+        border-radius: 6px;
+        background-color: red !important;
+        color: #fff !important;
 
 
-        }
-        button.add-btn{
-        margin-right:auto;
     }
-        .add-btn:hover {
-            background-color: #981d1b !important;
-            color: #fff !important;
 
-        }
+    button.add-btn {
+        margin-right: auto;
+    }
 
-        .add-btn__link {
-            color: #fff !important;
-            text-decoration: none;
-        }
+    .add-btn:hover {
+        background-color: #981d1b !important;
+        color: #fff !important;
 
-        .add-container {
-            width: 68%;
-        }
+    }
 
-        .search-container {
-            height: 50px;
-        }
+    .add-btn__link {
+        color: #fff !important;
+        text-decoration: none;
+    }
+
+    .add-container {
+        width: 68%;
+    }
+
+    .search-container {
+        height: 50px;
+    }
 </style>

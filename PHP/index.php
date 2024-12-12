@@ -77,16 +77,16 @@ include_once("./model/ketnoi.php");
                         <h3 class="text-primary text-capitalize m-0">Gói tập chỉ từ 299K</h3>
                         <h2 class="display-2 m-0 mt-2 mt-md-4 text-white font-weight-bold text-capitalize">Thanh Toán
                             Chill - Hưởng thả ga</h2>
-                        <p class ="btn btn-lg text-light">Nhiều gói ưu đãi hấp dẫn</p>
+                        <p class="btn btn-lg text-light">Nhiều gói ưu đãi hấp dẫn</p>
                     </div>
                 </div>
-                <div class="carousel-item"> 
+                <div class="carousel-item">
                     <img class="w-100" src="./assets/img/carousel-2.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <h3 class="text-primary text-capitalize m-0">Một sân chơi mới</h3>
                         <h2 class="display-2 m-0 mt-2 mt-md-4 text-white font-weight-bold text-capitalize">Định nghĩa
                             lại sự quyến rũ </h2>
-                        <p class ="btn btn-lg text-light">Hãy trải nghiệm và bạn sẽ thấy thay đổi</p>
+                        <p class="btn btn-lg text-light">Hãy trải nghiệm và bạn sẽ thấy thay đổi</p>
                     </div>
                 </div>
             </div>
@@ -113,26 +113,24 @@ include_once("./model/ketnoi.php");
         <div class="row px-3 mt-5">
             <!-- card 1 -->
             <?php
-                    include_once("controller/cIndex.php");
-                    $q= new cIndex();
-                     $gt=$q->get2GT();
-                    if($gt)
-                    {
-                        while($r=mysqli_fetch_assoc($gt))
-                        {
-                            echo' <div class="col-md-6 p-0 ">
+            include_once("controller/cIndex.php");
+            $q = new cIndex();
+            $gt = $q->get2GT();
+            if ($gt) {
+                while ($r = mysqli_fetch_assoc($gt)) {
+                    echo ' <div class="col-md-6 p-0 ">
                 <div
                     class="gym-class-box d-flex flex-column align-items-end justify-content-center bg-primary text-right text-white  px-4">
                     <div class="card-item mb-5 mt-lg-n5">
-                        <h3 class="display-4 mb-3 text-white font-weight-bold">'.$r['TenGoi'].'</h3>
+                        <h3 class="display-4 mb-3 text-white font-weight-bold">' . $r['TenGoi'] . '</h3>
                         <label class="btn btn-lg px-4 btn-success rounded card-item__link ">Giá tốt nhất</label>
                     </div>
                     <div class="card-price">
                         <span class="price">
-                            '.$r['Gia'],'
+                            ' . $r['Gia'], '
                             <sup>Đ</sup>
                         </span>
-                        <small>/ '.$r['ThoiHan'].'</small>
+                        <small>/ ' . $r['ThoiHan'] . '</small>
                     </div>
                     <div class="card-notice body-2 inline-flex items-center gap-8 mt-2">
                         <em class="fa-solid fa-thumbs-up p-1"></em>
@@ -148,9 +146,9 @@ include_once("./model/ketnoi.php");
                 </div>
 
             </div>';
-                        }
-                    }
-                ?>
+                }
+            }
+            ?>
             <!-- card 2 -->
             <!-- <div class="col-md-6 p-0 ">
                 
@@ -182,7 +180,7 @@ include_once("./model/ketnoi.php");
         </div>
     </div>
     <!-- Gym Class End -->
-   
+
 
     <!-- About Start -->
     <div class="container py-5 about-start">
@@ -349,12 +347,12 @@ include_once("./model/ketnoi.php");
             <div class="input-group">
                 <input type="text" name="telephone-sp" class="form-control-lg" placeholder="Số điện thoại">
             </div>
-            
+
             <div class="input-group-append">
                 <button type="submit" name="signin-register" class="btn btn-primary" value="">Đăng ký</button>
             </div>
         </form>
-        
+
     </div>
     <!-- Subscribe End -->
 
@@ -920,7 +918,7 @@ include_once("./model/ketnoi.php");
                     echo "<script>alert('Gửi đánh giá thành công!');</script>";
                     echo "<script>window.location.href='index.php#a';</script>";
                 } else {
-                    echo "<script>alert('gửi ko thành công!');</script>";
+                    echo "<script>alert('gửi khong thành công!');</script>";
                     echo "<script>window.location.href='index.php#a';</script>";
                 }
             }
@@ -1075,7 +1073,8 @@ include_once("./model/ketnoi.php");
                 <h4 class="text-primary mb-4">Liên kết</h4>
                 <div class="d-flex flex-column justify-content-start">
                     <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>
@@ -1083,8 +1082,9 @@ include_once("./model/ketnoi.php");
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-primary mb-4">Phổ biến</h4>
                 <div class="d-flex flex-column justify-content-start">
-                <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>

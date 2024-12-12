@@ -12,7 +12,7 @@ session_start();
     <meta content="Free Website Template" name="description">
 
     <!-- Favicon -->
-      <link href="../assets/img/logo.png" rel="icon">
+    <link href="../assets/img/logo.png" rel="icon">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -108,15 +108,15 @@ session_start();
                                     echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
                                     break;
                                 }
-                          case 2: {
+                            case 2: {
                                     echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     echo  '<li><a href="QLTBloi.php">Quản lý lỗi thiết bị</a></li>';
                                     break;
                                 }
-                             case 3: {
+                            case 3: {
                                     echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    
+
                                     break;
                                 }
                         }
@@ -124,7 +124,7 @@ session_start();
 
 
 
-                         echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
+                        echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
 
                         ?>
                     </ul>
@@ -134,17 +134,15 @@ session_start();
         </div>
         <?php
         include_once("../controller/cNhanVien.php");
-        $q= new cNhanVien();
-        $tbl= $q->Query1NV($_REQUEST['idnv']);
-        if($tbl)
-        {
-            while($r=mysqli_fetch_assoc($tbl))
-            {
-                $tennv=$r['TenNhanVien'];
-                $diachinv=$r['DiaChi'];
-                $sdtnv=$r['SoDienThoai'];
-                $emailnv=$r['Email'];
-                $vaitronv=$r['IDRole'];
+        $q = new cNhanVien();
+        $tbl = $q->Query1NV($_REQUEST['idnv']);
+        if ($tbl) {
+            while ($r = mysqli_fetch_assoc($tbl)) {
+                $tennv = $r['TenNhanVien'];
+                $diachinv = $r['DiaChi'];
+                $sdtnv = $r['SoDienThoai'];
+                $emailnv = $r['Email'];
+                $vaitronv = $r['IDRole'];
             }
         }
         ?>
@@ -155,54 +153,60 @@ session_start();
                 <form action="" method="POST" enctype="multipart/form-data">
                     <label for="name">Tên Nhân Viên</label>
                     <input type="text" id="name" name="name" placeholder="Nhập tên của nhân viên"
-                        pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s]+"
-                        value="<?php if(isset($tennv)) {echo $tennv;} ?>"
-                        required>
+                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
+
+                        value="<?php if (isset($tennv)) {
+                                    echo $tennv;
+                                } ?>" required>
 
                     <label for="address">Địa chỉ</label>
                     <input type="text" id="address" name="address" placeholder="Nhập địa chỉ"
-                        pattern="[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶƠỜỚỞỠỢÙÚỦỤỰỲỴÝỶỸửữựỳỵỷỹ\s0-9]+"
-                        value="<?php if(isset($diachinv)) {echo $diachinv;} ?>"
-                        required>
+                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s0-9]+$"
+
+                        value="<?php if (isset($diachinv)) {
+                                    echo $diachinv;
+                                } ?>" required>
 
                     <label for="phone">Số Điện Thoại</label>
                     <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" pattern="[0-9]{10}"
-                    value="<?php if(isset($sdtnv)) {echo $sdtnv;} ?>"
-                        required>
+                        value="<?php if (isset($sdtnv)) {
+                                    echo $sdtnv;
+                                } ?>" required>
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Nhập Email" required
-                        aria-label="Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                        value="<?php if(isset($emailnv)) {echo $emailnv;} ?>"
+                        aria-label="Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value="<?php if (isset($emailnv)) {
+                                                                                                                echo $emailnv;
+                                                                                                            } ?>"
                         title="Please enter a valid email address (e.g., example@domain.com)">
                     <label for="chucvu">Chức vụ</label>
-                 
 
-<select style="width:calc(73%); " class="form-select" aria-label="Default select example"
-    name="chucvu">
-    <?php
-    if ($vaitronv == 1 ) {
-        echo ' <option value="1" style ="height:50px; width:100%" selected>Quản lý</option>
+
+                    <select style="width:calc(73%); " class="form-select" aria-label="Default select example"
+                        name="chucvu">
+                        <?php
+                        if ($vaitronv == 1) {
+                            echo ' <option value="1" style ="height:50px; width:100%" selected>Quản lý</option>
     <option value="2 tháng">Nhân viên</option>
     <option value="3">Kế toán</option>
    ';
-    } elseif ($vaitronv == 2) {
-        echo ' <option value="1" >Quản lý</option>
+                        } elseif ($vaitronv == 2) {
+                            echo ' <option value="1" >Quản lý</option>
         <option value="2 tháng" selected>Nhân viên</option>
         <option value="3">Kế toán</option>
        ';
-    } elseif ($vaitronv == 3) {
-        echo ' <option value="1" >Quản lý</option>
+                        } elseif ($vaitronv == 3) {
+                            echo ' <option value="1" >Quản lý</option>
         <option value="2 tháng">Nhân viên</option>
         <option value="3" selected>Kế toán</option>
        ';
-    } 
-?>
+                        }
+                        ?>
 
-</select>
+                    </select>
 
 
                     <div class="button-group">
-                        <input type="submit" name='update-btn' class="update-btn"value="Cập nhật">
+                        <input type="submit" name='update-btn' class="update-btn" value="Cập nhật">
                         <input type="button" value="Hủy" class="cancel-btn" onclick="window.history.back();">
                     </div>
                 </form>
@@ -212,12 +216,11 @@ session_start();
         </div>
     </div>
     <!-- Blog End -->
-<?php
+    <?php
     include_once("../controller/cNhanVien.php");
-    $p= new cNhanVien();
-    if(isset($_REQUEST['update-btn']))
-    {
-        $updatenv=$p->CapNhatTTNV($_REQUEST['idnv'],$_REQUEST['name'],$_REQUEST['phone'],$_REQUEST['email'],$_REQUEST['address'],$_REQUEST['chucvu']);
+    $p = new cNhanVien();
+    if (isset($_REQUEST['update-btn'])) {
+        $updatenv = $p->CapNhatTTNV($_REQUEST['idnv'], $_REQUEST['name'], $_REQUEST['phone'], $_REQUEST['email'], $_REQUEST['address'], $_REQUEST['chucvu']);
         if ($updatenv) {
             echo '<script>alert("Cập nhật thông tin nhân viên thành công!")</script>';
             echo "<script>window.location.href = 'QLNV.php';</script>";
@@ -226,7 +229,7 @@ session_start();
             echo "<script>window.location.href = 'QLNV.php';</script>";
         }
     }
-?>
+    ?>
 
     <!-- Footer Start -->
     <div class="footer container-fluid mt-5 py-5 px-sm-3 px-md-5 text-white">
@@ -251,7 +254,8 @@ session_start();
                 <h4 class="text-primary mb-4">Liên kết</h4>
                 <div class="d-flex flex-column justify-content-start">
                     <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>
@@ -259,8 +263,9 @@ session_start();
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-primary mb-4">Phổ biến</h4>
                 <div class="d-flex flex-column justify-content-start">
-                <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>

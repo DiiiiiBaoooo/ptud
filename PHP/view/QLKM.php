@@ -12,7 +12,7 @@ session_start();
     <meta content="Free Website Template" name="description">
 
     <!-- Favicon -->
-      <link href="../assets/img/logo.png" rel="icon">
+    <link href="../assets/img/logo.png" rel="icon">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -102,15 +102,15 @@ session_start();
                                     echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
                                     break;
                                 }
-                          case 2: {
+                            case 2: {
                                     echo ' <li><a href="QLTV.php">Quản lý Thành viên</a></li>';
                                     echo  '<li><a href="QLTB.php">Quản lý thiết bị</a></li>';
                                     echo  '<li><a href="QLTBloi.php">Quản lý lỗi thiết bị</a></li>';
                                     break;
                                 }
-                             case 3: {
+                            case 3: {
                                     echo ' <li><a href="QLHD.php">Quản lý hóa đơn</a></li>';
-                                    
+
                                     break;
                                 }
                         }
@@ -118,7 +118,7 @@ session_start();
 
 
 
-                         echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
+                        echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
 
                         ?>
                     </ul>
@@ -135,17 +135,17 @@ session_start();
         <div class="right">
             <div class="qltv">
                 <h1 align="center">Quản lý Khuyến mãi</h1>
-                
+
                 <form method="post">
-                
+
                     <div class="search-bar">
-                    <button type="button" class="add-btn">
+                        <button type="button" class="add-btn">
                             <a href="./taokhuyenmai.php" class="add-btn__link">Thêm khuyến mãi</a>
                         </button>
                         <form method="post">
-                        <input type="text" name="searchkm" placeholder="Tìm khuyến mãi">
-                        <button class="search-btn">&#128269;</button>
-        </form>
+                            <input type="text" name="searchkm" placeholder="Tìm khuyến mãi">
+                            <button class="search-btn">&#128269;</button>
+                        </form>
                     </div>
                     <div class="list-container">
                         <div class="table-head">
@@ -156,13 +156,12 @@ session_start();
                         <?php
                         include_once("../controller/cKhuyenMai.php");
                         $p = new cKhuyenMai();
-                        if(isset($_REQUEST['searchkm']))
-                        {
+                        if (isset($_REQUEST['searchkm'])) {
                             $tbl = $p->searchkm($_REQUEST['searchkm']);
+                        } else {
+                            $tbl = $p->getAllKM();
                         }
-                        else
-                        {$tbl = $p->getAllKM();}
-                        
+
                         if ($tbl) {
                             while ($r = mysqli_fetch_assoc($tbl)) {
                                 echo ' <div class="list-item list-icon__hover hover-box" > 
@@ -170,7 +169,7 @@ session_start();
                             <span class="name" style="margin-left:50px"><a href="ChiTietKM.php?IDKhuyenMai=' . $r['IDKhuyenMai'] . '">' . $r['TenKhuyenMai'] . '</a></span>
                            <a class="update-btn" href="suacackhuyenmai.php?idkm=' . $r['IDKhuyenMai'] . '">Sửa</a>
                          <a class="delete-btn" href="xoakm.php?idkm=' . $r['IDKhuyenMai'] . '">Xóa</a>
-                            <button class="submit-btn">Xem</button>
+                            <a href="chitietkm.php?idkm=' . $r['IDKhuyenMai'] . '" class="submit-btn">Xem</a>
                         </div>';
                             }
                         }
@@ -210,7 +209,8 @@ session_start();
                 <h4 class="text-primary mb-4">Liên kết</h4>
                 <div class="d-flex flex-column justify-content-start">
                     <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>
@@ -218,8 +218,9 @@ session_start();
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-primary mb-4">Phổ biến</h4>
                 <div class="d-flex flex-column justify-content-start">
-                <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>
@@ -255,39 +256,39 @@ session_start();
     <script src="../assets/js/main.js"></script>
 </body>
 <style>
-    button.add-btn{
-        margin-right:auto;
+    button.add-btn {
+        margin-right: auto;
     }
-        .add-btn {
-            outline: none;
-            border: none;
-            width: 170px;
-            height: 40px;
-            border-radius: 6px;
-            background-color: red !important;
-            color: #fff !important;
-            m
 
+    .add-btn {
+        outline: none;
+        border: none;
+        width: 170px;
+        height: 40px;
+        border-radius: 6px;
+        background-color: red !important;
+        color: #fff !important;
 
-        }
+    }
 
-        .add-btn:hover {
-            background-color: #981d1b !important;
-            color: #fff !important;
+    .add-btn:hover {
+        background-color: #981d1b !important;
+        color: #fff !important;
 
-        }
+    }
 
-        .add-btn__link {
-            color: #fff !important;
-            text-decoration: none;
-        }
+    .add-btn__link {
+        color: #fff !important;
+        text-decoration: none;
+    }
 
-        .add-container {
-            width: 65%;
-        }
+    .add-container {
+        width: 65%;
+    }
 
-        .search-container {
-            height: 50px;
-        }
-    </style>
+    .search-container {
+        height: 50px;
+    }
+</style>
+
 </html>
