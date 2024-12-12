@@ -16,7 +16,7 @@ class mThanhVien
     {
         $p = new clsketnoi();
         $con = $p->MoKetNoi();
-        $query = "SELECT * from thanhvien where IDThanhVien ='$idtv' LIMIT 1";
+        $query = "SELECT * from thanhvien tv join thanhvien_goitap tvgt on tv.IDThanhVien = tvgt.IDThanhVien join goitap gt on gt.IDGoiTap = tvgt.IDGoiTap where tv.IDThanhVien ='$idtv' LIMIT 1 ";
         $kq = mysqli_query($con, $query);
         $p->DongKetNoi($con);
         return $kq;
@@ -110,6 +110,15 @@ GROUP BY t.IDThanhVien, t.TenThanhVien;";
         $p = new clsketnoi();
         $con = $p->MoKetNoi();
         $query = "SELECT * from  thanhvien where  SoDienThoai = '$sdt' ;";
+        $kq = mysqli_query($con, $query);
+        $p->DongKetNoi($con);
+        return $kq;
+    }
+    public function TKGT($idtv, $idgt, $ngaybatdau, $ngayketthuc)
+    {
+        $p = new clsketnoi();
+        $con = $p->MoKetNoi();
+        $query = "insert into thanhvien_goitap(IDThanhVien,IDGoiTap,ThoiGianBatDau,ThoiGianKetThuc) values('$idtv','$idgt','$ngaybatdau','$ngayketthuc') ;";
         $kq = mysqli_query($con, $query);
         $p->DongKetNoi($con);
         return $kq;

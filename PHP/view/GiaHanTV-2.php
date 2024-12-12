@@ -13,7 +13,7 @@ session_start();
     <meta content="Free Website Template" name="description">
 
     <!-- Favicon -->
-      <link href="../assets/img/logo.png" rel="icon">
+    <link href="../assets/img/logo.png" rel="icon">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -205,9 +205,17 @@ session_start();
                     include_once('../controller/cHoaDon.php');
                     $q = new cHoaDon();
                     $currentDateTime = date('Y-m-d H:i:s');
-
+                    $time = explode(' ', $ThoiHan);
+                    $thoihantap = number_format($time[0]);
                     $kq = $q->createHD($_SESSION['giagoi'], $currentDateTime, $_SESSION['id']);
+                    $thoihan = '+' . $thoihantap . ' month';
+
+                    $newdate = strtotime($thoihan, strtotime($currentDateTime));
+                    $newdate = date('Y-m-d H:i:s', $newdate);
                     if ($kq) {
+                        include_once("../controller/cThanhVien.php");
+                        $w = new cThanhVien();
+                        $update = $w->TaoTK_GT($_SESSION['id'], $_SESSION['idgt'], $currentDateTime, $newdate);
                         echo "<script>alert('Gửi yêu cầu gia hạn thành công')</script>";
                         echo "<script>window.location.href = 'ThanhToan1.php';</script>";
                     } else {
@@ -223,7 +231,7 @@ session_start();
 
 
     <!-- Footer Start -->
- <div class="footer container-fluid mt-5 py-5 px-sm-3 px-md-5 text-white">
+    <div class="footer container-fluid mt-5 py-5 px-sm-3 px-md-5 text-white">
         <div class="row pt-5">
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-primary mb-4">Gymnast</h4>
@@ -245,7 +253,8 @@ session_start();
                 <h4 class="text-primary mb-4">Liên kết</h4>
                 <div class="d-flex flex-column justify-content-start">
                     <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>
@@ -253,8 +262,9 @@ session_start();
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-primary mb-4">Phổ biến</h4>
                 <div class="d-flex flex-column justify-content-start">
-                <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>

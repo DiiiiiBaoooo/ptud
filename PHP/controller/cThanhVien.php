@@ -91,6 +91,13 @@ class cThanhVien
         $kq = $p->DangKyTV($tentv, $sdt, $diachi, $email, $ngaythamgia, $password);
         return $kq;
     }
+    public function TaoTK_GT($idtv, $idgt, $ngaybatdau, $ngayketthuc)
+    {
+        $p = new mThanhVien();
+
+        $kq = $p->TKGT($idtv, $idgt, $ngaybatdau, $ngayketthuc);
+        return $kq;
+    }
 
     public function getDanhgia()
     {

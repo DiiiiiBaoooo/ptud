@@ -12,7 +12,7 @@ session_start();
     <meta content="Free Website Template" name="description">
 
     <!-- Favicon -->
-      <link href="../assets/img/logo.png" rel="icon">
+    <link href="../assets/img/logo.png" rel="icon">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -105,7 +105,7 @@ session_start();
 
 
 
-                         echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
+                        echo   '<li><a href="dangxuat.php">Đăng xuất</a></li>';
 
                         ?>
                     </ul>
@@ -143,6 +143,8 @@ session_start();
                 <label for="address">Ngày tham gia:</label>
                 <span class="diachi">' . $r['NgayThamGia'] . '</span>
                 <br>
+                 <label for="thongtingoitap">Gói tập đang sử dụng:</label>
+                <span class="diachi">' . $r['TenGoi'] . '</span>
                 
                 ';
                         }
@@ -194,7 +196,8 @@ session_start();
                 <h4 class="text-primary mb-4">Liên kết</h4>
                 <div class="d-flex flex-column justify-content-start">
                     <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>
@@ -202,8 +205,9 @@ session_start();
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-primary mb-4">Phổ biến</h4>
                 <div class="d-flex flex-column justify-content-start">
-                <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng tôi</a>
+                    <a class="text-white mb-2" href="./index.php"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                    <a class="text-white mb-2" href="./view/about.php"><i class="fa fa-angle-right mr-2"></i>Về chúng
+                        tôi</a>
                     <a class="text-white mb-2" href="./view/class.php"><i class="fa fa-angle-right mr-2"></i>Lớp học</a>
                     <a class="text-white" href="./view/contact.php"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                 </div>
