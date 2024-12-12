@@ -108,6 +108,7 @@ if ($conn->connect_error) {
                                     echo  '<li><a href="QLKM.php">Quản lý khuyến mãi</a></li>';
                                     echo  '<li><a href="QLLLV.php">Quản lý lịch làm việc</a></li>';
                                     echo  '<li><a href="QLGT.php">Quản lý Gói tập</a></li>';
+                                    echo  '<li><a href="QLDG.php">Quản lý đánh giá khách hàng</a></li>';
                                     break;
                                 }
                             case 2: {
