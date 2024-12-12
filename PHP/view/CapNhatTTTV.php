@@ -153,7 +153,7 @@ session_start();
                 <form action="" method="POST" enctype="multipart/form-data">
                     <label for="name">Tên thành viên</label>
                     <input type="text" id="name" name="name" placeholder="Nhập tên của thành viên" required
-                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s]+$"
+                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂậẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s]+$"
                         value="<?php if (isset($tentv)) echo $tentv; ?>">
 
                     <label for="address">Địa chỉ</label>

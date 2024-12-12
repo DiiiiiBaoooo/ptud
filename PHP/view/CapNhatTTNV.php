@@ -153,7 +153,7 @@ session_start();
                 <form action="" method="POST" enctype="multipart/form-data">
                     <label for="name">Tên Nhân Viên</label>
                     <input type="text" id="name" name="name" placeholder="Nhập tên của nhân viên"
-                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s]+$"
+                        pattern="[A-Za-zÀỌÁÂÃẤắÈÉÊờÌẪÍÒÓÔÕÙÚÒĂĐẬêĨợŨƠỄàảáạệẠồỄỆâỠãèÔéỂậẹỎẽôếêìíỐòẵóưôõùúỒụựăđỗĩũơƯĂẰẮẲẴỘẶộƠỜỚỞồịỠễỡỏừỢÙặềÚỦỤỰốỲỴÝỶỸửểữựỳỵỷỹ\s]+$"
                         value="<?php if (isset($tennv)) {
                                     echo $tennv;
                                 } ?>" required>
